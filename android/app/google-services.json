@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "896122279912",
+    "firebase_url": "https://math4-75d4a.firebaseio.com",
+    "project_id": "math4-75d4a",
+    "storage_bucket": "math4-75d4a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:896122279912:android:213d8437101bc45936765d",
+        "android_client_info": {
+          "package_name": "math.hemidi.dz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "896122279912-nhf2gqe4s6bj7kuj4j2q8sd2hrp5gqbf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAb4dCcac6BsPKm5TxVc_oxULMHuUX_uSM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "896122279912-nhf2gqe4s6bj7kuj4j2q8sd2hrp5gqbf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
