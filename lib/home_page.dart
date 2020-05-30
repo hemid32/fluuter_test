@@ -1,5 +1,7 @@
 import 'dart:io';
 
+//import 'package:firebase_image/firebase_image.dart';
+//import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/model/Dog.dart';
@@ -10,7 +12,7 @@ import 'dart:typed_data';
 import 'package:flutter/services.dart';
 import 'package:collection/collection.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 
@@ -23,6 +25,7 @@ class home_page extends StatefulWidget {
   var percent ;
   var percent2 ;
   var percent3 ;
+  //var url ;
 
 
   home_page(this.data , this.percent , this.percent2 , this.percent3){
@@ -30,6 +33,7 @@ class home_page extends StatefulWidget {
     info = data[0];
     info2 = data[1];
     info3 = data[2];
+    //url = data[3];
     percent = this.percent ;
     //print('perecnt home : $percent');
     percent2 = this.percent2 ;
@@ -45,6 +49,7 @@ class home_page extends StatefulWidget {
 }
 
 class _home_pageState extends State<home_page> {
+  //final ref = FirebaseAuth.;
 
 
   @override
@@ -178,7 +183,13 @@ class _home_pageState extends State<home_page> {
                   ),]))
           ),
 
-    Container (
+         /* Container(
+            
+            //child ://Image.network(widget.url[0]),
+          ),*/
+          
+          
+          Container (
         margin: EdgeInsets.only(top: 30, left: 5, right: 5,),
 
           child :  CircularPercentIndicator(
@@ -229,3 +240,6 @@ Future<int>  get_point() async {
   return  t;
 
 }
+
+
+

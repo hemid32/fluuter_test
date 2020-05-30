@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/fine.dart';
 import 'package:flutterapp2/model/ponits.dart';
@@ -39,7 +41,12 @@ class data_tout {
     var info3_parti3 = await info3__parti3(ponits_info3);
     List<Map> info3 = [info3_parti1, info3_parti2, info3_parti3];
     // tout les  doné
-    List<List> info_tout = [info, info2, info3];
+
+    var url2 = await get_image('info2'); // url2 = [url_img_p ,url_img_q] = [pinfo2.jpg , ginfo2.jpg]
+    var url3 = await get_image('info3');  // url2 = [url_img_p ,url_img_q] = [pinfo3.jpg , ginfo3.jpg]
+    //print(url2);
+    //print(url3);
+    List<List> info_tout = [info, info2, info3,[url2 , url3] ]; // [url2 ,url3] = [[pinfo2.jpg , ginfo2.jpg] ,[pinfo3.jpg , ginfo3.jpg] ]
     return info_tout;
     // [info , info1 , info3]
   }
@@ -407,5 +414,30 @@ class data_tout {
       return 1 ;
 
     }
+  }
+
+  get_image(file) async {
+
+    var pont = await get_point(file) ;
+    //print('point file : $pont') ;
+    var imgp = 'p' +file + pont.toString() + '.jpg';
+    var imgq = 'g' +file + pont.toString() + '.jpg';
+    //print('image name p= $imgp');
+    //print('image name g= $imgq');
+    FirebaseAuth mAuth = FirebaseAuth.instance;
+    Future<FirebaseUser> user = mAuth.currentUser();
+    if (user != null) {
+      //print('yess');
+      final ref = FirebaseStorage.instance.ref().child(imgp);
+      final ref2 = FirebaseStorage.instance.ref().child(imgq);
+// no need of the file extension, the name will do fine.
+      var url_img_p = await ref.getDownloadURL();
+      var url_img_q = await ref2.getDownloadURL();
+      //url = Image.network(url);
+      return [url_img_p ,url_img_q];
+    } else {
+      return ['nn' , 'nnn'];
+    }
+
   }
 }

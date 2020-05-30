@@ -114,7 +114,7 @@ packages:
     source: hosted
     version: "3.1.5"
   firebase:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: firebase
       url: "https://pub.dartlang.org"
@@ -169,6 +169,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.1+2"
+  firebase_image:
+    dependency: "direct main"
+    description:
+      name: firebase_image
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.6"
+  firebase_storage:
+    dependency: "direct main"
+    description:
+      name: firebase_storage
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.6"
   flutter:
     dependency: "direct main"
     description: flutter

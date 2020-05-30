@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/login.dart';
 import 'package:flutterapp2/model/ponits.dart';
@@ -38,13 +40,17 @@ class Myapp extends StatelessWidget {
 
 
 void main() async{
+
   WidgetsFlutterBinding.ensureInitialized();
+  //var url = await h();
+  //print(url);
 
   var a = await data_tout();
   var info_tout = await a.data() ;
   var parcent1 = await a.percent('info') ;
   var parcent2 = await a.percent('info2') ;
   var parcent3 = await a.percent('info3') ;
+
   //var nv = await a.get_nv('info');
   //print(nv);
   //List<double> parcent = [parcent1,parcent2,parcent3];
@@ -402,3 +408,19 @@ Future<int>  get_point() async {
 }
 
 */
+/*
+h() async {
+  FirebaseAuth mAuth = FirebaseAuth.instance;
+  Future<FirebaseUser> user = mAuth.currentUser();
+  if (user != null) {
+    print('yess');
+    final ref = FirebaseStorage.instance.ref().child('84.jpg');
+// no need of the file extension, the name will do fine.
+    var url = await ref.getDownloadURL();
+    url = Image.network(url);
+    return url;
+  } else {
+    print('non');
+  }
+
+}*/
