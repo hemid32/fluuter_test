@@ -115,11 +115,7 @@ class _home_pageState extends State<home_page> {
                         percent: widget.percent,
                         progressColor: color(widget.percent),
                         //header: new Text("نسبة التقدم"),
-                        center: new Icon(
-                          Icons.person_pin,
-                          size: 30.0,
-                          color: Colors.lightBlue,
-                        ),))]))
+                        center: Text(((widget.percent3 )*100).toStringAsFixed(0)+'%'),))]))
           ),
           Card(
               margin: EdgeInsets.only(top: 10, left: 5, right: 5,),
@@ -140,11 +136,7 @@ class _home_pageState extends State<home_page> {
                         percent: widget.percent2,
                         progressColor: color(widget.percent2),
                         //header: new Text("نسبة التقدم"),
-                        center: new Icon(
-                          Icons.person_pin,
-                          size: 30.0,
-                          color: Colors.lightBlue ,
-                        ),))]))
+                        center: Text(((widget.percent2 )*100).toStringAsFixed(0)+'%'),))]))
           ),
           Card(
               margin: EdgeInsets.only(top: 10, left: 5, right: 5,),
@@ -160,16 +152,13 @@ class _home_pageState extends State<home_page> {
                 margin: EdgeInsets.only(right: MediaQuery.of(context).size.width*0.80),
                 child : CircularPercentIndicator(
 
-                radius: 60.0,
-                lineWidth: 8.0,
-                percent: widget.percent3,
+                  radius: 60.0,
+                  lineWidth: 8.0,
+                  percent: widget.percent3,
+                  //progressColor: color(widget.percent3),
                   progressColor: color(widget.percent3),
                 //header: new Text("نسبة التقدم"),
-                center: new Icon(
-                  Icons.person_pin,
-                  size: 30.0,
-                  color: Colors.lightBlue,
-                ),))]))
+                center: Text(((widget.percent3 )*100).toStringAsFixed(0)+'%'),))]))
           ),
           Card(
               margin: EdgeInsets.only(top: 10, left: 5, right: 5,),
@@ -199,11 +188,7 @@ class _home_pageState extends State<home_page> {
     percent:  (widget.percent + widget.percent3 + widget.percent2)/3,//percent_1(),
             progressColor: color((widget.percent + widget.percent3 + widget.percent2)/3),
     header: new Text("نسبة تقدمك في جميع الدروس"),
-    center: new Icon(
-    Icons.person_pin,
-    size: 50.0,
-    color: Colors.lightBlue ,
-    ),))
+    center: new Text((((widget.percent + widget.percent3 + widget.percent2)/3)*100).toStringAsFixed(0)+'%'),))
 
         ],
 
@@ -212,7 +197,8 @@ class _home_pageState extends State<home_page> {
     );
   }
     Color color(n){
-      if(n<0.3){return Colors.red ; }else if(n<0.5){return Colors.deepOrange ; }else if(n>0.5){return Colors.green;}
+    print('presentega $n');
+      if(n<=0.3){return Colors.red ; }else if(n<0.5){return Colors.orange ; }else if(n>=0.5){return Colors.green;}
    }
   double percent_2(){
     return 1 ;

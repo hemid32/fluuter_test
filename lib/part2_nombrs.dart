@@ -27,9 +27,11 @@ class Part2 extends StatefulWidget {
   final  info2 ;
   final  info3 ;
   final file ;
+  final data ;
+
   //Part2(this.info2 , this.info3);
 
-  const Part2({Key key,this.file , this.info2 , this.info3}) : super(key: key );
+  const Part2({Key key,this.file , this.info2 , this.info3 , this.data}) : super(key: key );
 
 
 
@@ -95,24 +97,44 @@ class _Part2State extends State<Part2> {
               )
             ]
         ) ,
-        body: mybody(context , widget.info2 , widget.info3 ,widget.file), // , widget.info2 , widget.info3
+        body: mybody(context , widget.info2 , widget.info3 ,widget.file , widget.data), // , widget.info2 , widget.info3
       ),
     );
 }
 
 var i = 0 ;
 var  new_list ;
-Widget mybody(context, info2 , info3,file) { //, info2 , info3
+Widget mybody(context, info2 , info3,file  ,data) { //, info2 , info3
   // cett list from databese
-  var list_name_gnrl = [info2['qst'],info2['choi1'],info2['choi2'],info2['choi3'], info2['choi4']];
+  var list_name_gnrl ;
+  //print('tafoooooooooooooooooooooooooh');
+  var title ;
+  if (file == 'info'){
+    title = data[0][1];
+    print(title);
+  list_name_gnrl = [data[0][1]['qst'],data[0][1]['choi1'],data[0][1]['choi2'],data[0][1]['choi3'], data[0][1]['choi4']];
+  }else if(file == 'info2'){
+    title = data[1][1];
+  list_name_gnrl = [data[1][1]['qst'],data[1][1]['choi1'],data[1][1]['choi2'],data[1][1]['choi3'], data[1][1]['choi4']];
+  }else if(file == 'info3'){
+    title = data[2][1];
+    print(title);
+  list_name_gnrl = [data[2][1]['qst'],data[2][1]['choi1'],data[2][1]['choi2'],data[2][1]['choi3'], data[2][1]['choi4']];
+  }
+
+
+
   var list_name = [list_name_gnrl[1],list_name_gnrl[2],list_name_gnrl[3],list_name_gnrl[4]];
   var crr = list_name[3] ;
+
   //print(list_name_gnrl);
   i++ ;
   if(i == 1){
     new_list = list_ran(list_name);
   };
   //final  new_list = new_list1;
+  if(file == 'info'){
+
     return Column(
         children: <Widget>[
         Card(
@@ -129,7 +151,7 @@ Widget mybody(context, info2 , info3,file) { //, info2 , info3
             //width: 500,
 
                 Icon(Icons.border_color),
-                Text(info2['title'] , textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
+                Text(title['title'], textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
             //padding: EdgeInsets.only(left:50),
 
 
@@ -258,7 +280,7 @@ Widget mybody(context, info2 , info3,file) { //, info2 , info3
 
 
                                     onPressed: () {
-                                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) =>  part3(file:file,info3: info3,),),); })
+                                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) =>  part3(file:file,info3: info3,data: data,),),); })
 
                               ],
 
@@ -313,6 +335,423 @@ Widget mybody(context, info2 , info3,file) { //, info2 , info3
 
         ]
   );
+  }else if (file == 'info2'){
+    return ListView(
+        children: <Widget>[
+          Card(
+              child : Container(
+
+                padding: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5),
+
+                margin:EdgeInsets.only(top: 10 , left: 5 , right: 5),
+                child : Row(
+
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                    children: <Widget>[
+                      //width: 500,
+
+                      Icon(Icons.border_color),
+                      Text(title['title'], textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
+                      //padding: EdgeInsets.only(left:50),
+
+
+                      Icon(Icons.assignment , )
+                    ]
+                )  ,
+              )
+          ),
+
+          Container(
+            margin: EdgeInsets.all(10),
+            padding: EdgeInsets.all(10),
+            child: Text(list_name_gnrl[0] , style: TextStyle(fontWeight: FontWeight.bold),),
+          ),
+
+          Container(
+            margin: EdgeInsets.all(10),
+            padding: EdgeInsets.all(10),
+            child: Image.network(widget.data[3][0][2]),
+          ),
+          Container(
+
+            child : Card( child : Column(
+              children: <Widget>[
+
+                Card(child  : ListTile(
+                  title:  Text(new_list[0]),
+                  leading: Radio(
+                    value: SingingCharacter.choi1,
+                    groupValue: _character,
+                    onChanged: (SingingCharacter value) {
+                      setState(() {
+                        _character = value;
+                        _hemidi = new_list[0];
+                      });
+                    },
+                  ),
+                ),
+                ),
+                Card(child: ListTile(
+                  title:  Text(new_list[1]),
+                  leading: Radio(
+                    value: SingingCharacter.choi2,
+                    groupValue: _character,
+                    onChanged: (SingingCharacter value) {
+                      setState(() {
+                        _character = value;
+                        _hemidi = new_list[1];
+                      });
+                    },
+                  ),
+                ),
+                ),
+                Card(child : ListTile(
+                  title: Text(new_list[2]),
+                  leading: Radio(
+                    value: SingingCharacter.choi3,
+                    groupValue: _character,
+                    onChanged: (SingingCharacter value) {
+                      setState(() {
+                        _character = value;
+                        _hemidi = new_list[2];
+                      });
+                    },
+                  ),
+                ),
+                ),
+                Card(child : ListTile(
+                  title: Text(new_list[3]),
+                  leading: Radio(
+                    value: SingingCharacter.choi4,
+                    groupValue: _character,
+                    onChanged: (SingingCharacter value) {
+                      setState(() {
+                        _character = value;
+                        _hemidi = new_list[3];
+                      });
+                    },
+                  ),
+                ),
+                ),
+              ],
+            ),
+            ),
+          ),
+
+          Container(
+            margin: EdgeInsets.only(top: 20 , bottom: 10),
+            child : Material(
+              elevation: 5.0,
+              borderRadius: BorderRadius.circular(30.0),
+              color: Color(0xff01A0C7),
+              child: MaterialButton(
+                minWidth: MediaQuery.of(context).size.width*0.5,
+                padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+
+
+                onPressed: () async  {
+                  //_text.text.isEmpty ? _validate = true : _validate = false;
+                  //pass.text.isEmpty ? _validate = true : _validate = false ;
+                  //imail.text.isEmpty ? _validate = true : _validate = false ;
+
+
+                  //print(_character);
+                  //data();
+                  //print(data());
+                  print(new_list);
+                  print(_hemidi);
+                  //Navigator.of(context).push(MaterialPageRoute(builder: (context) => Part2()));
+                  if(_hemidi == crr){
+                    print('yessss');
+                    showDialog(
+                        context: context,
+                        barrierDismissible: false,
+
+                        builder: (BuildContext context) {
+                          //onWillPop: () => Future.value(false);
+
+                          return WillPopScope(
+                              onWillPop: () {
+                                return Future.value(false);
+                              },
+                              child:CupertinoAlertDialog(
+
+                                title: Text('احسنت'),
+                                content: Icon(Icons.check_circle , color: Colors.green,),
+
+                                actions: <Widget>[
+                                  CupertinoDialogAction(
+
+                                      isDefaultAction: true, child: Container(child: Text("اكمل")),
+
+
+                                      onPressed: () {
+                                        Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) =>   part3(file:file,info3: info3,data: data,),),); })
+
+                                ],
+
+                              ));
+                        });
+
+
+
+                  } else{
+                    showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (BuildContext context) {
+
+                          return WillPopScope(
+                              onWillPop: () {
+                                return Future.value(false);
+                              },
+                              child: CupertinoAlertDialog(
+                                title: Text('خطأ'),
+                                content: Icon(Icons.cancel , color: Colors.red,),
+
+                                actions: <Widget>[
+                                  CupertinoDialogAction(
+
+                                      isDefaultAction: true, child: Container(child: Text("رجوع")),
+
+
+                                      onPressed: () async {
+                                        var a = await data_tout();
+                                        var data_t = await a.data() ;
+                                        Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) =>  nombrs(file,data_t),),);
+                                        //print('ol') ;
+                                      })
+
+                                ],
+
+                              ));
+                        });
+                  }
+
+
+
+                },
+                child: Text("تحقق",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold)),
+              ),
+            ),
+          )
+
+        ]
+    );
+
+  }else if (file == 'info3'){
+    return ListView(
+        children: <Widget>[
+          Card(
+              child : Container(
+
+                padding: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5),
+
+                margin:EdgeInsets.only(top: 10 , left: 5 , right: 5),
+                child : Row(
+
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                    children: <Widget>[
+                      //width: 500,
+
+                      Icon(Icons.border_color),
+                      Text(title['title'], textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
+                      //padding: EdgeInsets.only(left:50),
+
+
+                      Icon(Icons.assignment , )
+                    ]
+                )  ,
+              )
+          ),
+
+          Container(
+            margin: EdgeInsets.all(10),
+            padding: EdgeInsets.all(10),
+            child: Text(list_name_gnrl[0] , style: TextStyle(fontWeight: FontWeight.bold),),
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            padding: EdgeInsets.all(10),
+            child: Image.network(widget.data[3][1][2]),
+          ),
+
+          Container(
+
+            child : Card( child : Column(
+              children: <Widget>[
+
+                Card(child  : ListTile(
+                  title:  Text(new_list[0]),
+                  leading: Radio(
+                    value: SingingCharacter.choi1,
+                    groupValue: _character,
+                    onChanged: (SingingCharacter value) {
+                      setState(() {
+                        _character = value;
+                        _hemidi = new_list[0];
+                      });
+                    },
+                  ),
+                ),
+                ),
+                Card(child: ListTile(
+                  title:  Text(new_list[1]),
+                  leading: Radio(
+                    value: SingingCharacter.choi2,
+                    groupValue: _character,
+                    onChanged: (SingingCharacter value) {
+                      setState(() {
+                        _character = value;
+                        _hemidi = new_list[1];
+                      });
+                    },
+                  ),
+                ),
+                ),
+                Card(child : ListTile(
+                  title: Text(new_list[2]),
+                  leading: Radio(
+                    value: SingingCharacter.choi3,
+                    groupValue: _character,
+                    onChanged: (SingingCharacter value) {
+                      setState(() {
+                        _character = value;
+                        _hemidi = new_list[2];
+                      });
+                    },
+                  ),
+                ),
+                ),
+                Card(child : ListTile(
+                  title: Text(new_list[3]),
+                  leading: Radio(
+                    value: SingingCharacter.choi4,
+                    groupValue: _character,
+                    onChanged: (SingingCharacter value) {
+                      setState(() {
+                        _character = value;
+                        _hemidi = new_list[3];
+                      });
+                    },
+                  ),
+                ),
+                ),
+              ],
+            ),
+            ),
+          ),
+
+          Container(
+            margin: EdgeInsets.only(top: 20 , bottom: 10),
+            child : Material(
+              elevation: 5.0,
+              borderRadius: BorderRadius.circular(30.0),
+              color: Color(0xff01A0C7),
+              child: MaterialButton(
+                minWidth: MediaQuery.of(context).size.width*0.5,
+                padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+
+
+                onPressed: () async  {
+                  //_text.text.isEmpty ? _validate = true : _validate = false;
+                  //pass.text.isEmpty ? _validate = true : _validate = false ;
+                  //imail.text.isEmpty ? _validate = true : _validate = false ;
+
+
+                  //print(_character);
+                  //data();
+                  //print(data());
+                  //print(new_list);
+                  //print(_hemidi);
+                  //Navigator.of(context).push(MaterialPageRoute(builder: (context) => Part2()));
+                  if(_hemidi == crr){
+                    //print('yessss');
+                    showDialog(
+                        context: context,
+                        barrierDismissible: false,
+
+                        builder: (BuildContext context) {
+                          //onWillPop: () => Future.value(false);
+
+                          return WillPopScope(
+                              onWillPop: () {
+                                return Future.value(false);
+                              },
+                              child:CupertinoAlertDialog(
+
+                                title: Text('احسنت'),
+                                content: Icon(Icons.check_circle , color: Colors.green,),
+
+                                actions: <Widget>[
+                                  CupertinoDialogAction(
+
+                                      isDefaultAction: true, child: Container(child: Text("اكمل")),
+
+
+                                      onPressed: () {
+                                        Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) =>   part3(file:file,info3: info3,data: data,),),); })
+
+                                ],
+
+                              ));
+                        });
+
+
+
+                  } else{
+                    showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (BuildContext context) {
+
+                          return WillPopScope(
+                              onWillPop: () {
+                                return Future.value(false);
+                              },
+                              child: CupertinoAlertDialog(
+                                title: Text('خطأ'),
+                                content: Icon(Icons.cancel , color: Colors.red,),
+
+                                actions: <Widget>[
+                                  CupertinoDialogAction(
+
+                                      isDefaultAction: true, child: Container(child: Text("رجوع")),
+
+
+                                      onPressed: () async {
+                                        var a = await data_tout();
+                                        var data_t = await a.data() ;
+                                        Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) =>  nombrs(file,data_t),),);
+                                        //print('ol') ;
+                                      })
+
+                                ],
+
+                              ));
+                        });
+                  }
+
+
+
+                },
+                child: Text("تحقق",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold)),
+              ),
+            ),
+          )
+
+        ]
+    );
+
+  }
 
 
   }

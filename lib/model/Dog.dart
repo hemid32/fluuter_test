@@ -42,8 +42,8 @@ class data_tout {
     List<Map> info3 = [info3_parti1, info3_parti2, info3_parti3];
     // tout les  doné
 
-    var url2 = await get_image('info2'); // url2 = [url_img_p ,url_img_q] = [pinfo2.jpg , ginfo2.jpg]
-    var url3 = await get_image('info3');  // url2 = [url_img_p ,url_img_q] = [pinfo3.jpg , ginfo3.jpg]
+    var url2 = await get_image('info2'); // url2 = [url_img_p ,url_img_q , url_img_q_choi ] = [pinfo2n.jpg , ginfo2n.jpg , img_choi_info2n.jpg]
+    var url3 = await get_image('info3');  // url2 = [url_img_p ,url_img_q , url_img_q_choi ] = [pinfo3n.jpg , ginfo3n.jpg,img_choi_info3n.jpg]
     //print(url2);
     //print(url3);
     List<List> info_tout = [info, info2, info3,[url2 , url3] ]; // [url2 ,url3] = [[pinfo2.jpg , ginfo2.jpg] ,[pinfo3.jpg , ginfo3.jpg] ]
@@ -58,7 +58,7 @@ class data_tout {
 
 // Delete any existing database:
 
-  /*
+
     await deleteDatabase(dbPath);
 // Create the writable database file from the bundled demo database file:
     ByteData data = await rootBundle.load("issues/models/info.db");
@@ -66,7 +66,7 @@ class data_tout {
         data.offsetInBytes, data.lengthInBytes);
     await File(dbPath).writeAsBytes(bytes);
 
-   */
+
 
 
 
@@ -138,7 +138,7 @@ class data_tout {
     var dbPath = join(dbDir, "info2.db");
 
 // Delete any existing database:
-    /*
+
     await deleteDatabase(dbPath);
 
 // Create the writable database file from the bundled demo database file:
@@ -147,7 +147,7 @@ class data_tout {
         data.offsetInBytes, data.lengthInBytes);
     await File(dbPath).writeAsBytes(bytes);
 
-     */
+
     var db = await openDatabase(dbPath);
     List<Map> list = await db.rawQuery('SELECT  *  FROM parti1');
     //print(list[ponits]);
@@ -216,7 +216,7 @@ class data_tout {
     var dbPath = join(dbDir, "info3.db");
 
 // Delete any existing database:
-    /*
+
     await deleteDatabase(dbPath);
 
 // Create the writable database file from the bundled demo database file:
@@ -225,7 +225,7 @@ class data_tout {
         data.offsetInBytes, data.lengthInBytes);
     await File(dbPath).writeAsBytes(bytes);
 
-     */
+
     var db = await openDatabase(dbPath);
     List<Map> list = await db.rawQuery('SELECT  *  FROM parti1');
     //print(list[ponits]);
@@ -337,7 +337,7 @@ class data_tout {
     String file1 = file + '.db' ;
     var dbDir = await getDatabasesPath();
     var dbPath = join(dbDir, file1);
-    print(dbPath);
+    //print(dbPath);
 
 // Delete any existing database:
     //await deleteDatabase(dbPath);
@@ -348,10 +348,10 @@ class data_tout {
     int count = await db_update.rawUpdate(
         'UPDATE point SET ponits = ? WHERE ponits = ?',
         [t+1 , t]);
-    print('updated: $count');
+    //print('updated: $count');
     List<Map> list2 = await db.rawQuery('SELECT  ponits  FROM point');
     int t2 = list2[0]['ponits']  ;
-    print('valur vv: $t2');
+    //print('valur vv: $t2');
     await db_update.close();
 
   }
@@ -359,7 +359,7 @@ class data_tout {
     String file1 = file + '.db' ;
     var dbDir = await getDatabasesPath();
     var dbPath = join(dbDir, file1);
-    print(dbPath);
+    //print(dbPath);
 
 // Delete any existing database:
     //await deleteDatabase(dbPath);
@@ -422,6 +422,7 @@ class data_tout {
     //print('point file : $pont') ;
     var imgp = 'p' +file + pont.toString() + '.jpg';
     var imgq = 'g' +file + pont.toString() + '.jpg';
+    var imgq_choi = 'g_choi_' +file + pont.toString() + '.jpg';
     //print('image name p= $imgp');
     //print('image name g= $imgq');
     FirebaseAuth mAuth = FirebaseAuth.instance;
@@ -430,11 +431,14 @@ class data_tout {
       //print('yess');
       final ref = FirebaseStorage.instance.ref().child(imgp);
       final ref2 = FirebaseStorage.instance.ref().child(imgq);
+      final ref3 = FirebaseStorage.instance.ref().child(imgq_choi);
 // no need of the file extension, the name will do fine.
       var url_img_p = await ref.getDownloadURL();
       var url_img_q = await ref2.getDownloadURL();
+      var url_img_q_choi = await ref3.getDownloadURL();
       //url = Image.network(url);
-      return [url_img_p ,url_img_q];
+      //, url_img_q_choi
+      return [url_img_p ,url_img_q,url_img_q_choi ];
     } else {
       return ['nn' , 'nnn'];
     }
