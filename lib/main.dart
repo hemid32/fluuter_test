@@ -50,6 +50,7 @@ void main() async{
   var parcent1 = await a.percent('info') ;
   var parcent2 = await a.percent('info2') ;
   var parcent3 = await a.percent('info3') ;
+  //print(info_tout[2][2]);
 
   //var nv = await a.get_nv('info');
   //print(nv);

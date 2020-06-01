@@ -33,6 +33,7 @@ class data_tout {
     var info2_parti2 = await info2__parti2(ponits_info2);
     var info2_parti3 = await info2__parti3(ponits_info2);
     List<Map> info2 = [info2_parti1, info2_parti2, info2_parti3];
+    print(info2);
 
     var ponits_info3  = await get_point('info3');
     ///// info3
@@ -58,7 +59,7 @@ class data_tout {
 
 // Delete any existing database:
 
-
+/*
     await deleteDatabase(dbPath);
 // Create the writable database file from the bundled demo database file:
     ByteData data = await rootBundle.load("issues/models/info.db");
@@ -66,7 +67,7 @@ class data_tout {
         data.offsetInBytes, data.lengthInBytes);
     await File(dbPath).writeAsBytes(bytes);
 
-
+*/
 
 
 
@@ -138,6 +139,7 @@ class data_tout {
     var dbPath = join(dbDir, "info2.db");
 
 // Delete any existing database:
+/*
 
     await deleteDatabase(dbPath);
 
@@ -146,6 +148,10 @@ class data_tout {
     List<int> bytes = data.buffer.asUint8List(
         data.offsetInBytes, data.lengthInBytes);
     await File(dbPath).writeAsBytes(bytes);
+
+ */
+
+
 
 
     var db = await openDatabase(dbPath);
@@ -216,6 +222,7 @@ class data_tout {
     var dbPath = join(dbDir, "info3.db");
 
 // Delete any existing database:
+  /*
 
     await deleteDatabase(dbPath);
 
@@ -224,6 +231,8 @@ class data_tout {
     List<int> bytes = data.buffer.asUint8List(
         data.offsetInBytes, data.lengthInBytes);
     await File(dbPath).writeAsBytes(bytes);
+*/
+
 
 
     var db = await openDatabase(dbPath);
@@ -294,16 +303,10 @@ class data_tout {
     var dbPath = join(dbDir, file1);
 
 // Delete any existing database:
-    /*
-    await deleteDatabase(dbPath);
 
-// Create the writable database file from the bundled demo database file:
-    ByteData data = await rootBundle.load("issues/models/info.db");
-    List<int> bytes = data.buffer.asUint8List(
-        data.offsetInBytes, data.lengthInBytes);
-    await File(dbPath).writeAsBytes(bytes);
 
-     */
+
+
     var db = await openDatabase(dbPath);
     List<Map> list = await db.rawQuery('SELECT  ponits  FROM point');
     int t = list[0]['ponits'];

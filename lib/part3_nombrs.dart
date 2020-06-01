@@ -71,11 +71,11 @@ class _part3State extends State<part3> {
 Widget _mybody3(myController,context , info3,file , data){
   // qstion from data
 
-  if (file == 'info '){
+  if (file == 'info'){
 
 
 
-  var  methode = data[0][2]['method'];
+  var  methode = data[0][2]['methode'];
   var  qs = data[0][2]['qst'] ;
   var crr = data[0][2]['crr'] ;
   return  ListView(
@@ -94,7 +94,7 @@ Widget _mybody3(myController,context , info3,file , data){
                     //width: 500,
 
                     Icon(Icons.border_color),
-                    Text(info3['title'] , textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
+                    Text(data[0][2]['title'] , textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
                     //padding: EdgeInsets.only(left:50),
 
 
