@@ -66,6 +66,7 @@ Widget _mybody(context , file){
               var parcent2 = await a.percent('info2') ;
               var parcent3 = await a.percent('info3') ;
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => home_page(info_tout,parcent1,parcent2,parcent3)));
+              Navigator.pop(context);
 
 
             }

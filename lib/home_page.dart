@@ -4,6 +4,7 @@ import 'dart:io';
 //import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterapp2/loading.dart';
 import 'package:flutterapp2/model/Dog.dart';
 import 'part1_nombrs.dart';
 import 'hemidi.dart';
@@ -49,6 +50,7 @@ class home_page extends StatefulWidget {
 }
 
 class _home_pageState extends State<home_page> {
+  bool lod = false  ;
   //final ref = FirebaseAuth.;
 
 
@@ -56,21 +58,14 @@ class _home_pageState extends State<home_page> {
 
 
   Widget build(BuildContext context) {
-    return Scaffold(
+
+    return lod ? loading() :  Scaffold(
 
       appBar: AppBar(
 
         title: Text(' تعلم الرياضيات' , textDirection: TextDirection.rtl),
           actions: <Widget>[
-            IconButton(
-            icon: const Icon(Icons.home ),
-            tooltip: 'home',
-            onPressed: () async {
-              //var a = await data_tout();
-              //var info_tout = await a.data() ;
-              //Navigator.of(context).push(MaterialPageRoute(builder: (context) => home_page(info_tout)));
-            },
-            )
+
           ]
     ),
       body: Container(
@@ -102,8 +97,14 @@ class _home_pageState extends State<home_page> {
                   child : Stack(children: [ ListTile(
                     title: Text('انشطة عددية ', textDirection: TextDirection.rtl),
                     leading: Icon(Icons.iso , size: 50,color: Colors.lightBlueAccent,),
-                    onTap: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => nombrs('info',widget.data)));
+                    onTap: () async {
+                      setState(() {
+                        lod = true ;
+                      });
+                      await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => nombrs('info',widget.data)));
+                      setState(() {
+                        lod = false ;
+                      });
                       //print(info);
                     },
                   ),Container(
@@ -115,7 +116,7 @@ class _home_pageState extends State<home_page> {
                         percent: widget.percent,
                         progressColor: color(widget.percent),
                         //header: new Text("نسبة التقدم"),
-                        center: Text(((widget.percent3 )*100).toStringAsFixed(0)+'%'),))]))
+                        center: Text(((widget.percent )*100).toStringAsFixed(0)+'%'),))]))
           ),
           Card(
               margin: EdgeInsets.only(top: 10, left: 5, right: 5,),
@@ -124,9 +125,9 @@ class _home_pageState extends State<home_page> {
                   child : Stack(children: [ ListTile(
                     title: Text('الدوال و تنظيم المعطيات' , textDirection: TextDirection.rtl),
                     leading: Icon(Icons.blur_off , size: 50,color : Colors.lightBlueAccent,),
-                    onTap: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => nombrs('info2',widget.data)));
-                    },
+                    onTap: () async {
+                      await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => nombrs('info2',widget.data)));
+                      },
                   ),Container(
                       margin: EdgeInsets.only(right: MediaQuery.of(context).size.width*0.80),
                       child : CircularPercentIndicator(
@@ -166,9 +167,9 @@ class _home_pageState extends State<home_page> {
 
                   child : Stack(children: [ ListTile(
                     title: Text('حول التطبيق' , textDirection: TextDirection.rtl,textAlign: TextAlign.center,),
-                    onTap: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => nombrs('info3',widget.data),),);
-                    },
+                    onTap: () async {
+                      await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => nombrs('info3',widget.data),),);
+                      },
                   ),]))
           ),
 

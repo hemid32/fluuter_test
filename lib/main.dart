@@ -23,6 +23,12 @@ import 'package:flutter/services.dart';
 
 import 'package:flutter/services.dart' show rootBundle;
 import 'model/Dog.dart';
+class Routes {
+  static const String firstPage = '/home';
+//static const String secondPage = '/second';
+//static const String thirdPage = '/third';
+}
+
 // nombrs()
 /*
 void main(){

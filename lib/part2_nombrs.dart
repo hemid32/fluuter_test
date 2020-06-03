@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/part3_nombrs.dart';
@@ -54,6 +56,9 @@ class Part2 extends StatefulWidget {
 
 class _Part2State extends State<Part2> {
 
+  //var cnt = widget.data[3] ;
+
+
 
 
 
@@ -66,6 +71,8 @@ class _Part2State extends State<Part2> {
   @override
 
   Widget build(BuildContext context)  {
+    bool cnt  ;
+    if (widget.data[3][1][0] == 'issues/images/prv.png'){cnt = false;}else{cnt = true;}
 
     return MaterialApp(
       localizationsDelegates: [
@@ -84,27 +91,23 @@ class _Part2State extends State<Part2> {
             actions: <Widget>[
               IconButton(
                 icon: const Icon(Icons.home ),
-                tooltip: 'home',
-                onPressed: () async {
-                  var a = await data_tout();
-                  var info_tout = await a.data() ;
-                  var parcent1 = await a.percent('info') ;
-                  var parcent2 = await a.percent('info2') ;
-                  var parcent3 = await a.percent('info3') ;
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => home_page(info_tout,parcent1,parcent2,parcent3)));
-                  //Navigator.of(context).push(MaterialPageRoute(builder: (context) => home_page(0)));
+                //tooltip: 'home',
+                onPressed: ()  {
+                  Navigator.pop(context);
+                  Navigator.pop(context);
                 },
               )
             ]
         ) ,
-        body: mybody(context , widget.info2 , widget.info3 ,widget.file , widget.data), // , widget.info2 , widget.info3
+        body: mybody(context , widget.info2 , widget.info3 ,widget.file , widget.data , cnt), // , widget.info2 , widget.info3
       ),
     );
+
 }
 
 var i = 0 ;
 var  new_list ;
-Widget mybody(context, info2 , info3,file  ,data) { //, info2 , info3
+Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
   // cett list from databese
   var list_name_gnrl ;
   //print('tafoooooooooooooooooooooooooh');
@@ -133,7 +136,9 @@ Widget mybody(context, info2 , info3,file  ,data) { //, info2 , info3
     new_list = list_ran(list_name);
   };
   //final  new_list = new_list1;
+
   if(file == 'info'){
+
 
     return Column(
         children: <Widget>[
@@ -266,7 +271,8 @@ Widget mybody(context, info2 , info3,file  ,data) { //, info2 , info3
 
                         return WillPopScope(
                             onWillPop: () {
-                              return Future.value(false);
+                              return Future.value(true);
+
                             },
                             child:CupertinoAlertDialog(
 
@@ -280,8 +286,11 @@ Widget mybody(context, info2 , info3,file  ,data) { //, info2 , info3
 
 
                                     onPressed: () {
-                                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) =>  part3(file:file,info3: info3,data: data,),),); })
 
+                                      //Navigator.pop(context);
+                                      Navigator.pop(context, 'Cancel');
+                                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) =>  part3(file:file,info3: info3,data: data,),),); })
+                                      //Navigator.pop(context);
                               ],
 
                             ));
@@ -297,7 +306,7 @@ Widget mybody(context, info2 , info3,file  ,data) { //, info2 , info3
 
                         return WillPopScope(
                             onWillPop: () {
-                              return Future.value(false);
+                              return Future.value(true);
                             },
                             child: CupertinoAlertDialog(
                               title: Text('خطأ'),
@@ -312,8 +321,11 @@ Widget mybody(context, info2 , info3,file  ,data) { //, info2 , info3
                                     onPressed: () async {
                                       var a = await data_tout();
                                       var data_t = await a.data() ;
-                                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) =>  nombrs(file,data_t),),);
+                                      //Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) =>  nombrs(file,data_t),),);
                                       //print('ol') ;
+                                      Navigator.pop(context, 'Cancel');
+                                      Navigator.pop(context);
+
                                     })
 
                               ],
@@ -335,7 +347,8 @@ Widget mybody(context, info2 , info3,file  ,data) { //, info2 , info3
 
         ]
   );
-  }else if (file == 'info2'){
+  }else if (file == 'info2') {
+
     return ListView(
         children: <Widget>[
           Card(
@@ -371,7 +384,7 @@ Widget mybody(context, info2 , info3,file  ,data) { //, info2 , info3
           Container(
             margin: EdgeInsets.all(10),
             padding: EdgeInsets.all(10),
-            child: Image.network(widget.data[3][0][2]),
+            child: cnt ? Image.network(widget.data[3][0][2]) : Image.asset('issues/images/nct.jpg') , // Image.network(widget.data[3][0][2]),
           ),
           Container(
 
@@ -473,7 +486,7 @@ Widget mybody(context, info2 , info3,file  ,data) { //, info2 , info3
 
                           return WillPopScope(
                               onWillPop: () {
-                                return Future.value(false);
+                                return Future.value(true);
                               },
                               child:CupertinoAlertDialog(
 
@@ -487,12 +500,14 @@ Widget mybody(context, info2 , info3,file  ,data) { //, info2 , info3
 
 
                                       onPressed: () {
+                                        Navigator.pop(context, 'Cancel');
                                         Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) =>   part3(file:file,info3: info3,data: data,),),); })
 
                                 ],
 
                               ));
                         });
+
 
 
 
@@ -504,7 +519,7 @@ Widget mybody(context, info2 , info3,file  ,data) { //, info2 , info3
 
                           return WillPopScope(
                               onWillPop: () {
-                                return Future.value(false);
+                                return Future.value(true);
                               },
                               child: CupertinoAlertDialog(
                                 title: Text('خطأ'),
@@ -516,11 +531,13 @@ Widget mybody(context, info2 , info3,file  ,data) { //, info2 , info3
                                       isDefaultAction: true, child: Container(child: Text("رجوع")),
 
 
-                                      onPressed: () async {
-                                        var a = await data_tout();
-                                        var data_t = await a.data() ;
-                                        Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) =>  nombrs(file,data_t),),);
+                                      onPressed: ()  {
+                                        //var a = await data_tout();
+                                        //var data_t = await a.data() ;
+                                        //Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) =>  nombrs(file,data_t),),);
                                         //print('ol') ;
+                                        Navigator.pop(context, 'Cancel');
+                                        Navigator.pop(context);
                                       })
 
                                 ],
@@ -578,7 +595,7 @@ Widget mybody(context, info2 , info3,file  ,data) { //, info2 , info3
           Container(
             margin: EdgeInsets.all(10),
             padding: EdgeInsets.all(10),
-            child: Image.network(widget.data[3][1][2]),
+            child:  cnt ? Image.network(widget.data[3][1][2]) : Image.asset('issues/images/nct.jpg'),//Image.network(widget.data[3][1][2]),
           ),
 
           Container(
@@ -681,7 +698,7 @@ Widget mybody(context, info2 , info3,file  ,data) { //, info2 , info3
 
                           return WillPopScope(
                               onWillPop: () {
-                                return Future.value(false);
+                                return Future.value(true);
                               },
                               child:CupertinoAlertDialog(
 
@@ -695,6 +712,7 @@ Widget mybody(context, info2 , info3,file  ,data) { //, info2 , info3
 
 
                                       onPressed: () {
+                                        Navigator.pop(context, 'Cancel');
                                         Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) =>   part3(file:file,info3: info3,data: data,),),); })
 
                                 ],
@@ -712,7 +730,7 @@ Widget mybody(context, info2 , info3,file  ,data) { //, info2 , info3
 
                           return WillPopScope(
                               onWillPop: () {
-                                return Future.value(false);
+                                return Future.value(true);
                               },
                               child: CupertinoAlertDialog(
                                 title: Text('خطأ'),
@@ -724,10 +742,12 @@ Widget mybody(context, info2 , info3,file  ,data) { //, info2 , info3
                                       isDefaultAction: true, child: Container(child: Text("رجوع")),
 
 
-                                      onPressed: () async {
-                                        var a = await data_tout();
-                                        var data_t = await a.data() ;
-                                        Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) =>  nombrs(file,data_t),),);
+                                      onPressed: ()  {
+                                        Navigator.pop(context, 'Cancel');
+                                        Navigator.pop(context);
+                                        //var a = await data_tout();
+                                        //var data_t = await a.data() ;
+                                        //Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) =>  nombrs(file,data_t),),);
                                         //print('ol') ;
                                       })
 
@@ -769,5 +789,7 @@ list_ran(List list){
     }
 
   return new_list ;
+
+
 }
 

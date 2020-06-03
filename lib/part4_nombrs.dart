@@ -63,7 +63,9 @@ Widget _mybody(context,file){
 
               var a = await data_tout() ;
               var data = await a.data();
+              //Navigator.pop(context);
               await Navigator.of(context).push(MaterialPageRoute(builder: (context) => nombrs(file,data)));
+              Navigator.pop(context);
 
             }
                   ),

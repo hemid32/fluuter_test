@@ -9,6 +9,10 @@ import 'part2_nombrs.dart';
 import 'part4_nombrs.dart';
 //import 'package:flutter_localizations/flutter_localizations.dart';
 import 'home_page.dart';
+
+
+
+
 class part3 extends StatefulWidget {
   final info3 ;
   final file ;
@@ -32,7 +36,10 @@ class _part3State extends State<part3> {
   }
   @override
   Widget build(BuildContext context) {
+    bool cnt ;
+    if (widget.data[3][1][0] == 'issues/images/prv.png'){cnt = false;}else{cnt = true;}
     return MaterialApp(
+
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -49,26 +56,22 @@ class _part3State extends State<part3> {
               IconButton(
                 icon: const Icon(Icons.home ),
                 tooltip: 'home',
-                onPressed: () async {
-                  var a = await data_tout();
-                  var info_tout = await a.data() ;
-                  var parcent1 = await a.percent('info') ;
-                  var parcent2 = await a.percent('info2') ;
-                  var parcent3 = await a.percent('info3') ;
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => home_page(info_tout,parcent1,parcent2,parcent3)));
-                  //Navigator.of(context).push(MaterialPageRoute(builder: (context) => home_page(0)));
+                onPressed: ()  {
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                  Navigator.pop(context);
                 },
               )
             ]
 
         ) ,
-        body: _mybody3(myController,context , widget.info3 , widget.file, widget.data),
+        body: _mybody3(myController,context , widget.info3 , widget.file, widget.data , cnt),
       ),
     );
 
   }
 }
-Widget _mybody3(myController,context , info3,file , data){
+Widget _mybody3(myController,context , info3,file , data, cnt){
   // qstion from data
 
   if (file == 'info'){
@@ -165,7 +168,7 @@ Widget _mybody3(myController,context , info3,file , data){
 
                         return WillPopScope(
                             onWillPop: () {
-                              return Future.value(false);
+                              return Future.value(true);
                             },
                             child: CupertinoAlertDialog(
 
@@ -212,7 +215,8 @@ Widget _mybody3(myController,context , info3,file , data){
 
                         return WillPopScope(
                             onWillPop: () {
-                              return Future.value(false);
+                              return Future.value(true);
+                              //Navigator.pop(context);
                             },
                             child: CupertinoAlertDialog(
                               title: Text('خطأ'),
@@ -224,11 +228,14 @@ Widget _mybody3(myController,context , info3,file , data){
                                     isDefaultAction: true, child: Container(child: Text("عودة الي التعريف")),
 
 
-                                    onPressed: () async {
+                                    onPressed: ()  {
+                                      Navigator.pop(context, 'Cancel');
+                                      Navigator.pop(context);
+                                      Navigator.pop(context);
 
-                                      var a = await data_tout();
-                                      var data_t = await a.data() ;
-                                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) =>  nombrs(file,data_t),),);
+                                      //var a = await data_tout();
+                                      //var data_t = await a.data() ;
+                                      //Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) =>  nombrs(file,data_t),),);
 
                                       //Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => nombrs(),),);
                                     })
@@ -325,7 +332,7 @@ Widget _mybody3(myController,context , info3,file , data){
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 margin: EdgeInsets.only(top: 20),
-                child: Image.network(url),
+                child: cnt ? Image.network(url) : Image.asset('issues/images/nct.jpg')//Image.network(url),
               )
           ),
           Card(
@@ -393,14 +400,30 @@ Widget _mybody3(myController,context , info3,file , data){
                                         var  max_point = p ;
                                         if (point == max_point  ){
                                           var point_if_complite = a.update_point_if_complite(file) ;
+                                          Navigator.pop(context, 'Cancel');
+                                          Navigator.pop(context);
+                                          Navigator.pop(context);
+                                          Navigator.pop(context);
                                           await Navigator.of(context).push(MaterialPageRoute(builder: (context) => fine(file: file,)));
-                                        }else{
+                                        }else if(point == 3 || point == 6 || point == 10  ){
+                                          Navigator.pop(context, 'Cancel');
+                                          Navigator.pop(context);
+                                          Navigator.pop(context);
+                                          Navigator.pop(context);
+                                          await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => part4(file:file),)
+
 
 
                                           //var data = await a.data();
-                                          await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => part4(file:file),)
+
                                             ,);
 
+                                        }else {
+                                          Navigator.pop(context, 'Cancel');
+                                          Navigator.pop(context);
+                                          Navigator.pop(context);
+                                          Navigator.pop(context);
+                                          await Navigator.of(context).push(MaterialPageRoute(builder: (context) => nombrs(file,data)));
                                         }
                                         /*Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) =>  part3(),),);*/ }
                                   )
@@ -419,7 +442,7 @@ Widget _mybody3(myController,context , info3,file , data){
 
                           return WillPopScope(
                               onWillPop: () {
-                                return Future.value(false);
+                                return Future.value(true);
                               },
                               child: CupertinoAlertDialog(
                                 title: Text('خطأ'),
@@ -431,11 +454,14 @@ Widget _mybody3(myController,context , info3,file , data){
                                       isDefaultAction: true, child: Container(child: Text("عودة الي التعريف")),
 
 
-                                      onPressed: () async {
+                                      onPressed: () {
+                                        Navigator.pop(context, 'Cancel');
+                                        Navigator.pop(context);
+                                        Navigator.pop(context);
 
-                                        var a = await data_tout();
-                                        var data_t = await a.data() ;
-                                        Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) =>  nombrs(file,data_t),),);
+                                        //var a = await data_tout();
+                                        //var data_t = await a.data() ;
+                                        //Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) =>  nombrs(file,data_t),),);
 
                                         //Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => nombrs(),),);
                                       })

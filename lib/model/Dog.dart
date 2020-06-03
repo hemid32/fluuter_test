@@ -139,8 +139,8 @@ class data_tout {
     var dbPath = join(dbDir, "info2.db");
 
 // Delete any existing database:
-/*
 
+/*
     await deleteDatabase(dbPath);
 
 // Create the writable database file from the bundled demo database file:
@@ -149,8 +149,8 @@ class data_tout {
         data.offsetInBytes, data.lengthInBytes);
     await File(dbPath).writeAsBytes(bytes);
 
- */
 
+*/
 
 
 
@@ -222,7 +222,8 @@ class data_tout {
     var dbPath = join(dbDir, "info3.db");
 
 // Delete any existing database:
-  /*
+
+    /*
 
     await deleteDatabase(dbPath);
 
@@ -231,8 +232,8 @@ class data_tout {
     List<int> bytes = data.buffer.asUint8List(
         data.offsetInBytes, data.lengthInBytes);
     await File(dbPath).writeAsBytes(bytes);
-*/
 
+*/
 
 
     var db = await openDatabase(dbPath);
@@ -304,7 +305,14 @@ class data_tout {
 
 // Delete any existing database:
 
+    //await deleteDatabase(dbPath);
+    /*
 
+// Create the writable database file from the bundled demo database file:
+    ByteData data = await rootBundle.load("issues/models/info.db");
+    List<int> bytes = data.buffer.asUint8List(
+        data.offsetInBytes, data.lengthInBytes);
+    await File(dbPath).writeAsBytes(bytes);*/
 
 
     var db = await openDatabase(dbPath);
@@ -421,30 +429,47 @@ class data_tout {
 
   get_image(file) async {
 
-    var pont = await get_point(file) ;
-    //print('point file : $pont') ;
-    var imgp = 'p' +file + pont.toString() + '.jpg';
-    var imgq = 'g' +file + pont.toString() + '.jpg';
-    var imgq_choi = 'g_choi_' +file + pont.toString() + '.jpg';
-    //print('image name p= $imgp');
-    //print('image name g= $imgq');
-    FirebaseAuth mAuth = FirebaseAuth.instance;
-    Future<FirebaseUser> user = mAuth.currentUser();
-    if (user != null) {
-      //print('yess');
-      final ref = FirebaseStorage.instance.ref().child(imgp);
-      final ref2 = FirebaseStorage.instance.ref().child(imgq);
-      final ref3 = FirebaseStorage.instance.ref().child(imgq_choi);
+    try {
+    final result = await InternetAddress.lookup('google.com');
+    if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+      //print(connected)
+
+      var pont = await get_point(file) ;
+      //print('point file : $pont') ;
+      var imgp = 'p' +file + pont.toString() + '.jpg';
+      var imgq = 'g' +file + pont.toString() + '.jpg';
+      var imgq_choi = 'g_choi_' +file + pont.toString() + '.jpg';
+      //print('image name p= $imgp');
+      //print('image name g= $imgq');
+      FirebaseAuth mAuth = FirebaseAuth.instance;
+      Future<FirebaseUser> user = mAuth.currentUser();
+      if (user != null) {
+        //print('yess');
+        final ref = FirebaseStorage.instance.ref().child(imgp);
+        final ref2 = FirebaseStorage.instance.ref().child(imgq);
+        final ref3 = FirebaseStorage.instance.ref().child(imgq_choi);
 // no need of the file extension, the name will do fine.
-      var url_img_p = await ref.getDownloadURL();
-      var url_img_q = await ref2.getDownloadURL();
-      var url_img_q_choi = await ref3.getDownloadURL();
-      //url = Image.network(url);
-      //, url_img_q_choi
-      return [url_img_p ,url_img_q,url_img_q_choi ];
-    } else {
-      return ['nn' , 'nnn'];
+        var url_img_p = await ref.getDownloadURL();
+        var url_img_q = await ref2.getDownloadURL();
+        var url_img_q_choi = await ref3.getDownloadURL();
+        //url = Image.network(url);
+        //, url_img_q_choi
+        return [url_img_p ,url_img_q,url_img_q_choi ];
+      }
+
+
+
+
     }
+    } on SocketException catch (_) {
+    //print('not connected');
+
+      return ['issues/images/prv.png','issues/images/prv.png','issues/images/prv.png'];
+
+
+    }
+
+
 
   }
 }

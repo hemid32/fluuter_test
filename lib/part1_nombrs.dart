@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'hemidi.dart';
@@ -7,6 +10,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'home_page.dart';
 import 'dart:convert' ;
 
+import 'loading.dart';
+
 class nombrs extends StatelessWidget {
   var data  ;
   var info ;
@@ -15,6 +20,7 @@ class nombrs extends StatelessWidget {
   var info3 ;
   var file ;
   var url ;
+  var img_typ  ;
   //Map info1 ;
   nombrs(this.file,this.data){
     data = this.data ;
@@ -25,6 +31,13 @@ class nombrs extends StatelessWidget {
     //print(info3);
     //print(this.data);
     url = this.data[3]; // url = [[pinfo2.jpg , ginfo2.jpg] ,[pinfo3.jpg , ginfo3.jpg] ]
+    print(url);
+    print(url[1][0]);
+    if(url[1][0] == 'issues/images/prv.png'){
+      //print('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
+      img_typ = false;
+    }else{img_typ = true ; }
+
     //print(url);
     //info2 = this.info[1];
     //info = json.decode(this.info[0]);
@@ -36,6 +49,9 @@ class nombrs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //final ProgressDialog pr = ProgressDialog(context);
+
+
     return MaterialApp(
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
@@ -53,29 +69,34 @@ class nombrs extends StatelessWidget {
                 icon: const Icon(Icons.home ),
                 tooltip: 'home',
                 onPressed: () async {
+
                   var a = await data_tout();
                   var info_tout = await a.data() ;
                   var parcent1 = await a.percent('info') ;
                   var parcent2 = await a.percent('info2') ;
                   var parcent3 = await a.percent('info3') ;
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => home_page(info_tout,parcent1,parcent2,parcent3)));
+                  //Navigator.of(context).pop(MaterialPageRoute(builder: (context) => home_page(info_tout,parcent1,parcent2,parcent3)));
                   //Navigator.of(context).push(MaterialPageRoute(builder: (context) => home_page(0)));
+                  Navigator.of(context).pop();
                 },
               )
             ]
         ) ,
-        body: _mybody(context,info , info2 , info3 , file , url , data),
+        body: _mybody(context,info , info2 , info3 , file , url , data, img_typ),
       ),
     );
 
   }
+
 }
 var h = 1 ;
 
-Widget _mybody(context, info , info2 , info3 , file , url , data ){
+Widget _mybody(context, info , info2 , info3 , file , url , data ,img_typ){
   //print(info3);
 
   if(file == 'info' ){
+
+
     var title1 = info[0]['title'];
     var difinition_title =info[0]['def1'];
     var difinition_title2 = info[0]['def2'];
@@ -187,8 +208,7 @@ Widget _mybody(context, info , info2 , info3 , file , url , data ){
               onPressed: () async  {
 
                 //print('hemidi love');
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => Part2(file: file,info2: info2,info3: info3,data:data)));
-
+                await Navigator.of(context).push(MaterialPageRoute(builder: (context) => Part2(file: file,info2: info2,info3: info3,data:data)));
 
               },
               child: Text("متابعة",
@@ -267,7 +287,7 @@ Widget _mybody(context, info , info2 , info3 , file , url , data ){
         Card(
             color: Colors.lightGreenAccent,
             margin: EdgeInsets.only(top:10 , left: 5 , right: 5 , bottom: 5),
-            child : Container(child : Image.network(url[0][0]),
+            child : Container(child : img_typ ? Image.network(url[1][0]) : Image.asset('issues/images/nct.jpg') ,
               margin: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5 , ) ,
 
 
@@ -318,9 +338,7 @@ Widget _mybody(context, info , info2 , info3 , file , url , data ){
 
               onPressed: () async  {
 
-                //print('hemidi love');
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => Part2(file: file,info2: info2,info3: info3,data:data)));
-
+                await Navigator.of(context).push(MaterialPageRoute(builder: (context) => Part2(file: file,info2: info2,info3: info3,data:data)));
 
               },
               child: Text("متابعة",
@@ -401,12 +419,13 @@ Widget _mybody(context, info , info2 , info3 , file , url , data ){
         Card(
             color: Colors.lightGreenAccent,
             margin: EdgeInsets.only(top:10 , left: 5 , right: 5 , bottom: 5),
-            child : Container(child : Image.network(url[1][0]),
+            child : Container(child : img_typ ? Image.network(url[1][0]) : Image.asset('issues/images/nct.jpg')   ,
               margin: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5 , ) ,
 
 
             )
         ),
+
 
         Card(
             color: Colors.orange,
@@ -452,9 +471,7 @@ Widget _mybody(context, info , info2 , info3 , file , url , data ){
 
               onPressed: () async  {
 
-                //print('hemidi love');
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => Part2(file: file,info2: info2,info3: info3,data:data)));
-
+                await Navigator.of(context).push(MaterialPageRoute(builder: (context) => Part2(file: file,info2: info2,info3: info3,data:data)));
 
               },
               child: Text("متابعة",
@@ -467,12 +484,17 @@ Widget _mybody(context, info , info2 , info3 , file , url , data ){
 
 
 
+
       ],
     );
 
 
   }
+
+
   //return
+
+
 
 }
 
