@@ -1,7 +1,11 @@
 import 'dart:io';
 
+import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutterapp2/loading.dart';
 import 'package:flutterapp2/part3_nombrs.dart';
 import "dart:math";
 import 'home_page.dart';
@@ -9,6 +13,7 @@ import 'package:flutterapp2/hemidi.dart';
 import 'part1_nombrs.dart'  ;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'model/Dog.dart';
+
 final _random =  Random();
 ////
 
@@ -58,6 +63,16 @@ class _Part2State extends State<Part2> {
 
   //var cnt = widget.data[3] ;
 
+  AudioCache _audioCache;
+
+  @override
+  void initState() {
+    super.initState();
+    // create this only once
+    _audioCache = AudioCache(prefix: "audio/", fixedPlayer: AudioPlayer()..setReleaseMode(ReleaseMode.STOP));
+  }
+
+
 
 
 
@@ -65,16 +80,18 @@ class _Part2State extends State<Part2> {
 
   //SingingCharacter _character = SingingCharacter.choi1;
   SingingCharacter _character = null;
+  bool lod = false ;
 
 
 
   @override
 
+
   Widget build(BuildContext context)  {
     bool cnt  ;
     if (widget.data[3][1][0] == 'issues/images/prv.png'){cnt = false;}else{cnt = true;}
 
-    return MaterialApp(
+    return lod ? loading() :  MaterialApp(
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -92,9 +109,20 @@ class _Part2State extends State<Part2> {
               IconButton(
                 icon: const Icon(Icons.home ),
                 //tooltip: 'home',
-                onPressed: ()  {
+                onPressed: ()   {
+
+
+
+
+                  setState(() {
+                    lod = true ;
+                  });
                   Navigator.pop(context);
                   Navigator.pop(context);
+                  setState(() {
+                    lod = false ;
+                  });
+
                 },
               )
             ]
@@ -257,11 +285,11 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
                 //print(_character);
                 //data();
                 //print(data());
-                print(new_list);
-                print(_hemidi);
+                //print(new_list);
+                //print(_hemidi);
                 //Navigator.of(context).push(MaterialPageRoute(builder: (context) => Part2()));
                 if(_hemidi == crr){
-                  print('yessss');
+                  _audioCache.play('yes.mp3');
                   showDialog(
                       context: context,
                       barrierDismissible: false,
@@ -295,10 +323,13 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
 
                             ));
                       });
+                  //return  _audioCache.play('yes.mp3') ;
 
 
 
                 } else{
+                  _audioCache.play('non.mp3');
+
                   showDialog(
                       context: context,
                       barrierDismissible: false,
@@ -384,7 +415,20 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
           Container(
             margin: EdgeInsets.all(10),
             padding: EdgeInsets.all(10),
-            child: cnt ? Image.network(widget.data[3][0][2]) : Image.asset('issues/images/nct.jpg') , // Image.network(widget.data[3][0][2]),
+            child: cnt ? Image.network(widget.data[3][0][2]) :Center(
+
+
+                child : Container(
+
+                  padding: EdgeInsets.only(top: 50 , bottom: 50),
+                  child: SpinKitRing(
+                    color: Colors.blue,
+                    size: 50.0,
+
+                  ),
+                )
+
+            ), // Image.network(widget.data[3][0][2]),
           ),
           Container(
 
@@ -472,11 +516,12 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
                   //print(_character);
                   //data();
                   //print(data());
-                  print(new_list);
-                  print(_hemidi);
+                  //print(new_list);
+                  //print(_hemidi);
                   //Navigator.of(context).push(MaterialPageRoute(builder: (context) => Part2()));
                   if(_hemidi == crr){
-                    print('yessss');
+                    _audioCache.play('yes.mp3');
+                    //print('yessss');
                     showDialog(
                         context: context,
                         barrierDismissible: false,
@@ -512,6 +557,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
 
 
                   } else{
+                    _audioCache.play('non.mp3');
                     showDialog(
                         context: context,
                         barrierDismissible: false,
@@ -595,7 +641,20 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
           Container(
             margin: EdgeInsets.all(10),
             padding: EdgeInsets.all(10),
-            child:  cnt ? Image.network(widget.data[3][1][2]) : Image.asset('issues/images/nct.jpg'),//Image.network(widget.data[3][1][2]),
+            child:  cnt ? Image.network(widget.data[3][1][2]) : Center(
+
+
+                child : Container(
+
+                  padding: EdgeInsets.only(top: 50 , bottom: 50),
+                  child: SpinKitRing(
+                    color: Colors.blue,
+                    size: 50.0,
+
+                  ),
+                )
+
+            ),//Image.network(widget.data[3][1][2]),
           ),
 
           Container(
@@ -688,6 +747,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
                   //print(_hemidi);
                   //Navigator.of(context).push(MaterialPageRoute(builder: (context) => Part2()));
                   if(_hemidi == crr){
+                    _audioCache.play('yes.mp3');
                     //print('yessss');
                     showDialog(
                         context: context,
@@ -723,6 +783,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
 
 
                   } else{
+                    _audioCache.play('non.mp3');
                     showDialog(
                         context: context,
                         barrierDismissible: false,

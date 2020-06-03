@@ -1,3 +1,5 @@
+import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutterapp2/hemidi.dart';
@@ -26,6 +28,14 @@ class _part3State extends State<part3> {
 
 
   final myController = TextEditingController();
+  AudioCache _audioCache;
+
+  @override
+  void initState() {
+    super.initState();
+    // create this only once
+    _audioCache = AudioCache(prefix: "audio/", fixedPlayer: AudioPlayer()..setReleaseMode(ReleaseMode.STOP));
+  }
 
 
   @override
@@ -65,13 +75,13 @@ class _part3State extends State<part3> {
             ]
 
         ) ,
-        body: _mybody3(myController,context , widget.info3 , widget.file, widget.data , cnt),
+        body: _mybody3(myController,context , widget.info3 , widget.file, widget.data , cnt, _audioCache),
       ),
     );
 
   }
 }
-Widget _mybody3(myController,context , info3,file , data, cnt){
+Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
   // qstion from data
 
   if (file == 'info'){
@@ -159,6 +169,7 @@ Widget _mybody3(myController,context , info3,file , data, cnt){
                 //print(myController.text);
                 //Navigator.of(context).push(MaterialPageRoute(builder: (context) => Part2()));
                 if(myController.text == crr){
+                  _audioCache.play('yes.mp3');
 
                   showDialog(
                       context: context,
@@ -208,6 +219,8 @@ Widget _mybody3(myController,context , info3,file , data, cnt){
                       }
                   )
                   ;} else{
+                  _audioCache.play('non.mp3');
+
                   showDialog(
                       context: context,
                       barrierDismissible: false,
@@ -370,6 +383,8 @@ Widget _mybody3(myController,context , info3,file , data, cnt){
                   // print(myController.text);
                   //Navigator.of(context).push(MaterialPageRoute(builder: (context) => Part2()));
                   if(myController.text == crr){
+                    _audioCache.play('yes.mp3');
+
 
                     showDialog(
                         context: context,
@@ -435,6 +450,8 @@ Widget _mybody3(myController,context , info3,file , data, cnt){
                         }
                     )
                     ;} else{
+                    _audioCache.play('non.mp3');
+
                     showDialog(
                         context: context,
                         barrierDismissible: false,

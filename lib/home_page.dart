@@ -126,7 +126,13 @@ class _home_pageState extends State<home_page> {
                     title: Text('الدوال و تنظيم المعطيات' , textDirection: TextDirection.rtl),
                     leading: Icon(Icons.blur_off , size: 50,color : Colors.lightBlueAccent,),
                     onTap: () async {
+                      setState(() {
+                        lod = true ;
+                      });
                       await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => nombrs('info2',widget.data)));
+                      setState(() {
+                        lod = false ;
+                      });
                       },
                   ),Container(
                       margin: EdgeInsets.only(right: MediaQuery.of(context).size.width*0.80),
@@ -146,9 +152,18 @@ class _home_pageState extends State<home_page> {
               child : Stack(children: [ ListTile(
             title: Text('انشطة هندسية' , textDirection: TextDirection.rtl),
             leading: Icon(Icons.signal_cellular_null , size: 50,color : Colors.lightBlueAccent,),
+
             onTap: (){
+              setState(() {
+                lod = true ;
+              });
+
               Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => nombrs('info3',widget.data),),);
-            },
+
+              setState(() {
+                lod = false ;
+              });
+              },
           ),Container(
                 margin: EdgeInsets.only(right: MediaQuery.of(context).size.width*0.80),
                 child : CircularPercentIndicator(

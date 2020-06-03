@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'hemidi.dart';
 import 'model/Dog.dart';
 import 'part2_nombrs.dart';
@@ -12,10 +13,9 @@ import 'dart:convert' ;
 
 import 'loading.dart';
 
-class nombrs extends StatelessWidget {
+class nombrs extends StatefulWidget {
   var data  ;
   var info ;
-  var title ;
   var info2 ;
   var info3 ;
   var file ;
@@ -48,11 +48,21 @@ class nombrs extends StatelessWidget {
   }
 
   @override
+  _nombrsState createState() => _nombrsState();
+}
+
+class _nombrsState extends State<nombrs> {
+  var title ;
+  bool lod = false ;
+
+
+  @override
   Widget build(BuildContext context) {
     //final ProgressDialog pr = ProgressDialog(context);
 
 
-    return MaterialApp(
+
+    return lod ? loading() :  MaterialApp(
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -70,31 +80,41 @@ class nombrs extends StatelessWidget {
                 tooltip: 'home',
                 onPressed: () async {
 
-                  var a = await data_tout();
-                  var info_tout = await a.data() ;
-                  var parcent1 = await a.percent('info') ;
-                  var parcent2 = await a.percent('info2') ;
-                  var parcent3 = await a.percent('info3') ;
+                  //var a = await data_tout();
+                  //var info_tout = await a.data() ;
+                  //var parcent1 = await a.percent('info') ;
+                  //var parcent2 = await a.percent('info2') ;
+                  //var parcent3 = await a.percent('info3') ;
                   //Navigator.of(context).pop(MaterialPageRoute(builder: (context) => home_page(info_tout,parcent1,parcent2,parcent3)));
                   //Navigator.of(context).push(MaterialPageRoute(builder: (context) => home_page(0)));
-                  Navigator.of(context).pop();
+                  setState(() {
+                    lod = true ;
+                  });
+                  await Navigator.of(context).pop();
+                  setState(() {
+                    lod = false ;
+                  });
+
                 },
               )
             ]
         ) ,
-        body: _mybody(context,info , info2 , info3 , file , url , data, img_typ),
+        body: _mybody(context,widget.info , widget.info2 , widget.info3 , widget.file , widget.url , widget.data, widget.img_typ),
       ),
     );
 
   }
-
 }
 var h = 1 ;
 
 Widget _mybody(context, info , info2 , info3 , file , url , data ,img_typ){
+
+
   //print(info3);
 
   if(file == 'info' ){
+
+
 
 
     var title1 = info[0]['title'];
@@ -208,6 +228,8 @@ Widget _mybody(context, info , info2 , info3 , file , url , data ,img_typ){
               onPressed: () async  {
 
                 //print('hemidi love');
+
+
                 await Navigator.of(context).push(MaterialPageRoute(builder: (context) => Part2(file: file,info2: info2,info3: info3,data:data)));
 
               },
@@ -234,10 +256,10 @@ Widget _mybody(context, info , info2 , info3 , file , url , data ,img_typ){
     var exempl_cont = info2[0]['exmplp'];
 
 
+
     return ListView(
 
       children: <Widget>[
-
         Card(
             child : Container(
 
@@ -284,14 +306,34 @@ Widget _mybody(context, info , info2 , info3 , file , url , data ,img_typ){
               //padding: EdgeInsets.only(left:300 , top: 5 , right: 5, bottom: 5),
             )
         ),
+
         Card(
-            color: Colors.lightGreenAccent,
+
+            color: Colors.white30,
             margin: EdgeInsets.only(top:10 , left: 5 , right: 5 , bottom: 5),
-            child : Container(child : img_typ ? Image.network(url[1][0]) : Image.asset('issues/images/nct.jpg') ,
+
+            child : Container(
+
+              child : img_typ ? Image.network(url[0][0]) : Center(
+
+
+              child : Container(
+
+                padding: EdgeInsets.only(top: 50 , bottom: 50),
+  child: SpinKitRing(
+  color: Colors.blue,
+  size: 50.0,
+
+  ),
+  )
+
+              ),
               margin: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5 , ) ,
 
 
+
             )
+
         ),
 
         Card(
@@ -419,7 +461,20 @@ Widget _mybody(context, info , info2 , info3 , file , url , data ,img_typ){
         Card(
             color: Colors.lightGreenAccent,
             margin: EdgeInsets.only(top:10 , left: 5 , right: 5 , bottom: 5),
-            child : Container(child : img_typ ? Image.network(url[1][0]) : Image.asset('issues/images/nct.jpg')   ,
+            child : Container(child : img_typ ? Image.network(url[1][0]) : Center(
+
+
+  child : Container(
+
+  padding: EdgeInsets.only(top: 50 , bottom: 50),
+  child: SpinKitRing(
+  color: Colors.blue,
+  size: 50.0,
+
+  ),
+  )
+
+  )  ,
               margin: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5 , ) ,
 
 
@@ -487,6 +542,8 @@ Widget _mybody(context, info , info2 , info3 , file , url , data ,img_typ){
 
       ],
     );
+
+
 
 
   }

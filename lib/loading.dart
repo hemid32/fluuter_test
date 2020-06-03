@@ -5,10 +5,10 @@ class loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.brown[100],
+      color: Colors.tealAccent,
       child: Center(
-        child: SpinKitRotatingPlain(
-          color: Colors.blue,
+        child: SpinKitFadingCircle(
+          color: Colors.black38,
           size: 50.0,
 
         ),
