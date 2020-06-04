@@ -66,7 +66,6 @@ class data_tout {
     List<int> bytes = data.buffer.asUint8List(
         data.offsetInBytes, data.lengthInBytes);
     await File(dbPath).writeAsBytes(bytes);
-
 */
 
 
@@ -88,13 +87,11 @@ class data_tout {
 // Delete any existing database:
     /*
     await deleteDatabase(dbPath);
-
 // Create the writable database file from the bundled demo database file:
     ByteData data = await rootBundle.load("issues/models/info.db");
     List<int> bytes = data.buffer.asUint8List(
         data.offsetInBytes, data.lengthInBytes);
     await File(dbPath).writeAsBytes(bytes);
-
      */
     var db = await openDatabase(dbPath);
     List<Map> list = await db.rawQuery('SELECT  *  FROM parti2');
@@ -114,13 +111,11 @@ class data_tout {
 // Delete any existing database:
     /*
     await deleteDatabase(dbPath);
-
 // Create the writable database file from the bundled demo database file:
     ByteData data = await rootBundle.load("issues/models/info.db");
     List<int> bytes = data.buffer.asUint8List(
         data.offsetInBytes, data.lengthInBytes);
     await File(dbPath).writeAsBytes(bytes);
-
      */
     var db = await openDatabase(dbPath);
     List<Map> list = await db.rawQuery('SELECT  *  FROM parti3');
@@ -142,14 +137,11 @@ class data_tout {
 
 /*
     await deleteDatabase(dbPath);
-
 // Create the writable database file from the bundled demo database file:
     ByteData data = await rootBundle.load("issues/models/info2.db");
     List<int> bytes = data.buffer.asUint8List(
         data.offsetInBytes, data.lengthInBytes);
     await File(dbPath).writeAsBytes(bytes);
-
-
 */
 
 
@@ -171,13 +163,11 @@ class data_tout {
 // Delete any existing database:
     /*
     await deleteDatabase(dbPath);
-
 // Create the writable database file from the bundled demo database file:
     ByteData data = await rootBundle.load("issues/models/info2.db");
     List<int> bytes = data.buffer.asUint8List(
         data.offsetInBytes, data.lengthInBytes);
     await File(dbPath).writeAsBytes(bytes);
-
      */
     var db = await openDatabase(dbPath);
     List<Map> list = await db.rawQuery('SELECT  *  FROM parti2');
@@ -197,13 +187,11 @@ class data_tout {
 // Delete any existing database:
     /*
     await deleteDatabase(dbPath);
-
 // Create the writable database file from the bundled demo database file:
     ByteData data = await rootBundle.load("issues/models/info2.db");
     List<int> bytes = data.buffer.asUint8List(
         data.offsetInBytes, data.lengthInBytes);
     await File(dbPath).writeAsBytes(bytes);
-
      */
     var db = await openDatabase(dbPath);
     List<Map> list = await db.rawQuery('SELECT  *  FROM parti3');
@@ -224,15 +212,12 @@ class data_tout {
 // Delete any existing database:
 
     /*
-
     await deleteDatabase(dbPath);
-
 // Create the writable database file from the bundled demo database file:
     ByteData data = await rootBundle.load("issues/models/info3.db");
     List<int> bytes = data.buffer.asUint8List(
         data.offsetInBytes, data.lengthInBytes);
     await File(dbPath).writeAsBytes(bytes);
-
 */
 
 
@@ -253,13 +238,11 @@ class data_tout {
 // Delete any existing database:
     /*
     await deleteDatabase(dbPath);
-
 // Create the writable database file from the bundled demo database file:
     ByteData data = await rootBundle.load("issues/models/info3.db");
     List<int> bytes = data.buffer.asUint8List(
         data.offsetInBytes, data.lengthInBytes);
     await File(dbPath).writeAsBytes(bytes);
-
      */
     var db = await openDatabase(dbPath);
     List<Map> list = await db.rawQuery('SELECT  *  FROM parti2');
@@ -279,13 +262,11 @@ class data_tout {
 // Delete any existing database:
     /*
     await deleteDatabase(dbPath);
-
 // Create the writable database file from the bundled demo database file:
     ByteData data = await rootBundle.load("issues/models/info3.db");
     List<int> bytes = data.buffer.asUint8List(
         data.offsetInBytes, data.lengthInBytes);
     await File(dbPath).writeAsBytes(bytes);
-
      */
     var db = await openDatabase(dbPath);
     List<Map> list = await db.rawQuery('SELECT  *  FROM parti3');
@@ -302,23 +283,36 @@ class data_tout {
     String file1 = file + '.db' ;
     var dbDir = await getDatabasesPath();
     var dbPath = join(dbDir, file1);
+    var exists = await databaseExists(dbPath);
+    //print(exists);
+
+    //if (!exists){
+    // if update data and file execute cett line
+    //await deleteDatabase(dbPath);
 
 // Delete any existing database:
+    try {
+      var db = await openDatabase(dbPath);
+      List<Map> list = await db.rawQuery('SELECT  ponits  FROM point');
+      int t = list[0]['ponits'];
+      return t;
+    }catch(e){
+      print('caaaaaaaaaaaaaaaath');
 
     //await deleteDatabase(dbPath);
-    /*
+    String ff = "issues/models/" + file1 ;
 
 // Create the writable database file from the bundled demo database file:
-    ByteData data = await rootBundle.load("issues/models/info.db");
+    ByteData data = await rootBundle.load(ff);
     List<int> bytes = data.buffer.asUint8List(
         data.offsetInBytes, data.lengthInBytes);
-    await File(dbPath).writeAsBytes(bytes);*/
+    await File(dbPath).writeAsBytes(bytes);
 
 
     var db = await openDatabase(dbPath);
     List<Map> list = await db.rawQuery('SELECT  ponits  FROM point');
     int t = list[0]['ponits'];
-    return t;
+    return t;}
   }
   Future<int> get_nv(file) async {
     String file1 = file + '.db' ;
@@ -328,13 +322,11 @@ class data_tout {
 // Delete any existing database:
     /*
     await deleteDatabase(dbPath);
-
 // Create the writable database file from the bundled demo database file:
     ByteData data = await rootBundle.load("issues/models/info.db");
     List<int> bytes = data.buffer.asUint8List(
         data.offsetInBytes, data.lengthInBytes);
     await File(dbPath).writeAsBytes(bytes);
-
      */
     var db = await openDatabase(dbPath);
     List<Map> list = await db.rawQuery('SELECT  niveu  FROM point');
@@ -392,7 +384,7 @@ class data_tout {
     //return 'c'
 
   }
-   max_qastion_(file) async {
+  max_qastion_(file) async {
     String file1 = file + '.db' ;
 
     var dbDir = await getDatabasesPath();
@@ -430,39 +422,39 @@ class data_tout {
   get_image(file) async {
 
     try {
-    final result = await InternetAddress.lookup('google.com');
-    if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-      //print(connected)
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        //print(connected)
 
-      var pont = await get_point(file) ;
-      //print('point file : $pont') ;
-      var imgp = 'p' +file + pont.toString() + '.jpg';
-      var imgq = 'g' +file + pont.toString() + '.jpg';
-      var imgq_choi = 'g_choi_' +file + pont.toString() + '.jpg';
-      //print('image name p= $imgp');
-      //print('image name g= $imgq');
-      FirebaseAuth mAuth = FirebaseAuth.instance;
-      Future<FirebaseUser> user = mAuth.currentUser();
-      if (user != null) {
-        //print('yess');
-        final ref = FirebaseStorage.instance.ref().child(imgp);
-        final ref2 = FirebaseStorage.instance.ref().child(imgq);
-        final ref3 = FirebaseStorage.instance.ref().child(imgq_choi);
+        var pont = await get_point(file) ;
+        //print('point file : $pont') ;
+        var imgp = 'p' +file + pont.toString() + '.jpg';
+        var imgq = 'g' +file + pont.toString() + '.jpg';
+        var imgq_choi = 'g_choi_' +file + pont.toString() + '.jpg';
+        //print('image name p= $imgp');
+        //print('image name g= $imgq');
+        FirebaseAuth mAuth = FirebaseAuth.instance;
+        Future<FirebaseUser> user = mAuth.currentUser();
+        if (user != null) {
+          //print('yess');
+          final ref = FirebaseStorage.instance.ref().child(imgp);
+          final ref2 = FirebaseStorage.instance.ref().child(imgq);
+          final ref3 = FirebaseStorage.instance.ref().child(imgq_choi);
 // no need of the file extension, the name will do fine.
-        var url_img_p = await ref.getDownloadURL();
-        var url_img_q = await ref2.getDownloadURL();
-        var url_img_q_choi = await ref3.getDownloadURL();
-        //url = Image.network(url);
-        //, url_img_q_choi
-        return [url_img_p ,url_img_q,url_img_q_choi ];
+          var url_img_p = await ref.getDownloadURL();
+          var url_img_q = await ref2.getDownloadURL();
+          var url_img_q_choi = await ref3.getDownloadURL();
+          //url = Image.network(url);
+          //, url_img_q_choi
+          return [url_img_p ,url_img_q,url_img_q_choi ];
+        }
+
+
+
+
       }
-
-
-
-
-    }
     } on SocketException catch (_) {
-    //print('not connected');
+      //print('not connected');
 
       return ['issues/images/prv.png','issues/images/prv.png','issues/images/prv.png'];
 

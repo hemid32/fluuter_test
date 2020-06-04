@@ -64,6 +64,7 @@ Widget _mybody(context,file){
               var a = await data_tout() ;
               var data = await a.data();
               //Navigator.pop(context);
+
               Navigator.pop(context);
               Navigator.pop(context);
               Navigator.pop(context);

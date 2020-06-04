@@ -109,16 +109,28 @@ class _Part2State extends State<Part2> {
               IconButton(
                 icon: const Icon(Icons.home ),
                 //tooltip: 'home',
-                onPressed: ()   {
+                onPressed: () async  {
 
 
 
 
-                  setState(() {
+                  setState(()  {
                     lod = true ;
                   });
+                  //Navigator.pop(context);
+                  var a = await data_tout();
+                  var info_tout = await a.data() ;
+                  var parcent1 = await a.percent('info') ;
+                  var parcent2 = await a.percent('info2') ;
+                  var parcent3 = await a.percent('info3') ;
+                  //Navigator.of(context).pop();
+                  //Navigator.of(context).pop();
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => home_page(info_tout,parcent1,parcent2,parcent3)));
+
                   Navigator.pop(context);
                   Navigator.pop(context);
+                  Navigator.pop(context);
+
                   setState(() {
                     lod = false ;
                   });

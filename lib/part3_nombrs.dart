@@ -2,8 +2,10 @@ import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutterapp2/hemidi.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutterapp2/loading.dart';
 import 'fine.dart';
 import 'model/Dog.dart';
 import 'part1_nombrs.dart';
@@ -29,6 +31,7 @@ class _part3State extends State<part3> {
 
   final myController = TextEditingController();
   AudioCache _audioCache;
+  bool lod = false ;
 
   @override
   void initState() {
@@ -48,7 +51,7 @@ class _part3State extends State<part3> {
   Widget build(BuildContext context) {
     bool cnt ;
     if (widget.data[3][1][0] == 'issues/images/prv.png'){cnt = false;}else{cnt = true;}
-    return MaterialApp(
+    return lod ? loading() : MaterialApp(
 
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
@@ -66,10 +69,28 @@ class _part3State extends State<part3> {
               IconButton(
                 icon: const Icon(Icons.home ),
                 tooltip: 'home',
-                onPressed: ()  {
+                onPressed: () async  {
+                  setState(()  {
+                    lod = true ;
+                  });
+                  //Navigator.pop(context);
+                  var a = await data_tout();
+                  var info_tout = await a.data() ;
+                  var parcent1 = await a.percent('info') ;
+                  var parcent2 = await a.percent('info2') ;
+                  var parcent3 = await a.percent('info3') ;
+                  //Navigator.of(context).pop();
+                  //Navigator.of(context).pop();
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => home_page(info_tout,parcent1,parcent2,parcent3)));
+
                   Navigator.pop(context);
                   Navigator.pop(context);
                   Navigator.pop(context);
+                  Navigator.pop(context);
+
+                  setState(() {
+                    lod = false ;
+                  });
                 },
               )
             ]
@@ -345,7 +366,20 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 margin: EdgeInsets.only(top: 20),
-                child: cnt ? Image.network(url) : Image.asset('issues/images/nct.jpg')//Image.network(url),
+                child: cnt ? Image.network(url) : Center(
+
+
+                    child : Container(
+
+                      padding: EdgeInsets.only(top: 50 , bottom: 50),
+                      child: SpinKitRing(
+                        color: Colors.blue,
+                        size: 50.0,
+
+                      ),
+                    )
+
+                ),//Image.network(url),
               )
           ),
           Card(
@@ -415,16 +449,12 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
                                         var  max_point = p ;
                                         if (point == max_point  ){
                                           var point_if_complite = a.update_point_if_complite(file) ;
-                                          Navigator.pop(context, 'Cancel');
-                                          Navigator.pop(context);
-                                          Navigator.pop(context);
-                                          Navigator.pop(context);
+                                          //Navigator.pop(context, 'Cancel');
+                                          //Navigator.pop(context);
+                                          //Navigator.pop(context);
+                                          //Navigator.pop(context);
                                           await Navigator.of(context).push(MaterialPageRoute(builder: (context) => fine(file: file,)));
-                                        }else if(point == 3 || point == 6 || point == 10  ){
-                                          Navigator.pop(context, 'Cancel');
-                                          Navigator.pop(context);
-                                          Navigator.pop(context);
-                                          Navigator.pop(context);
+                                        }else if(point == 3 || point == 6 || point == 7  ){
                                           await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => part4(file:file),)
 
 

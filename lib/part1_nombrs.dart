@@ -79,14 +79,22 @@ class _nombrsState extends State<nombrs> {
                 icon: const Icon(Icons.home ),
                 tooltip: 'home',
                 onPressed: () async {
-
-                  //var a = await data_tout();
-                  //var info_tout = await a.data() ;
-                  //var parcent1 = await a.percent('info') ;
-                  //var parcent2 = await a.percent('info2') ;
-                  //var parcent3 = await a.percent('info3') ;
-                  //Navigator.of(context).pop(MaterialPageRoute(builder: (context) => home_page(info_tout,parcent1,parcent2,parcent3)));
+                  setState(() {
+                    lod = true ;
+                  });
+                  var a = await data_tout();
+                  var info_tout = await a.data() ;
+                  var parcent1 = await a.percent('info') ;
+                  var parcent2 = await a.percent('info2') ;
+                  var parcent3 = await a.percent('info3') ;
+                  //Navigator.of(context).pop();
+                  //Navigator.of(context).pop();
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => home_page(info_tout,parcent1,parcent2,parcent3)));
+                  setState(() {
+                    lod = false ;
+                  });
                   //Navigator.of(context).push(MaterialPageRoute(builder: (context) => home_page(0)));
+                  /*
                   setState(() {
                     lod = true ;
                   });
@@ -94,6 +102,8 @@ class _nombrsState extends State<nombrs> {
                   setState(() {
                     lod = false ;
                   });
+
+                   */
 
                 },
               )
