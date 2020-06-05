@@ -360,6 +360,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
 
 
                                     onPressed: () {
+                                     // _audioCache.disableLog();
 
                                       //Navigator.pop(context);
                                       Navigator.pop(context, 'Cancel');
@@ -396,6 +397,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
 
 
                                     onPressed: () async {
+                                     // _audioCache.disableLog();
                                       var a = await data_tout();
                                       var data_t = await a.data() ;
                                       //Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) =>  nombrs(file,data_t),),);

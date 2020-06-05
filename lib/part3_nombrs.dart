@@ -33,6 +33,7 @@ class _part3State extends State<part3> {
   AudioCache _audioCache;
   bool lod = false ;
 
+
   @override
   void initState() {
     super.initState();
@@ -46,10 +47,14 @@ class _part3State extends State<part3> {
     // Clean up the controller when the widget is disposed.
     myController.dispose();
     super.dispose();
+
   }
   @override
   Widget build(BuildContext context) {
     bool cnt ;
+
+
+
     if (widget.data[3][1][0] == 'issues/images/prv.png'){cnt = false;}else{cnt = true;}
     return lod ? loading() : MaterialApp(
 
@@ -61,7 +66,9 @@ class _part3State extends State<part3> {
         Locale("ar", "AE"), // OR Locale('ar', 'AE') OR Other RTL locales
       ],
 
+
       home: Scaffold(
+
         appBar: AppBar(
 
           title: Text('تعلم الرياضيات'),
@@ -101,7 +108,9 @@ class _part3State extends State<part3> {
     );
 
   }
-}
+
+
+bool fff = false  ;
 Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
   // qstion from data
 
@@ -335,7 +344,7 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
 
     }
 
-    return  ListView(
+    return ListView(
         children: <Widget>[
           Card(
               child : Container(
@@ -476,6 +485,7 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
                                       isDefaultAction: true, child: Container(child: Text("اكمل")),
 
                                       onPressed: () async {
+                                        //Navigator.pop(context, 'Cancel');
                                         var a = await data_tout() ;
                                         var update_ponint = await a.update_point(file);
                                         var point = await a.get_point(file);
@@ -489,7 +499,7 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
                                           //Navigator.pop(context);
                                           //Navigator.pop(context);
                                           await Navigator.of(context).push(MaterialPageRoute(builder: (context) => fine(file: file,)));
-                                        }else if(point == 3 || point == 6 || point == 7  ){
+                                        }else if(point == 13 || point == 16 || point == 17  ){
                                           await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => part4(file:file),)
 
 
@@ -499,11 +509,43 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
                                             ,);
 
                                         }else {
-                                          Navigator.pop(context, 'Cancel');
+                                          //Navigator.pop(context, 'Cancel');
+                                          //Navigator.pop(context);
+                                          //Navigator.pop(context);
+                                          //Navigator.pop(context);
+
+
+                                          setState(() {
+
+                                            lod = true ;
+                                          });
+
+                                          var a = await data_tout();
+                                          var b = await  a.data() ;
+
+                                          setState(() {
+                                            data = b ;
+                                          });
+
+
+
                                           Navigator.pop(context);
-                                          Navigator.pop(context);
-                                          Navigator.pop(context);
-                                          await Navigator.of(context).push(MaterialPageRoute(builder: (context) => nombrs(file,data)));
+
+                                          await Navigator.pop(context);
+                                          await Navigator.pop(context);
+                                          await Navigator.pop(context);
+                                          //var a = await data_tout();
+                                          //var info_tout3 = await a.data() ;
+
+                                          //Navigator.pop(context);
+
+                                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => nombrs(file,data)));
+
+
+                                          setState(() {
+                                            lod = false ;
+                                          });
+
                                         }
                                         /*Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) =>  part3(),),);*/ }
                                   )
@@ -571,4 +613,5 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
 
   }
 
+}
 }

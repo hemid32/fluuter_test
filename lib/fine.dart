@@ -73,7 +73,7 @@ Widget _mybody(context , file){
               Navigator.pop(context);
               Navigator.pop(context);
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => home_page(info_tout,parcent1,parcent2,parcent3)));
-              Navigator.pop(context);
+              //Navigator.pop(context);
 
 
             }
