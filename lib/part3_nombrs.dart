@@ -117,6 +117,24 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
         Card(
             child : Container(
 
+              decoration: BoxDecoration(
+                //color: Colors.lightBlueAccent,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10)
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+              ),
+
               padding: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5),
 
               margin:EdgeInsets.only(top: 10 , left: 5 , right: 5),
@@ -139,11 +157,11 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
         ),
 
         Card(
-            color: Colors.lightBlueAccent,
+            color: Colors.orange[200],
             child : Container(
-          margin: EdgeInsets.only(top: 20),
+          //margin: EdgeInsets.only(top: 20),
           padding: EdgeInsets.all(10),
-          child: Text(methode),
+          child: Text(methode,style: TextStyle(fontWeight: FontWeight.bold),),
         )
         )
         ,
@@ -152,7 +170,7 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
             child: Container(
               width: MediaQuery.of(context).size.width,
           margin: EdgeInsets.only(top: 20),
-          child: Text(qs),
+          child: Text(qs,style: TextStyle(fontWeight: FontWeight.bold),),
         )
         )
         ,
@@ -167,7 +185,7 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
               controller: myController,
               decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintText: 'ادخل الاجابة هنا' ,
+                  hintText: 'اكتب الاجابة هنا' ,
 
               ),
             )
@@ -321,6 +339,23 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
         children: <Widget>[
           Card(
               child : Container(
+                decoration: BoxDecoration(
+                  //color: Colors.lightBlueAccent,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10)
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
 
                 padding: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5),
 
@@ -344,11 +379,11 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
           ),
 
           Card(
-              color: Colors.lightBlueAccent,
+              color: Colors.orange[200],
               child : Container(
-                margin: EdgeInsets.only(top: 20),
+                //margin: EdgeInsets.only(top: 20),
                 padding: EdgeInsets.all(10),
-                child: Text(methode),
+                child: Text(methode,style: TextStyle(fontWeight: FontWeight.bold),),
               )
           )
           ,
@@ -357,7 +392,7 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 margin: EdgeInsets.only(top: 20),
-                child: Text(qs),
+                child: Text(qs,style: TextStyle(fontWeight: FontWeight.bold),),
               )
           )
           ,
@@ -393,7 +428,7 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
                     controller: myController,
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: 'ادخل الاجابة هنا' ,
+                      hintText: 'اكتب الاجابة هنا' ,
 
                     ),
                   )

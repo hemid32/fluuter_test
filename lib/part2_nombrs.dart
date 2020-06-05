@@ -180,10 +180,29 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
   if(file == 'info'){
 
 
-    return Column(
+    return ListView(
         children: <Widget>[
         Card(
         child : Container(
+
+
+          decoration: BoxDecoration(
+            //color: Colors.lightBlueAccent,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+                bottomLeft: Radius.circular(10),
+                bottomRight: Radius.circular(10)
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: Offset(0, 3), // changes position of shadow
+              ),
+            ],
+          ),
 
             padding: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5),
 
@@ -216,9 +235,13 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
       child : Card( child : Column(
         children: <Widget>[
 
-          Card(child  : ListTile(
+          Card(
+            color: Colors.orange[200],
+            child  : ListTile(
             title:  Text(new_list[0]),
             leading: Radio(
+              activeColor: Colors.black,
+
               value: SingingCharacter.choi1,
               groupValue: _character,
               onChanged: (SingingCharacter value) {
@@ -230,9 +253,13 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
             ),
           ),
           ),
-          Card(child: ListTile(
+          Card(
+            color: Colors.orange[200],
+            child: ListTile(
             title:  Text(new_list[1]),
             leading: Radio(
+              activeColor: Colors.black,
+
               value: SingingCharacter.choi2,
               groupValue: _character,
               onChanged: (SingingCharacter value) {
@@ -244,9 +271,13 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
             ),
           ),
           ),
-          Card(child : ListTile(
+          Card(
+            color: Colors.orange[200],
+            child : ListTile(
             title: Text(new_list[2]),
             leading: Radio(
+              //hoverColor: Colors.black,
+              activeColor: Colors.black,
               value: SingingCharacter.choi3,
               groupValue: _character,
               onChanged: (SingingCharacter value) {
@@ -258,9 +289,12 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
             ),
           ),
           ),
-          Card(child : ListTile(
+          Card(
+            color: Colors.orange[200],
+            child : ListTile(
             title: Text(new_list[3]),
             leading: Radio(
+              activeColor: Colors.black,
               value: SingingCharacter.choi4,
               groupValue: _character,
               onChanged: (SingingCharacter value) {
@@ -396,6 +430,23 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
         children: <Widget>[
           Card(
               child : Container(
+                decoration: BoxDecoration(
+                  //color: Colors.lightBlueAccent,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10)
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
 
                 padding: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5),
 
@@ -447,9 +498,12 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
             child : Card( child : Column(
               children: <Widget>[
 
-                Card(child  : ListTile(
+                Card(
+                  color: Colors.orange[200],
+                  child  : ListTile(
                   title:  Text(new_list[0]),
                   leading: Radio(
+                    activeColor: Colors.black,
                     value: SingingCharacter.choi1,
                     groupValue: _character,
                     onChanged: (SingingCharacter value) {
@@ -461,9 +515,13 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
                   ),
                 ),
                 ),
-                Card(child: ListTile(
+                Card(
+                  color: Colors.orange[200],
+                  child: ListTile(
+
                   title:  Text(new_list[1]),
                   leading: Radio(
+                    activeColor: Colors.black,
                     value: SingingCharacter.choi2,
                     groupValue: _character,
                     onChanged: (SingingCharacter value) {
@@ -475,9 +533,13 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
                   ),
                 ),
                 ),
-                Card(child : ListTile(
+                Card(
+
+                  color: Colors.orange[200],
+                  child : ListTile(
                   title: Text(new_list[2]),
                   leading: Radio(
+                    activeColor: Colors.black,
                     value: SingingCharacter.choi3,
                     groupValue: _character,
                     onChanged: (SingingCharacter value) {
@@ -489,9 +551,13 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
                   ),
                 ),
                 ),
-                Card(child : ListTile(
+                Card(
+
+                  color: Colors.orange[200],
+                  child : ListTile(
                   title: Text(new_list[3]),
                   leading: Radio(
+                    activeColor: Colors.black,
                     value: SingingCharacter.choi4,
                     groupValue: _character,
                     onChanged: (SingingCharacter value) {
@@ -623,6 +689,23 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
         children: <Widget>[
           Card(
               child : Container(
+                decoration: BoxDecoration(
+                  //color: Colors.lightBlueAccent,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10)
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
 
                 padding: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5),
 
@@ -671,12 +754,19 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
 
           Container(
 
-            child : Card( child : Column(
+            child : Card(
+
+
+              child : Column(
               children: <Widget>[
 
-                Card(child  : ListTile(
+                Card(
+
+                  color: Colors.orange[200],
+                  child  : ListTile(
                   title:  Text(new_list[0]),
                   leading: Radio(
+                    activeColor: Colors.black,
                     value: SingingCharacter.choi1,
                     groupValue: _character,
                     onChanged: (SingingCharacter value) {
@@ -688,9 +778,12 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
                   ),
                 ),
                 ),
-                Card(child: ListTile(
+                Card(
+                  color: Colors.orange[200],
+                  child: ListTile(
                   title:  Text(new_list[1]),
                   leading: Radio(
+                    activeColor: Colors.black,
                     value: SingingCharacter.choi2,
                     groupValue: _character,
                     onChanged: (SingingCharacter value) {
@@ -702,9 +795,12 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
                   ),
                 ),
                 ),
-                Card(child : ListTile(
+                Card(
+                  color: Colors.orange[200],
+                  child : ListTile(
                   title: Text(new_list[2]),
                   leading: Radio(
+                    activeColor: Colors.black,
                     value: SingingCharacter.choi3,
                     groupValue: _character,
                     onChanged: (SingingCharacter value) {
@@ -716,9 +812,12 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
                   ),
                 ),
                 ),
-                Card(child : ListTile(
+                Card(
+                  color: Colors.orange[200],
+                  child : ListTile(
                   title: Text(new_list[3]),
                   leading: Radio(
+                     activeColor: Colors.black,
                     value: SingingCharacter.choi4,
                     groupValue: _character,
                     onChanged: (SingingCharacter value) {

@@ -15,7 +15,7 @@ import 'package:collection/collection.dart';
 import 'package:sqflite/sqflite.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-
+import 'abot.dart';
 
 class home_page extends StatefulWidget {
   List<List> data ;
@@ -62,7 +62,6 @@ class _home_pageState extends State<home_page> {
     return lod ? loading() :  Scaffold(
 
       appBar: AppBar(
-
         title: Text(' تعلم الرياضيات' , textDirection: TextDirection.rtl),
           actions: <Widget>[
 
@@ -77,14 +76,39 @@ class _home_pageState extends State<home_page> {
 
 
               child : Container(
-                  decoration: BoxDecoration( color: Colors.lightBlueAccent, border: Border.all(color: Theme.of(context).accentColor,) ),
+                  decoration: BoxDecoration(
+                    color: Colors.lightBlueAccent,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10)
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                  ),
+
+                  //decoration: BoxDecoration( color: Colors.lightBlue,  ),
                   margin: EdgeInsets.only(top: 10),
                   padding: EdgeInsets.only(bottom: 10 , top: 10 , right: 5 , left: 5, ),
                   width: 500,
                   child : Container(
                //EdgeInsets.only(),
 
-                    child : Text('الرياضيات للسنة الرابعة متوسط',textAlign:TextAlign.center ,),
+                    child : Text('الرياضيات للسنة الرابعة متوسط',textAlign:TextAlign.center ,style: TextStyle(
+                      fontSize: 20,
+                      foreground: Paint()
+                        ..style = PaintingStyle.stroke
+                        ..strokeWidth = 1
+                        ..color = Colors.black,
+                    ),
+                    )
 
                   )
               )
@@ -95,7 +119,7 @@ class _home_pageState extends State<home_page> {
               child : Container(
 
                   child : Stack(children: [ ListTile(
-                    title: Text('انشطة عددية ', textDirection: TextDirection.rtl),
+                    title: Text('انشطة عددية ', textDirection: TextDirection.rtl,style: TextStyle(fontWeight: FontWeight.bold),),
                     leading: Icon(Icons.iso , size: 50,color: Colors.lightBlueAccent,),
                     onTap: () async {
                       setState(() {
@@ -116,14 +140,14 @@ class _home_pageState extends State<home_page> {
                         percent: widget.percent,
                         progressColor: color(widget.percent),
                         //header: new Text("نسبة التقدم"),
-                        center: Text(((widget.percent )*100).toStringAsFixed(0)+'%'),))]))
+                        center: Text(((widget.percent )*100).toStringAsFixed(0)+'%',style: TextStyle(fontWeight: FontWeight.bold),),))]))
           ),
           Card(
               margin: EdgeInsets.only(top: 10, left: 5, right: 5,),
               child : Container(
 
                   child : Stack(children: [ ListTile(
-                    title: Text('الدوال و تنظيم المعطيات' , textDirection: TextDirection.rtl),
+                    title: Text('الدوال و تنظيم المعطيات' , textDirection: TextDirection.rtl,style: TextStyle(fontWeight: FontWeight.bold),),
                     leading: Icon(Icons.blur_off , size: 50,color : Colors.lightBlueAccent,),
                     onTap: () async {
                       setState(() {
@@ -143,14 +167,14 @@ class _home_pageState extends State<home_page> {
                         percent: widget.percent2,
                         progressColor: color(widget.percent2),
                         //header: new Text("نسبة التقدم"),
-                        center: Text(((widget.percent2 )*100).toStringAsFixed(0)+'%'),))]))
+                        center: Text(((widget.percent2 )*100).toStringAsFixed(0)+'%',style: TextStyle(fontWeight: FontWeight.bold),),))]))
           ),
           Card(
               margin: EdgeInsets.only(top: 10, left: 5, right: 5,),
               child : Container(
 
               child : Stack(children: [ ListTile(
-            title: Text('انشطة هندسية' , textDirection: TextDirection.rtl),
+            title: Text('انشطة هندسية' , textDirection: TextDirection.rtl,style: TextStyle(fontWeight: FontWeight.bold),),
             leading: Icon(Icons.signal_cellular_null , size: 50,color : Colors.lightBlueAccent,),
 
             onTap: (){
@@ -174,16 +198,16 @@ class _home_pageState extends State<home_page> {
                   //progressColor: color(widget.percent3),
                   progressColor: color(widget.percent3),
                 //header: new Text("نسبة التقدم"),
-                center: Text(((widget.percent3 )*100).toStringAsFixed(0)+'%'),))]))
+                center: Text(((widget.percent3 )*100).toStringAsFixed(0)+'%',style: TextStyle(fontWeight: FontWeight.bold),),))]))
           ),
           Card(
               margin: EdgeInsets.only(top: 10, left: 5, right: 5,),
               child : Container(
 
                   child : Stack(children: [ ListTile(
-                    title: Text('حول التطبيق' , textDirection: TextDirection.rtl,textAlign: TextAlign.center,),
-                    onTap: () async {
-                      await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => nombrs('info3',widget.data),),);
+                    title: Text('حول التطبيق' , textDirection: TextDirection.rtl,textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
+                    onTap: ()  {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => abot())); //nombrs('info3',widget.data),),);
                       },
                   ),]))
           ),
@@ -203,8 +227,8 @@ class _home_pageState extends State<home_page> {
     lineWidth: 10.0,
     percent:  (widget.percent + widget.percent3 + widget.percent2)/3,//percent_1(),
             progressColor: color((widget.percent + widget.percent3 + widget.percent2)/3),
-    header: new Text("نسبة تقدمك في جميع الدروس"),
-    center: new Text((((widget.percent + widget.percent3 + widget.percent2)/3)*100).toStringAsFixed(0)+'%'),))
+    header: new Text("نسبة تقدمك في جميع الدروس",style: TextStyle(fontWeight: FontWeight.bold),),
+    center: new Text((((widget.percent + widget.percent3 + widget.percent2)/3)*100).toStringAsFixed(0)+'%',style: TextStyle(fontWeight: FontWeight.bold),),))
 
         ],
 
@@ -213,7 +237,7 @@ class _home_pageState extends State<home_page> {
     );
   }
     Color color(n){
-    print('presentega $n');
+    //print('presentega $n');
       if(n<=0.3){return Colors.red ; }else if(n<0.5){return Colors.orange ; }else if(n>=0.5){return Colors.green;}
    }
   double percent_2(){

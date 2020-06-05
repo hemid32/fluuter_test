@@ -88,8 +88,10 @@ class _nombrsState extends State<nombrs> {
                   var parcent2 = await a.percent('info2') ;
                   var parcent3 = await a.percent('info3') ;
                   //Navigator.of(context).pop();
-                  //Navigator.of(context).pop();
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pop();
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => home_page(info_tout,parcent1,parcent2,parcent3)));
+
                   setState(() {
                     lod = false ;
                   });
@@ -139,6 +141,23 @@ Widget _mybody(context, info , info2 , info3 , file , url , data ,img_typ){
 
         Card(
             child : Container(
+              decoration: BoxDecoration(
+                //color: Colors.lightBlueAccent,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10)
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+              ),
 
               padding: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5),
 
@@ -161,14 +180,14 @@ Widget _mybody(context, info , info2 , info3 , file , url , data ,img_typ){
             )
         ),
         Card(
-            color: Colors.cyan,
+            color: Colors.lime[200],
             margin: EdgeInsets.only(top:10),
             child : Container(child : Text(difinition_title,style: TextStyle(fontWeight: FontWeight.bold) ),
               padding: EdgeInsets.only(left:300 , top: 5 , right: 5, bottom: 5),
             )
         ),
         Card(
-            color: Colors.lightGreenAccent,
+            color: Colors.orange[200],
             margin: EdgeInsets.only(top:10 , left: 5 , right: 5 , bottom: 5),
             child : Container(child : Text(difinition1),
               margin: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5 , ) ,
@@ -177,14 +196,14 @@ Widget _mybody(context, info , info2 , info3 , file , url , data ,img_typ){
             )
         ),
         Card(
-            color: Colors.cyan,
+            color: Colors.lime[200],
             margin: EdgeInsets.only(top:10),
             child : Container(child : Text(difinition_title2,style: TextStyle(fontWeight: FontWeight.bold) ),
               //padding: EdgeInsets.only(left:300 , top: 5 , right: 5, bottom: 5),
             )
         ),
         Card(
-            color: Colors.lightGreenAccent,
+            color: Colors.orange[200],
             margin: EdgeInsets.only(top:10 , left: 5 , right: 5 , bottom: 5),
             child : Container(child : Text(difinition2),
               margin: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5 , ) ,
@@ -194,7 +213,7 @@ Widget _mybody(context, info , info2 , info3 , file , url , data ,img_typ){
         ),
 
         Card(
-            color: Colors.orange,
+            color: Colors.lime[200],
             margin: EdgeInsets.only(top:10),
             child : Container(child : Text(exemple,style: TextStyle(fontWeight: FontWeight.bold) ),
               padding: EdgeInsets.only(left:300 , top: 5 , right: 5, bottom: 5),
@@ -202,7 +221,7 @@ Widget _mybody(context, info , info2 , info3 , file , url , data ,img_typ){
         ),
 
         Card(
-            color: Colors.greenAccent,
+            color: Colors.orange[200],
             margin: EdgeInsets.only(top:10 , left: 5 , right: 5 , bottom: 5),
             child : Container(child : Text(exempl_cont , textDirection: TextDirection.rtl),
               margin: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5 , ) ,
@@ -272,6 +291,23 @@ Widget _mybody(context, info , info2 , info3 , file , url , data ,img_typ){
       children: <Widget>[
         Card(
             child : Container(
+              decoration: BoxDecoration(
+                //color: Colors.lightBlueAccent,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10)
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+              ),
 
               padding: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5),
 
@@ -294,14 +330,14 @@ Widget _mybody(context, info , info2 , info3 , file , url , data ,img_typ){
             )
         ),
         Card(
-            color: Colors.cyan,
+            color: Colors.lime[200],
             margin: EdgeInsets.only(top:10),
             child : Container(child : Text(difinition_title,style: TextStyle(fontWeight: FontWeight.bold) ),
               padding: EdgeInsets.only(left:300 , top: 5 , right: 5, bottom: 5),
             )
         ),
         Card(
-            color: Colors.lightGreenAccent,
+            color: Colors.orange[200],
             margin: EdgeInsets.only(top:10 , left: 5 , right: 5 , bottom: 5),
             child : Container(child : Text(difinition1),
               margin: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5 , ) ,
@@ -310,7 +346,7 @@ Widget _mybody(context, info , info2 , info3 , file , url , data ,img_typ){
             )
         ),
         Card(
-            color: Colors.cyan,
+            color: Colors.lime[200],
             margin: EdgeInsets.only(top:10),
             child : Container(child : Text(difinition_title2,style: TextStyle(fontWeight: FontWeight.bold) ),
               //padding: EdgeInsets.only(left:300 , top: 5 , right: 5, bottom: 5),
@@ -347,7 +383,7 @@ Widget _mybody(context, info , info2 , info3 , file , url , data ,img_typ){
         ),
 
         Card(
-            color: Colors.orange,
+            color: Colors.lime[200],
             margin: EdgeInsets.only(top:10),
             child : Container(child : Text(exemple,style: TextStyle(fontWeight: FontWeight.bold) ),
               padding: EdgeInsets.only(left:300 , top: 5 , right: 5, bottom: 5),
@@ -355,7 +391,7 @@ Widget _mybody(context, info , info2 , info3 , file , url , data ,img_typ){
         ),
 
         Card(
-            color: Colors.greenAccent,
+            color: Colors.orange[200],
             margin: EdgeInsets.only(top:10 , left: 5 , right: 5 , bottom: 5),
             child : Container(child : Text(exempl_cont),
               margin: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5 , ) ,
@@ -424,6 +460,23 @@ Widget _mybody(context, info , info2 , info3 , file , url , data ,img_typ){
 
         Card(
             child : Container(
+              decoration: BoxDecoration(
+                //color: Colors.lightBlueAccent,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10)
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+              ),
 
               padding: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5),
 
@@ -446,14 +499,14 @@ Widget _mybody(context, info , info2 , info3 , file , url , data ,img_typ){
             )
         ),
         Card(
-            color: Colors.cyan,
+            color: Colors.lime[200],
             margin: EdgeInsets.only(top:10),
             child : Container(child : Text(difinition_title,style: TextStyle(fontWeight: FontWeight.bold) ),
               padding: EdgeInsets.only(left:300 , top: 5 , right: 5, bottom: 5),
             )
         ),
         Card(
-            color: Colors.lightGreenAccent,
+            color: Colors.orange[200],
             margin: EdgeInsets.only(top:10 , left: 5 , right: 5 , bottom: 5),
             child : Container(child : Text(difinition1),
               margin: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5 , ) ,
@@ -462,14 +515,14 @@ Widget _mybody(context, info , info2 , info3 , file , url , data ,img_typ){
             )
         ),
         Card(
-            color: Colors.cyan,
+            color: Colors.lime[200],
             margin: EdgeInsets.only(top:10),
             child : Container(child : Text(difinition_title2,style: TextStyle(fontWeight: FontWeight.bold) ),
               //padding: EdgeInsets.only(left:300 , top: 5 , right: 5, bottom: 5),
             )
         ),
         Card(
-            color: Colors.lightGreenAccent,
+            color: Colors.white30,
             margin: EdgeInsets.only(top:10 , left: 5 , right: 5 , bottom: 5),
             child : Container(child : img_typ ? Image.network(url[1][0]) : Center(
 
@@ -493,7 +546,7 @@ Widget _mybody(context, info , info2 , info3 , file , url , data ,img_typ){
 
 
         Card(
-            color: Colors.orange,
+            color: Colors.lime[200],
             margin: EdgeInsets.only(top:10),
             child : Container(child : Text(exemple,style: TextStyle(fontWeight: FontWeight.bold) ),
               padding: EdgeInsets.only(left:300 , top: 5 , right: 5, bottom: 5),
@@ -501,7 +554,7 @@ Widget _mybody(context, info , info2 , info3 , file , url , data ,img_typ){
         ),
 
         Card(
-            color: Colors.greenAccent,
+            color: Colors.orange[200],
             margin: EdgeInsets.only(top:10 , left: 5 , right: 5 , bottom: 5),
             child : Container(child : Text(exempl_cont),
               margin: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5 , ) ,

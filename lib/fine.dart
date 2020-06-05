@@ -40,12 +40,14 @@ Widget _mybody(context , file){
     children: <Widget>[
       Center(child : Container(
         margin: EdgeInsets.only(top: 90 ),
-      child : Text('لقد اكملت هذا الفصل' , textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold)),
+      child : Text('احسنت لقد اكملت هذا الفصل' , textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold)),
       )
       ),
       Center(child : Container(
+        width: 200,
+        height: 200,
         padding: EdgeInsets.only(top: 60),
-      child : Image.asset('issues/images/prv.png')
+      child : Image.asset('issues/images/cmp.png')
       )
       ),
       Center(
