@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -8,6 +9,9 @@ import 'hemidi.dart';
 import 'model/Dog.dart';
 import 'part2_nombrs.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+//import 'package:firebase_admob/firebase_admob.dart';
+import 'package:admob_flutter/admob_flutter.dart';
+
 import 'home_page.dart';
 import 'dart:convert' ;
 
@@ -52,8 +56,50 @@ class nombrs extends StatefulWidget {
 }
 
 class _nombrsState extends State<nombrs> {
-  var title ;
-  bool lod = false ;
+
+
+
+
+
+
+
+  var title;
+
+  bool lod = false;
+
+
+  // ads
+  GlobalKey<ScaffoldState> scaffoldState = GlobalKey();
+  AdmobBannerSize bannerSize;
+  AdmobInterstitial interstitialAd;
+  AdmobReward rewardAd;
+  final adse = ads();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Admob.initialize(adse.idapp());
+    interstitialAd = AdmobInterstitial(
+      adUnitId: adse.idintir(),
+      listener: (AdmobAdEvent event, Map<String, dynamic> args) {
+        if (event == AdmobAdEvent.closed) interstitialAd.load();
+        print('load ads intirersrsr');
+      },
+
+    );
+    interstitialAd.load();
+
+
+  }
+
+  @override
+  void dispose() {
+    interstitialAd.dispose();
+    //rewardAd.dispose();
+    super.dispose();
+  }
+
+
 
 
   @override
@@ -61,8 +107,7 @@ class _nombrsState extends State<nombrs> {
     //final ProgressDialog pr = ProgressDialog(context);
 
 
-
-    return lod ? loading() :  MaterialApp(
+    return lod ? loading() : MaterialApp(
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -76,24 +121,26 @@ class _nombrsState extends State<nombrs> {
             title: Text('تعلم الرياضيات', textDirection: TextDirection.rtl),
             actions: <Widget>[
               IconButton(
-                icon: const Icon(Icons.home ),
+                icon: const Icon(Icons.home),
                 tooltip: 'home',
                 onPressed: () async {
                   setState(() {
-                    lod = true ;
+                    lod = true;
                   });
                   var a = await data_tout();
-                  var info_tout = await a.data() ;
-                  var parcent1 = await a.percent('info') ;
-                  var parcent2 = await a.percent('info2') ;
-                  var parcent3 = await a.percent('info3') ;
+                  var info_tout = await a.data();
+                  var parcent1 = await a.percent('info');
+                  var parcent2 = await a.percent('info2');
+                  var parcent3 = await a.percent('info3');
                   //Navigator.of(context).pop();
                   Navigator.of(context).pop();
                   Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => home_page(info_tout,parcent1,parcent2,parcent3)));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) =>
+                          home_page(info_tout, parcent1, parcent2, parcent3)));
 
                   setState(() {
-                    lod = false ;
+                    lod = false;
                   });
                   //Navigator.of(context).push(MaterialPageRoute(builder: (context) => home_page(0)));
                   /*
@@ -110,511 +157,616 @@ class _nombrsState extends State<nombrs> {
                 },
               )
             ]
-        ) ,
-        body: _mybody(context,widget.info , widget.info2 , widget.info3 , widget.file , widget.url , widget.data, widget.img_typ),
+        ),
+        body: _mybody(
+            context,
+            widget.info,
+            widget.info2,
+            widget.info3,
+            widget.file,
+            widget.url,
+            widget.data,
+            widget.img_typ),
       ),
     );
-
-  }
-}
-var h = 1 ;
-
-Widget _mybody(context, info , info2 , info3 , file , url , data ,img_typ){
-
-
-  //print(info3);
-
-  if(file == 'info' ){
-
-
-
-
-    var title1 = info[0]['title'];
-    var difinition_title =info[0]['def1'];
-    var difinition_title2 = info[0]['def2'];
-    var difinition1 = info[0]['deftp'];
-    var difinition2 = info[0]['def2p'];
-    var exemple = info[0]['exmpl'];
-    var exempl_cont = info[0]['exmplp'];
-    return ListView(
-      children: <Widget>[
-
-        Card(
-            child : Container(
-              decoration: BoxDecoration(
-                //color: Colors.lightBlueAccent,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10),
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10)
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: Offset(0, 3), // changes position of shadow
-                  ),
-                ],
-              ),
-
-              padding: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5),
-
-              margin:EdgeInsets.only(top: 10 , left: 5 , right: 5),
-              child : Row(
-
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                  children: <Widget>[
-                    //width: 500,
-
-                    Icon(Icons.border_color),
-                    Text(title1 , textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
-                    //padding: EdgeInsets.only(left:50),
-
-
-                    Icon(Icons.assignment , )
-                  ]
-              )  ,
-            )
-        ),
-        Card(
-            color: Colors.lime[200],
-            margin: EdgeInsets.only(top:10),
-            child : Container(child : Text(difinition_title,style: TextStyle(fontWeight: FontWeight.bold) ),
-              padding: EdgeInsets.only(left:300 , top: 5 , right: 5, bottom: 5),
-            )
-        ),
-        Card(
-            color: Colors.orange[200],
-            margin: EdgeInsets.only(top:10 , left: 5 , right: 5 , bottom: 5),
-            child : Container(child : Text(difinition1,style: TextStyle(fontWeight: FontWeight.bold),),
-              margin: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5 , ) ,
-
-
-            )
-        ),
-        Card(
-            color: Colors.lime[200],
-            margin: EdgeInsets.only(top:10),
-            child : Container(child : Text(difinition_title2,style: TextStyle(fontWeight: FontWeight.bold) ),
-              //padding: EdgeInsets.only(left:300 , top: 5 , right: 5, bottom: 5),
-            )
-        ),
-        Card(
-            color: Colors.orange[200],
-            margin: EdgeInsets.only(top:10 , left: 5 , right: 5 , bottom: 5),
-            child : Container(child : Text(difinition2,style: TextStyle(fontWeight: FontWeight.bold),),
-              margin: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5 , ) ,
-
-
-            )
-        ),
-
-        Card(
-            color: Colors.lime[200],
-            margin: EdgeInsets.only(top:10),
-            child : Container(child : Text(exemple,style: TextStyle(fontWeight: FontWeight.bold) ),
-              padding: EdgeInsets.only(left:300 , top: 5 , right: 5, bottom: 5),
-            )
-        ),
-
-        Card(
-            color: Colors.orange[200],
-            margin: EdgeInsets.only(top:10 , left: 5 , right: 5 , bottom: 5),
-            child : Container(child : Text(exempl_cont , textDirection: TextDirection.rtl,style: TextStyle(fontWeight: FontWeight.bold),),
-              margin: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5 , ) ,
-
-
-            )
-        ),
-        /*
-        Container(
-            margin: EdgeInsets.only( top: 20 ),
-            child : RaisedButton(
-              padding: EdgeInsets.only(top: 10 , bottom: 10 ,right: 70 , left: 70),
-              color: Colors.tealAccent,
-              child: Text('متابغة'),
-              onPressed: (){
-                print('hemidi love');
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => Part2(info2: info2,info3: info3,)));
-              },
-            ),
-        ),*/
-        Container(
-          //width: MediaQuery.of(context).size.width*0.01,
-          margin: EdgeInsets.only(top: 20 , bottom: 20),
-          child : Material(
-            elevation: 5.0,
-            borderRadius: BorderRadius.circular(30.0),
-            color: Color(0xff01A0C7),
-            child: MaterialButton(
-              minWidth: MediaQuery.of(context).size.width*0.5,
-              padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-
-
-              onPressed: () async  {
-
-                //print('hemidi love');
-
-
-                await Navigator.of(context).push(MaterialPageRoute(builder: (context) => Part2(file: file,info2: info2,info3: info3,data:data)));
-
-              },
-              child: Text("متابعة",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold)),
-            ),
-          ),
-        )
-
-
-
-      ],
-    );
-  } else if (file == 'info2'){
-    //print(info3);
-    var title1 = info2[0]['title'];
-    var difinition_title =info2[0]['def1'];
-    var difinition_title2 = info2[0]['def2'];
-    var difinition1 = info2[0]['deftp'];
-    var difinition2 = info2[0]['def2p'];
-    var exemple = info2[0]['exmpl'];
-    var exempl_cont = info2[0]['exmplp'];
-
-
-
-    return ListView(
-
-      children: <Widget>[
-        Card(
-            child : Container(
-              decoration: BoxDecoration(
-                //color: Colors.lightBlueAccent,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10),
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10)
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: Offset(0, 3), // changes position of shadow
-                  ),
-                ],
-              ),
-
-              padding: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5),
-
-              margin:EdgeInsets.only(top: 10 , left: 5 , right: 5),
-              child : Row(
-
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                  children: <Widget>[
-                    //width: 500,
-
-                    Icon(Icons.border_color),
-                    Text(title1 , textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
-                    //padding: EdgeInsets.only(left:50),
-
-
-                    Icon(Icons.assignment , )
-                  ]
-              )  ,
-            )
-        ),
-        Card(
-            color: Colors.lime[200],
-            margin: EdgeInsets.only(top:10),
-            child : Container(child : Text(difinition_title,style: TextStyle(fontWeight: FontWeight.bold) ),
-              padding: EdgeInsets.only(left:300 , top: 5 , right: 5, bottom: 5),
-            )
-        ),
-        Card(
-            color: Colors.orange[200],
-            margin: EdgeInsets.only(top:10 , left: 5 , right: 5 , bottom: 5),
-            child : Container(child : Text(difinition1,style: TextStyle(fontWeight: FontWeight.bold),),
-              margin: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5 , ) ,
-
-
-            )
-        ),
-        Card(
-            color: Colors.lime[200],
-            margin: EdgeInsets.only(top:10),
-            child : Container(child : Text(difinition_title2,style: TextStyle(fontWeight: FontWeight.bold) ),
-              //padding: EdgeInsets.only(left:300 , top: 5 , right: 5, bottom: 5),
-            )
-        ),
-
-        Card(
-
-            color: Colors.white30,
-            margin: EdgeInsets.only(top:10 , left: 5 , right: 5 , bottom: 5),
-
-            child : Container(
-
-              child : img_typ ? Image.network(url[0][0]) : Center(
-
-
-              child : Container(
-
-                padding: EdgeInsets.only(top: 50 , bottom: 50),
-  child: SpinKitRing(
-  color: Colors.blue,
-  size: 50.0,
-
-  ),
-  )
-
-              ),
-              margin: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5 , ) ,
-
-
-
-            )
-
-        ),
-
-        Card(
-            color: Colors.lime[200],
-            margin: EdgeInsets.only(top:10),
-            child : Container(child : Text(exemple,style: TextStyle(fontWeight: FontWeight.bold) ),
-              padding: EdgeInsets.only(left:300 , top: 5 , right: 5, bottom: 5),
-            )
-        ),
-
-        Card(
-            color: Colors.orange[200],
-            margin: EdgeInsets.only(top:10 , left: 5 , right: 5 , bottom: 5),
-            child : Container(child : Text(exempl_cont,style: TextStyle(fontWeight: FontWeight.bold),),
-              margin: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5 , ) ,
-
-
-            )
-        ),
-        /*
-        Container(
-            margin: EdgeInsets.only( top: 20 ),
-            child : RaisedButton(
-              padding: EdgeInsets.only(top: 10 , bottom: 10 ,right: 70 , left: 70),
-              color: Colors.tealAccent,
-              child: Text('متابغة'),
-              onPressed: (){
-                print('hemidi love');
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => Part2(info2: info2,info3: info3,)));
-              },
-            ),
-        ),*/
-        Container(
-          //width: MediaQuery.of(context).size.width*0.01,
-          margin: EdgeInsets.only(top: 20 , bottom: 20),
-          child : Material(
-            elevation: 5.0,
-            borderRadius: BorderRadius.circular(30.0),
-            color: Color(0xff01A0C7),
-            child: MaterialButton(
-              minWidth: MediaQuery.of(context).size.width*0.5,
-              padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-
-
-              onPressed: () async  {
-
-                await Navigator.of(context).push(MaterialPageRoute(builder: (context) => Part2(file: file,info2: info2,info3: info3,data:data)));
-
-              },
-              child: Text("متابعة",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold)),
-            ),
-          ),
-        )
-
-
-
-      ],
-    );
-
-
-  }else if (file == 'info3'){
-    //print(info3);
-    var title1 = info3[0]['title'];
-    var difinition_title =info3[0]['def1'];
-    var difinition_title2 = info3[0]['def2'];
-    var difinition1 = info3[0]['deftp'];
-    var difinition2 = info3[0]['def2p'];
-    var exemple = info3[0]['exmpl'];
-    var exempl_cont = info3[0]['exmplp'];
-
-
-    return ListView(
-
-      children: <Widget>[
-
-        Card(
-            child : Container(
-              decoration: BoxDecoration(
-                //color: Colors.lightBlueAccent,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10),
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10)
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: Offset(0, 3), // changes position of shadow
-                  ),
-                ],
-              ),
-
-              padding: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5),
-
-              margin:EdgeInsets.only(top: 10 , left: 5 , right: 5),
-              child : Row(
-
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                  children: <Widget>[
-                    //width: 500,
-
-                    Icon(Icons.border_color),
-                    Text(title1 , textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
-                    //padding: EdgeInsets.only(left:50),
-
-
-                    Icon(Icons.assignment , )
-                  ]
-              )  ,
-            )
-        ),
-        Card(
-            color: Colors.lime[200],
-            margin: EdgeInsets.only(top:10),
-            child : Container(child : Text(difinition_title,style: TextStyle(fontWeight: FontWeight.bold) ),
-              padding: EdgeInsets.only(left:300 , top: 5 , right: 5, bottom: 5),
-            )
-        ),
-        Card(
-            color: Colors.orange[200],
-            margin: EdgeInsets.only(top:10 , left: 5 , right: 5 , bottom: 5),
-            child : Container(child : Text(difinition1,style: TextStyle(fontWeight: FontWeight.bold),),
-              margin: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5 , ) ,
-
-
-            )
-        ),
-        Card(
-            color: Colors.lime[200],
-            margin: EdgeInsets.only(top:10),
-            child : Container(child : Text(difinition_title2,style: TextStyle(fontWeight: FontWeight.bold) ),
-              //padding: EdgeInsets.only(left:300 , top: 5 , right: 5, bottom: 5),
-            )
-        ),
-        Card(
-            color: Colors.white30,
-            margin: EdgeInsets.only(top:10 , left: 5 , right: 5 , bottom: 5),
-            child : Container(child : img_typ ? Image.network(url[1][0]) : Center(
-
-
-  child : Container(
-
-  padding: EdgeInsets.only(top: 50 , bottom: 50),
-  child: SpinKitRing(
-  color: Colors.blue,
-  size: 50.0,
-
-  ),
-  )
-
-  )  ,
-              margin: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5 , ) ,
-
-
-            )
-        ),
-
-
-        Card(
-            color: Colors.lime[200],
-            margin: EdgeInsets.only(top:10),
-            child : Container(child : Text(exemple,style: TextStyle(fontWeight: FontWeight.bold) ),
-              padding: EdgeInsets.only(left:300 , top: 5 , right: 5, bottom: 5),
-            )
-        ),
-
-        Card(
-            color: Colors.orange[200],
-            margin: EdgeInsets.only(top:10 , left: 5 , right: 5 , bottom: 5),
-            child : Container(child : Text(exempl_cont,style: TextStyle(fontWeight: FontWeight.bold),),
-              margin: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5 , ) ,
-
-
-            )
-        ),
-        /*
-        Container(
-            margin: EdgeInsets.only( top: 20 ),
-            child : RaisedButton(
-              padding: EdgeInsets.only(top: 10 , bottom: 10 ,right: 70 , left: 70),
-              color: Colors.tealAccent,
-              child: Text('متابغة'),
-              onPressed: (){
-                print('hemidi love');
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => Part2(info2: info2,info3: info3,)));
-              },
-            ),
-        ),*/
-        Container(
-          //width: MediaQuery.of(context).size.width*0.01,
-          margin: EdgeInsets.only(top: 20 , bottom: 20),
-          child : Material(
-            elevation: 5.0,
-            borderRadius: BorderRadius.circular(30.0),
-            color: Color(0xff01A0C7),
-            child: MaterialButton(
-              minWidth: MediaQuery.of(context).size.width*0.5,
-              padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-
-
-              onPressed: () async  {
-
-                await Navigator.of(context).push(MaterialPageRoute(builder: (context) => Part2(file: file,info2: info2,info3: info3,data:data)));
-
-              },
-              child: Text("متابعة",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold)),
-            ),
-          ),
-        )
-
-
-
-
-      ],
-    );
-
-
-
-
   }
 
+  var h = 1;
 
-  //return
+  Widget _mybody(context, info, info2, info3, file, url, data, img_typ) {
+    //print(info3);
+
+    if (file == 'info') {
+      var title1 = info[0]['title'];
+      var difinition_title = info[0]['def1'];
+      var difinition_title2 = info[0]['def2'];
+      var difinition1 = info[0]['deftp'];
+      var difinition2 = info[0]['def2p'];
+      var exemple = info[0]['exmpl'];
+      var exempl_cont = info[0]['exmplp'];
+      return ListView(
+        children: <Widget>[
+
+          Card(
+              child: Container(
+                decoration: BoxDecoration(
+                  //color: Colors.lightBlueAccent,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10)
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+
+                padding: EdgeInsets.only(top: 5, left: 5, right: 5, bottom: 5),
+
+                margin: EdgeInsets.only(top: 10, left: 5, right: 5),
+                child: Row(
+
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                    children: <Widget>[
+                      //width: 500,
+
+                      Icon(Icons.border_color),
+                      Text(title1, textAlign: TextAlign.center,
+                        style: TextStyle(fontWeight: FontWeight.bold),),
+                      //padding: EdgeInsets.only(left:50),
 
 
+                      Icon(Icons.assignment,)
+                    ]
+                ),
+              )
+          ),
+          Card(
+              color: Colors.lime[200],
+              margin: EdgeInsets.only(top: 10),
+              child: Container(child: Text(difinition_title,
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+                padding: EdgeInsets.only(
+                    left: 300, top: 5, right: 5, bottom: 5),
+              )
+          ),
+          Card(
+              color: Colors.orange[200],
+              margin: EdgeInsets.only(top: 10, left: 5, right: 5, bottom: 5),
+              child: Container(child: Text(
+                difinition1, style: TextStyle(fontWeight: FontWeight.bold),),
+                margin: EdgeInsets.only(top: 5, left: 5, right: 5, bottom: 5,),
+
+
+              )
+          ),
+          // ads banner
+
+
+
+          AdmobBanner(
+            adUnitId: adse.idbanner(),
+            adSize: AdmobBannerSize.FULL_BANNER,
+
+          ),
+
+
+
+
+          Card(
+              color: Colors.lime[200],
+              margin: EdgeInsets.only(top: 10),
+              child: Container(child: Text(difinition_title2,
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+                //padding: EdgeInsets.only(left:300 , top: 5 , right: 5, bottom: 5),
+              )
+          ),
+          Card(
+              color: Colors.orange[200],
+              margin: EdgeInsets.only(top: 10, left: 5, right: 5, bottom: 5),
+              child: Container(child: Text(
+                difinition2, style: TextStyle(fontWeight: FontWeight.bold),),
+                margin: EdgeInsets.only(top: 5, left: 5, right: 5, bottom: 5,),
+
+
+              )
+          ),
+
+
+
+          Card(
+              color: Colors.lime[200],
+              margin: EdgeInsets.only(top: 10),
+              child: Container(child: Text(
+                  exemple, style: TextStyle(fontWeight: FontWeight.bold)),
+                padding: EdgeInsets.only(
+                    left: 300, top: 5, right: 5, bottom: 5),
+              )
+          ),
+
+          Card(
+              color: Colors.orange[200],
+              margin: EdgeInsets.only(top: 10, left: 5, right: 5, bottom: 5),
+              child: Container(child: Text(
+                exempl_cont, textDirection: TextDirection.rtl,
+                style: TextStyle(fontWeight: FontWeight.bold),),
+                margin: EdgeInsets.only(top: 5, left: 5, right: 5, bottom: 5,),
+
+
+              )
+          ),
+          /*
+        Container(
+            margin: EdgeInsets.only( top: 20 ),
+            child : RaisedButton(
+              padding: EdgeInsets.only(top: 10 , bottom: 10 ,right: 70 , left: 70),
+              color: Colors.tealAccent,
+              child: Text('متابغة'),
+              onPressed: (){
+                print('hemidi love');
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => Part2(info2: info2,info3: info3,)));
+              },
+            ),
+        ),*/
+          Container(
+            //width: MediaQuery.of(context).size.width*0.01,
+            margin: EdgeInsets.only(top: 20, bottom: 20),
+            child: Material(
+              elevation: 5.0,
+              borderRadius: BorderRadius.circular(30.0),
+              color: Color(0xff01A0C7),
+              child: MaterialButton(
+                minWidth: MediaQuery
+                    .of(context)
+                    .size
+                    .width * 0.5,
+                padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+
+
+                onPressed: () async {
+                  //print('hemidi love');
+                  //ads
+                  var a = await data_tout();
+                  var point = await a.get_point(file);
+                  //var max_point = await a.max_qastion_(file);
+                  if(point % 3 == 0 ){
+                    interstitialAd.show() ;
+                  }
+
+
+                  //fine ads
+
+
+
+                  await Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) =>
+                          Part2(file: file,
+                              info2: info2,
+                              info3: info3,
+                              data: data)));
+                },
+                child: Text("متابعة",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold)),
+              ),
+            ),
+          )
+
+
+        ],
+      );
+    } else if (file == 'info2') {
+      //print(info3);
+      var title1 = info2[0]['title'];
+      var difinition_title = info2[0]['def1'];
+      var difinition_title2 = info2[0]['def2'];
+      var difinition1 = info2[0]['deftp'];
+      var difinition2 = info2[0]['def2p'];
+      var exemple = info2[0]['exmpl'];
+      var exempl_cont = info2[0]['exmplp'];
+
+
+      return ListView(
+
+        children: <Widget>[
+          Card(
+              child: Container(
+                decoration: BoxDecoration(
+                  //color: Colors.lightBlueAccent,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10)
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+
+                padding: EdgeInsets.only(top: 5, left: 5, right: 5, bottom: 5),
+
+                margin: EdgeInsets.only(top: 10, left: 5, right: 5),
+                child: Row(
+
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                    children: <Widget>[
+                      //width: 500,
+
+                      Icon(Icons.border_color),
+                      Text(title1, textAlign: TextAlign.center,
+                        style: TextStyle(fontWeight: FontWeight.bold),),
+                      //padding: EdgeInsets.only(left:50),
+
+
+                      Icon(Icons.assignment,)
+                    ]
+                ),
+              )
+          ),
+
+
+
+          Card(
+              color: Colors.lime[200],
+              margin: EdgeInsets.only(top: 10),
+              child: Container(child: Text(difinition_title,
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+                padding: EdgeInsets.only(
+                    left: 300, top: 5, right: 5, bottom: 5),
+              )
+          ),
+          Card(
+              color: Colors.orange[200],
+              margin: EdgeInsets.only(top: 10, left: 5, right: 5, bottom: 5),
+              child: Container(child: Text(
+                difinition1, style: TextStyle(fontWeight: FontWeight.bold),),
+                margin: EdgeInsets.only(top: 5, left: 5, right: 5, bottom: 5,),
+
+
+              )
+          ),
+
+
+          AdmobBanner(
+            adUnitId: adse.idbanner(),
+            adSize: AdmobBannerSize.FULL_BANNER,
+
+          ),
+          Card(
+              color: Colors.lime[200],
+              margin: EdgeInsets.only(top: 10),
+              child: Container(child: Text(difinition_title2,
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+                //padding: EdgeInsets.only(left:300 , top: 5 , right: 5, bottom: 5),
+              )
+          ),
+
+          Card(
+
+              color: Colors.white30,
+              margin: EdgeInsets.only(top: 10, left: 5, right: 5, bottom: 5),
+
+              child: Container(
+
+                child: img_typ ? Image.network(url[0][0]) : Center(
+
+
+                    child: Container(
+
+                      padding: EdgeInsets.only(top: 50, bottom: 50),
+                      child: SpinKitRing(
+                        color: Colors.blue,
+                        size: 50.0,
+
+                      ),
+                    )
+
+                ),
+                margin: EdgeInsets.only(top: 5, left: 5, right: 5, bottom: 5,),
+
+
+              )
+
+          ),
+
+          Card(
+              color: Colors.lime[200],
+              margin: EdgeInsets.only(top: 10),
+              child: Container(child: Text(
+                  exemple, style: TextStyle(fontWeight: FontWeight.bold)),
+                padding: EdgeInsets.only(
+                    left: 300, top: 5, right: 5, bottom: 5),
+              )
+          ),
+
+          Card(
+              color: Colors.orange[200],
+              margin: EdgeInsets.only(top: 10, left: 5, right: 5, bottom: 5),
+              child: Container(child: Text(
+                exempl_cont, style: TextStyle(fontWeight: FontWeight.bold),),
+                margin: EdgeInsets.only(top: 5, left: 5, right: 5, bottom: 5,),
+
+
+              )
+          ),
+          /*
+        Container(
+            margin: EdgeInsets.only( top: 20 ),
+            child : RaisedButton(
+              padding: EdgeInsets.only(top: 10 , bottom: 10 ,right: 70 , left: 70),
+              color: Colors.tealAccent,
+              child: Text('متابغة'),
+              onPressed: (){
+                print('hemidi love');
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => Part2(info2: info2,info3: info3,)));
+              },
+            ),
+        ),*/
+          Container(
+            //width: MediaQuery.of(context).size.width*0.01,
+            margin: EdgeInsets.only(top: 20, bottom: 20),
+            child: Material(
+              elevation: 5.0,
+              borderRadius: BorderRadius.circular(30.0),
+              color: Color(0xff01A0C7),
+              child: MaterialButton(
+                minWidth: MediaQuery
+                    .of(context)
+                    .size
+                    .width * 0.5,
+                padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+
+
+                onPressed: () async {
+                  //ads
+                  //ads
+                  var a = await data_tout();
+                  var point = await a.get_point(file);
+                  //var max_point = await a.max_qastion_(file);
+                  if(point % 3 == 0 ){
+                    interstitialAd.show() ;
+                  }
+
+
+                  //fine ads
+                  //ads fine
+
+                  await Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) =>
+                          Part2(file: file,
+                              info2: info2,
+                              info3: info3,
+                              data: data)));
+                },
+                child: Text("متابعة",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold)),
+              ),
+            ),
+          )
+
+
+        ],
+      );
+    } else if (file == 'info3') {
+      //print(info3);
+      var title1 = info3[0]['title'];
+      var difinition_title = info3[0]['def1'];
+      var difinition_title2 = info3[0]['def2'];
+      var difinition1 = info3[0]['deftp'];
+      var difinition2 = info3[0]['def2p'];
+      var exemple = info3[0]['exmpl'];
+      var exempl_cont = info3[0]['exmplp'];
+
+
+      return ListView(
+
+        children: <Widget>[
+
+          Card(
+              child: Container(
+                decoration: BoxDecoration(
+                  //color: Colors.lightBlueAccent,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10)
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+
+                padding: EdgeInsets.only(top: 5, left: 5, right: 5, bottom: 5),
+
+                margin: EdgeInsets.only(top: 10, left: 5, right: 5),
+                child: Row(
+
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                    children: <Widget>[
+                      //width: 500,
+
+                      Icon(Icons.border_color),
+                      Text(title1, textAlign: TextAlign.center,
+                        style: TextStyle(fontWeight: FontWeight.bold),),
+                      //padding: EdgeInsets.only(left:50),
+
+
+                      Icon(Icons.assignment,)
+                    ]
+                ),
+              )
+          ),
+          Card(
+              color: Colors.lime[200],
+              margin: EdgeInsets.only(top: 10),
+              child: Container(child: Text(difinition_title,
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+                padding: EdgeInsets.only(
+                    left: 300, top: 5, right: 5, bottom: 5),
+              )
+          ),
+          Card(
+              color: Colors.orange[200],
+              margin: EdgeInsets.only(top: 10, left: 5, right: 5, bottom: 5),
+              child: Container(child: Text(
+                difinition1, style: TextStyle(fontWeight: FontWeight.bold),),
+                margin: EdgeInsets.only(top: 5, left: 5, right: 5, bottom: 5,),
+
+
+              )
+          ),
+
+          AdmobBanner(
+            adUnitId: adse.idbanner(),
+            adSize: AdmobBannerSize.FULL_BANNER,
+
+          ),
+
+          Card(
+              color: Colors.lime[200],
+              margin: EdgeInsets.only(top: 10),
+              child: Container(child: Text(difinition_title2,
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+                //padding: EdgeInsets.only(left:300 , top: 5 , right: 5, bottom: 5),
+              )
+          ),
+          Card(
+              color: Colors.white30,
+              margin: EdgeInsets.only(top: 10, left: 5, right: 5, bottom: 5),
+              child: Container(
+                child: img_typ ? Image.network(url[1][0]) : Center(
+
+
+                    child: Container(
+
+                      padding: EdgeInsets.only(top: 50, bottom: 50),
+                      child: SpinKitRing(
+                        color: Colors.blue,
+                        size: 50.0,
+
+                      ),
+                    )
+
+                ),
+                margin: EdgeInsets.only(top: 5, left: 5, right: 5, bottom: 5,),
+
+
+              )
+          ),
+
+
+          Card(
+              color: Colors.lime[200],
+              margin: EdgeInsets.only(top: 10),
+              child: Container(child: Text(
+                  exemple, style: TextStyle(fontWeight: FontWeight.bold)),
+                padding: EdgeInsets.only(
+                    left: 300, top: 5, right: 5, bottom: 5),
+              )
+          ),
+
+          Card(
+              color: Colors.orange[200],
+              margin: EdgeInsets.only(top: 10, left: 5, right: 5, bottom: 5),
+              child: Container(child: Text(
+                exempl_cont, style: TextStyle(fontWeight: FontWeight.bold),),
+                margin: EdgeInsets.only(top: 5, left: 5, right: 5, bottom: 5,),
+
+
+              )
+          ),
+          /*
+        Container(
+            margin: EdgeInsets.only( top: 20 ),
+            child : RaisedButton(
+              padding: EdgeInsets.only(top: 10 , bottom: 10 ,right: 70 , left: 70),
+              color: Colors.tealAccent,
+              child: Text('متابغة'),
+              onPressed: (){
+                print('hemidi love');
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => Part2(info2: info2,info3: info3,)));
+              },
+            ),
+        ),*/
+          Container(
+            //width: MediaQuery.of(context).size.width*0.01,
+            margin: EdgeInsets.only(top: 20, bottom: 20),
+            child: Material(
+              elevation: 5.0,
+              borderRadius: BorderRadius.circular(30.0),
+              color: Color(0xff01A0C7),
+              child: MaterialButton(
+                minWidth: MediaQuery
+                    .of(context)
+                    .size
+                    .width * 0.5,
+                padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+
+
+                onPressed: () async {
+                  //ads
+                  //ads
+                  var a = await data_tout();
+                  var point = await a.get_point(file);
+                  //var max_point = await a.max_qastion_(file);
+                  if(point % 3 == 0 ){
+                    interstitialAd.show() ;
+                  }
+
+
+                  //fine ads
+                  //fin ads
+
+
+
+                  await Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) =>
+                          Part2(file: file,
+                              info2: info2,
+                              info3: info3,
+                              data: data)));
+                },
+                child: Text("متابعة",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold)),
+              ),
+            ),
+          )
+
+
+        ],
+      );
+    }
+
+
+    //return
+
+
+  }
 
 }
-

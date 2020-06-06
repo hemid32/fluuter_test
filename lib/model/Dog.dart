@@ -465,3 +465,27 @@ class data_tout {
 
   }
 }
+
+
+class ads {
+
+  String idapp(){
+    return 'ca-app-pub-3940256099942544~3347511713' ;
+}
+
+  String idbanner(){
+    return 'ca-app-pub-3940256099942544/6300978111';
+  }
+
+  String idintir(){
+    return 'ca-app-pub-3940256099942544/1033173712';
+  }
+  String idInterstitial_Video(){
+    return 'ca-app-pub-3940256099942544/8691691433';
+  }
+  String idNative(){
+    return 'ca-app-pub-3940256099942544/2247696110';
+  }
+
+}
+

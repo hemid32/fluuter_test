@@ -1,3 +1,4 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
@@ -34,11 +35,21 @@ class _part3State extends State<part3> {
   bool lod = false ;
 
 
+  // ads
+  GlobalKey<ScaffoldState> scaffoldState = GlobalKey();
+  AdmobBannerSize bannerSize;
+  AdmobInterstitial interstitialAd;
+  AdmobReward rewardAd;
+  final adse = ads();
+
+
   @override
   void initState() {
     super.initState();
     // create this only once
     _audioCache = AudioCache(prefix: "audio/", fixedPlayer: AudioPlayer()..setReleaseMode(ReleaseMode.STOP));
+    Admob.initialize(adse.idapp());
+
   }
 
 
@@ -164,6 +175,14 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
               )  ,
             )
         ),
+        Container(
+
+            margin:  EdgeInsets.only(top: 15 , bottom:  15),
+            child : AdmobBanner(
+              adUnitId: adse.idbanner(),
+              adSize: AdmobBannerSize.FULL_BANNER,
+
+            )),
 
         Card(
             color: Colors.orange[200],
@@ -386,6 +405,14 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
                 )  ,
               )
           ),
+          Container(
+
+              margin:  EdgeInsets.only(top: 15 , bottom:  15),
+              child : AdmobBanner(
+                adUnitId: adse.idbanner(),
+                adSize: AdmobBannerSize.FULL_BANNER,
+
+              )),
 
           Card(
               color: Colors.orange[200],

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
@@ -65,11 +66,30 @@ class _Part2State extends State<Part2> {
 
   AudioCache _audioCache;
 
+  // ads
+  GlobalKey<ScaffoldState> scaffoldState = GlobalKey();
+  AdmobBannerSize bannerSize;
+  AdmobInterstitial interstitialAd;
+  AdmobReward rewardAd;
+  final adse = ads();
+
   @override
   void initState() {
     super.initState();
     // create this only once
     _audioCache = AudioCache(prefix: "audio/", fixedPlayer: AudioPlayer()..setReleaseMode(ReleaseMode.STOP));
+    Admob.initialize(adse.idapp());
+    interstitialAd = AdmobInterstitial(
+      adUnitId: adse.idintir(),
+      listener: (AdmobAdEvent event, Map<String, dynamic> args) {
+        if (event == AdmobAdEvent.closed) interstitialAd.load();
+        print('load ads intirersrsr');
+      },
+
+    );
+    interstitialAd.load();
+
+
   }
 
 
@@ -224,6 +244,16 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
             )  ,
           )
           ),
+
+          Container(
+            
+              margin:  EdgeInsets.only(top: 15 , bottom:  15),
+              child : AdmobBanner(
+            adUnitId: adse.idbanner(),
+            adSize: AdmobBannerSize.FULL_BANNER,
+
+          )),
+
 
           Container(
             margin: EdgeInsets.all(10),
@@ -470,6 +500,15 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
                 )  ,
               )
           ),
+
+          Container(
+
+              margin:  EdgeInsets.only(top: 15 , bottom:  15),
+              child : AdmobBanner(
+                adUnitId: adse.idbanner(),
+                adSize: AdmobBannerSize.FULL_BANNER,
+
+              )),
 
           Container(
             margin: EdgeInsets.all(10),
@@ -729,6 +768,14 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
                 )  ,
               )
           ),
+          Container(
+
+              margin:  EdgeInsets.only(top: 15 , bottom:  15),
+              child : AdmobBanner(
+                adUnitId: adse.idbanner(),
+                adSize: AdmobBannerSize.FULL_BANNER,
+
+              )),
 
           Container(
             margin: EdgeInsets.all(10),

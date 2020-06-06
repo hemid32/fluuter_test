@@ -50,6 +50,9 @@ dependencies:
   cached_network_image: ^2.2.0+1
   transparent_image: ^1.0.0
   audioplayers: ^0.15.1
+  firebase_admob: ^0.9.3+2
+  admob_flutter: ^0.3.4
+
 
 
 
