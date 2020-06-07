@@ -82,7 +82,7 @@ class _part3State extends State<part3> {
 
         appBar: AppBar(
 
-          title: Text('تعلم الرياضيات'),
+          title: Text('تحدي'),
             actions: <Widget>[
               IconButton(
                 icon: const Icon(Icons.home ),
@@ -259,6 +259,7 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
                                     isDefaultAction: true, child: Container(child: Text("اكمل")),
 
                                     onPressed: () async {
+                                      //Navigator.pop(context, 'Cancel');
                                       var a = await data_tout() ;
                                       var update_ponint = await a.update_point(file);
                                       var point = await a.get_point(file);
@@ -267,14 +268,57 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
                                       var  max_point = p ;
                                       if (point == max_point  ){
                                         var point_if_complite = a.update_point_if_complite(file) ;
+                                        //Navigator.pop(context, 'Cancel');
+                                        //Navigator.pop(context);
+                                        //Navigator.pop(context);
+                                        //Navigator.pop(context);
                                         await Navigator.of(context).push(MaterialPageRoute(builder: (context) => fine(file: file,)));
-                                      }else{
-
-
-                                        //var data = await a.data();
+                                      }else if(point % 4 == 0   ){
                                         await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => part4(file:file),)
+
+
+
+                                          //var data = await a.data();
+
                                           ,);
 
+                                      }else {
+                                        //Navigator.pop(context, 'Cancel');
+                                        //Navigator.pop(context);
+                                        //Navigator.pop(context);
+                                        //Navigator.pop(context);
+
+
+                                        setState(() {
+
+                                          lod = true ;
+                                        });
+
+                                        var a = await data_tout();
+                                        var b = await  a.data() ;
+
+                                        setState(() {
+                                          data = b ;
+                                        });
+
+
+
+                                        Navigator.pop(context);
+
+                                        await Navigator.pop(context);
+                                        await Navigator.pop(context);
+                                        await Navigator.pop(context);
+                                        //var a = await data_tout();
+                                        //var info_tout3 = await a.data() ;
+
+                                        //Navigator.pop(context);
+
+                                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => nombrs(file,data)));
+
+
+                                        setState(() {
+                                          lod = false ;
+                                        });
                                       }
                                       /*Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) =>  part3(),),);*/ }
                                         )
@@ -526,7 +570,7 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
                                           //Navigator.pop(context);
                                           //Navigator.pop(context);
                                           await Navigator.of(context).push(MaterialPageRoute(builder: (context) => fine(file: file,)));
-                                        }else if(point == 13 || point == 16 || point == 17  ){
+                                        }else if(point % 4 ==  0   ){
                                           await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => part4(file:file),)
 
 

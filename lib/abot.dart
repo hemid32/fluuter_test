@@ -37,19 +37,32 @@ class abot extends StatelessWidget {
 
       body : Column(
       children: <Widget>[
+        
+        Center(
+
+          child : Container (
+            width: 250,
+          height:  250,
+          
+          child:  Image.asset('issues/images/logo.png'),
+        ) )
+        ,
         Container(
           child: Row(
             children: <Widget>[
-              Text('النسخة'),
-              Text('0.01'),
+              Text('النسخة',style: TextStyle(fontWeight: FontWeight.bold),),
+              Text('0.01',style: TextStyle(fontWeight: FontWeight.bold),),
             ],
           ),
 
         ),
+        Card(
+          child : Container(
+            padding: EdgeInsets.all(5),
+         child :  Text('هذا التطبيق تم تصميمه ليساعد طلبة سنة رابعة متوسط في المراجعة و التمرن على حل المسائل و التمارين بطريقة مريحة'  , style: TextStyle(fontWeight: FontWeight.bold),),
+          )),
         Container(
-         child :  Text('هذا التطبيق تم تصميمه ليساعد طلبة سنة رابعة متوسط في المراجعة و التمرن على حل المسائل و التمارين بطريقة مريحة'),
-        ),
-        Container(
+          margin: EdgeInsets.only(top: 20),
           child : Material(
             elevation: 5.0,
             borderRadius: BorderRadius.circular(30.0),
@@ -74,8 +87,7 @@ class abot extends StatelessWidget {
 
 
         ),
-        Container(),
-        Container(),
+
 
       ],
 

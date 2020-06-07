@@ -124,7 +124,7 @@ class _Part2State extends State<Part2> {
       home: Scaffold(
         appBar: AppBar(
 
-          title: Text('تعلم الرياضيات'),
+          title: Text('اختر الاجابة الصحيحة'),
             actions: <Widget>[
               IconButton(
                 icon: const Icon(Icons.home ),

@@ -35,8 +35,8 @@ class nombrs extends StatefulWidget {
     //print(info3);
     //print(this.data);
     url = this.data[3]; // url = [[pinfo2.jpg , ginfo2.jpg] ,[pinfo3.jpg , ginfo3.jpg] ]
-    print(url);
-    print(url[1][0]);
+    //print(url);
+    //print(url[1][0]);
     if(url[1][0] == 'issues/images/prv.png'){
       //print('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
       img_typ = false;
@@ -80,7 +80,7 @@ class _nombrsState extends State<nombrs> {
     super.initState();
     Admob.initialize(adse.idapp());
     interstitialAd = AdmobInterstitial(
-      adUnitId: adse.idintir(),
+      adUnitId: adse.idInterstitial_Video(),
       listener: (AdmobAdEvent event, Map<String, dynamic> args) {
         if (event == AdmobAdEvent.closed) interstitialAd.load();
         print('load ads intirersrsr');
@@ -118,7 +118,7 @@ class _nombrsState extends State<nombrs> {
       home: Scaffold(
         appBar: AppBar(
 
-            title: Text('تعلم الرياضيات', textDirection: TextDirection.rtl),
+            title: Text('معارف', textDirection: TextDirection.rtl),
             actions: <Widget>[
               IconButton(
                 icon: const Icon(Icons.home),

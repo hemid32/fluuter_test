@@ -6,6 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/loading.dart';
 import 'package:flutterapp2/model/Dog.dart';
+import 'package:flutterapp2/pgcd.dart';
+import 'eq1.dart';
 import 'part1_nombrs.dart';
 import 'hemidi.dart';
 import 'package:path/path.dart';
@@ -62,14 +64,21 @@ class _home_pageState extends State<home_page> {
     return lod ? loading() :  Scaffold(
 
       appBar: AppBar(
-        title: Text(' تعلم الرياضيات' , textDirection: TextDirection.rtl),
+        title: Text('الصفحة الرئيسية' ,textAlign: TextAlign.center,),
           actions: <Widget>[
+            FloatingActionButton(
+              onPressed: ()=> exit(0),
+              tooltip: 'Close app',
+              backgroundColor: Colors.deepOrange[300],
+              child: new Icon(Icons.exit_to_app , size:30,),
+            ),
+
 
           ]
     ),
       body: Container(
 
-        child : Column(
+        child : ListView(
         children: <Widget>[
 
           Card(
@@ -204,18 +213,58 @@ class _home_pageState extends State<home_page> {
               margin: EdgeInsets.only(top: 10, left: 5, right: 5,),
               child : Container(
 
-                  child : Stack(children: [ ListTile(
-                    title: Text('حول التطبيق' , textDirection: TextDirection.rtl,textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
-                    onTap: ()  {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => abot())); //nombrs('info3',widget.data),),);
+                  child : Stack(children: [
+
+                    ListTile(
+                    title: Text('حساب PGCD' , textDirection: TextDirection.rtl,style: TextStyle(fontWeight: FontWeight.bold),),
+
+                      leading: Icon(Icons.add_to_photos , size: 50,color: Colors.lightBlueAccent,),
+                      onTap: ()  {
+                      //Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => abot())); //nombrs('info3',widget.data),),);
+                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => Pgcd(a:5 , b: 2))); //nombrs('info3',widget.data),),);
                       },
-                  ),]))
+                  ),
+                  ]))
           ),
 
          /* Container(
             
             //child ://Image.network(widget.url[0]),
           ),*/
+          Card(
+              margin: EdgeInsets.only(top: 10, left: 5, right: 5,),
+              child : Container(
+
+                  child : Stack(children: [
+
+                    ListTile(
+                      title: Text('حل معادلة من الدرجة الاولى' , textDirection: TextDirection.rtl,style: TextStyle(fontWeight: FontWeight.bold),),
+
+                      leading: Icon(Icons.filter_1 , size: 50,color: Colors.lightBlueAccent,),
+                      onTap: ()  {
+                        //Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => abot())); //nombrs('info3',widget.data),),);
+                        Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => eq1())); //nombrs('info3',widget.data),),);
+                      },
+                    ),
+                  ]))
+          ),
+          Card(
+              margin: EdgeInsets.only(top: 10, left: 5, right: 5,),
+              child : Container(
+
+                  child : Stack(children: [
+
+                    ListTile(
+                      title: Text('حول التطبيق' , textDirection: TextDirection.rtl,style: TextStyle(fontWeight: FontWeight.bold),),
+
+                      leading: Icon(Icons.system_update , size: 50,color: Colors.lightBlueAccent,),
+                      onTap: ()  {
+                        //Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => abot())); //nombrs('info3',widget.data),),);
+                        Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => abot())); //nombrs('info3',widget.data),),);
+                      },
+                    ),
+                  ]))
+          ),
           
           
           Container (

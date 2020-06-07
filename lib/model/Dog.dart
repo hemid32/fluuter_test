@@ -33,7 +33,7 @@ class data_tout {
     var info2_parti2 = await info2__parti2(ponits_info2);
     var info2_parti3 = await info2__parti3(ponits_info2);
     List<Map> info2 = [info2_parti1, info2_parti2, info2_parti3];
-    print(info2);
+    //print(info2);
 
     var ponits_info3  = await get_point('info3');
     ///// info3
@@ -489,3 +489,24 @@ class ads {
 
 }
 
+/*
+String idapp(){
+    return 'ca-app-pub-1803778669602445~6902545696' ;
+}
+
+  String idbanner(){
+    return 'ca-app-pub-1803778669602445/5353714200';
+  }
+
+  String idintir(){
+    return 'ca-app-pub-1803778669602445/1740157850';
+  }
+  String idInterstitial_Video(){
+    return 'ca-app-pub-1803778669602445/1740157850';
+  }
+  String idNative(){
+    // banner this
+    return 'ca-app-pub-1803778669602445/5353714200';
+  }
+
+ */

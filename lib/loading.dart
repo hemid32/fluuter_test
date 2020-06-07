@@ -8,11 +8,14 @@ class loading extends StatelessWidget {
       color: Colors.lightBlueAccent,
       child: Center(
         child: SpinKitFadingCircle(
+
           color: Colors.white,
           size: 50.0,
 
         ),
       ),
-    );
+      )
+
+   ;
   }
 }

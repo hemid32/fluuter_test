@@ -84,6 +84,7 @@ flutter:
   assets:
     - issues/images/prv.png
     - issues/images/cmp.png
+    - issues/images/logo.png
     - issues/images/nct.jpg
     - issues/models/info.db
     - issues/models/info2.db
