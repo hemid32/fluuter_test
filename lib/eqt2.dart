@@ -227,9 +227,9 @@ class _PgcdState1 extends State<eqt2> {
                           setState(() {
                             method = ' ';
                           });
-                          var av = int.parse(a.text.trim());
-                          var bv = int.parse(b.text.trim());
-                          var cv = int.parse(c.text.trim());
+                          var av = double.parse(a.text.trim());
+                          var bv = double.parse(b.text.trim());
+                          var cv = double.parse(c.text.trim());
                           var h ;
 
                           try {h = pgcd(av, bv , cv); }catch(e){

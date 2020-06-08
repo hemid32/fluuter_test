@@ -18,7 +18,7 @@ class abot extends StatelessWidget {
         home: Scaffold(
         appBar: AppBar(
 
-        title: Text('تعلم الرياضيات'),
+        title: Text('حول التطبيق'),
     actions: <Widget>[
     IconButton(
     icon: const Icon(Icons.home ),
@@ -35,7 +35,7 @@ class abot extends StatelessWidget {
 
 
 
-      body : Column(
+      body : ListView(
       children: <Widget>[
         
         Center(
@@ -59,7 +59,7 @@ class abot extends StatelessWidget {
         Card(
           child : Container(
             padding: EdgeInsets.all(5),
-         child :  Text('هذا التطبيق تم تصميمه ليساعد طلبة سنة رابعة متوسط في المراجعة و التمرن على حل المسائل و التمارين بطريقة مريحة'  , style: TextStyle(fontWeight: FontWeight.bold),),
+         child :  Text('هذا التطبيق تم تصميمه ليساعد طلبة سنة رابعة متوسط في المراجعة و التمرن على حل المسائل و التمارين بطريقة ممتعة و محفزة يحتوى التطبيقة على جميع الدروس الموجودة في الكتاب المدرسي للجيل الثاني بطريقة مختصرة التطبيق مجاني في جالة وجود اي مشكل او خطأ ما يرجا التواصل معنا عبر الايميل التالي benameurhemidi10@gmail.com'  , style: TextStyle(fontWeight: FontWeight.bold),),
           )),
         Container(
           margin: EdgeInsets.only(top: 20),

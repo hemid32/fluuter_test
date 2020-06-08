@@ -207,8 +207,8 @@ class _PgcdState1 extends State<eq1> {
                           setState(() {
                             method = ' ';
                           });
-                          var av = int.parse(a.text.trim());
-                          var bv = int.parse(b.text.trim());
+                          var av = double.parse(a.text.trim());
+                          var bv = double.parse(b.text.trim());
                           var h ;
 
                           try {h = pgcd(av, bv); }catch(e){
@@ -234,7 +234,7 @@ class _PgcdState1 extends State<eq1> {
 
 
                           );
-                          print(mdt);
+                          //print(mdt);
                         },
                         child: Text("احسب",
                             textAlign: TextAlign.center,
@@ -269,42 +269,7 @@ class _PgcdState1 extends State<eq1> {
     return x ;
   }
 
-  int pgcd1(var a, var b) {
-    //print('entre to while ');
-    mdt = [] ;
 
-    try {
-      while (true) {
-        var m;
-        int z;
-        z = a % b;
-        m = (a / b).toInt();
-        //print('m  : $m');
-        String value = '$a = $b x $m + $z';
-        mdt.add(value);
-        if (z == 0) {
-
-          if (b < m) {
-            return b;
-          } else {
-            return b;
-          }
-
-          break;
-        } else {
-
-          a = b;
-          b = z;
-          //print('$a , $b');
-
-
-
-        }
-      } }catch(e){
-      mdt.add('الرجاء اختيار عددان طبيعيان');
-      return 0 ;
-    }
-  }
 
 
 }

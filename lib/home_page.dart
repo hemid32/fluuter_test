@@ -276,7 +276,7 @@ class _home_pageState extends State<home_page> {
                     ListTile(
                       title: Text('حول التطبيق' , textDirection: TextDirection.rtl,style: TextStyle(fontWeight: FontWeight.bold),),
 
-                      leading: Icon(Icons.system_update , size: 50,color: Colors.lightBlueAccent,),
+                      leading: Icon(Icons.info_outline , size: 50,color: Colors.lightBlueAccent,),
                       onTap: ()  {
                         //Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => abot())); //nombrs('info3',widget.data),),);
                         Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => abot())); //nombrs('info3',widget.data),),);
