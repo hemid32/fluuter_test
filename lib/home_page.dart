@@ -8,6 +8,7 @@ import 'package:flutterapp2/loading.dart';
 import 'package:flutterapp2/model/Dog.dart';
 import 'package:flutterapp2/pgcd.dart';
 import 'eq1.dart';
+import 'eqt2.dart';
 import 'part1_nombrs.dart';
 import 'hemidi.dart';
 import 'package:path/path.dart';
@@ -238,7 +239,7 @@ class _home_pageState extends State<home_page> {
                   child : Stack(children: [
 
                     ListTile(
-                      title: Text('حل معادلة من الدرجة الاولى' , textDirection: TextDirection.rtl,style: TextStyle(fontWeight: FontWeight.bold),),
+                      title: Text('حل معادلة من الدرجة 1' , textDirection: TextDirection.rtl,style: TextStyle(fontWeight: FontWeight.bold),),
 
                       leading: Icon(Icons.filter_1 , size: 50,color: Colors.lightBlueAccent,),
                       onTap: ()  {
@@ -248,6 +249,24 @@ class _home_pageState extends State<home_page> {
                     ),
                   ]))
           ),
+          Card(
+              margin: EdgeInsets.only(top: 10, left: 5, right: 5,),
+              child : Container(
+
+                  child : Stack(children: [
+
+                    ListTile(
+                      title: Text('حل معادلة من الدرجة 2' , textDirection: TextDirection.rtl,style: TextStyle(fontWeight: FontWeight.bold),),
+
+                      leading: Icon(Icons.filter_2 , size: 50,color: Colors.lightBlueAccent,),
+                      onTap: ()  {
+                        //Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => abot())); //nombrs('info3',widget.data),),);
+                        Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => eqt2())); //nombrs('info3',widget.data),),);
+                      },
+                    ),
+                  ]))
+          ),
+
           Card(
               margin: EdgeInsets.only(top: 10, left: 5, right: 5,),
               child : Container(

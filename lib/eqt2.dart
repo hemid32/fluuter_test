@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -15,19 +16,21 @@ void main() {
 
  */
 
-class eq1 extends StatefulWidget {
+class eqt2 extends StatefulWidget {
 
   @override
   _PgcdState1 createState() => _PgcdState1();
 }
 
-class _PgcdState1 extends State<eq1> {
+class _PgcdState1 extends State<eqt2> {
   final a = TextEditingController();
   final b = TextEditingController();
+  final c = TextEditingController();
   String rslt = '....';
 
   String at = 'a';
   String bt = 'b';
+  String ct = 'c';
   String method = 'الطريقة';
   List <String> mdt = [];
 
@@ -49,6 +52,7 @@ class _PgcdState1 extends State<eq1> {
     // Clean up the controller when the widget is disposed.
     a.dispose();
     b.dispose();
+    c.dispose();
     super.dispose();
   }
 
@@ -69,7 +73,7 @@ class _PgcdState1 extends State<eq1> {
 
         appBar: AppBar(
 
-            title: Text('حل معادلة من الدرجة 1'),
+            title: Text('حل معادلة من الدرجة 2'),
             actions: <Widget>[
               IconButton(
                 icon: const Icon(Icons.home),
@@ -123,7 +127,7 @@ class _PgcdState1 extends State<eq1> {
                     //width: 500,
 
                     Icon(Icons.border_color),
-                    Text('aX + b = 0' , textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
+                    Text('aX^2 + bX = c' , textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
                     //padding: EdgeInsets.only(left:50),
 
 
@@ -178,6 +182,22 @@ class _PgcdState1 extends State<eq1> {
                     ),
                   )),
 
+              Container(
+                child: Text('اكتب العدد c ',style: TextStyle(fontWeight: FontWeight.bold)),
+              ),
+
+              Card(
+                  color: Colors.white30,
+                  child: TextField(
+                    textAlign: TextAlign.center,
+                    controller: c,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'اضغط هنا لكتابة العدد c',
+
+                    ),
+                  )),
+
               Card(
 
                 child: Container(
@@ -209,9 +229,10 @@ class _PgcdState1 extends State<eq1> {
                           });
                           var av = int.parse(a.text.trim());
                           var bv = int.parse(b.text.trim());
+                          var cv = int.parse(c.text.trim());
                           var h ;
 
-                          try {h = pgcd(av, bv); }catch(e){
+                          try {h = pgcd(av, bv , cv); }catch(e){
                             h = 0 ;
                           };
 
@@ -258,53 +279,49 @@ class _PgcdState1 extends State<eq1> {
     );
   }
 
-  double pgcd(var a, var b) {
+  pgcd(var a, var b , var c) {
     mdt = [];
     double x ;
     x = -(b)/a ;
-    mdt.add('$a * x + $b = 0' );
-    mdt.add('$a * x = -($b)'  );
-    mdt.add('x = -($b)/$a'  );
-    mdt.add('x = $x' );
-    return x ;
-  }
-
-  int pgcd1(var a, var b) {
-    //print('entre to while ');
-    mdt = [] ;
-
-    try {
-      while (true) {
-        var m;
-        int z;
-        z = a % b;
-        m = (a / b).toInt();
-        //print('m  : $m');
-        String value = '$a = $b x $m + $z';
-        mdt.add(value);
-        if (z == 0) {
-
-          if (b < m) {
-            return b;
-          } else {
-            return b;
-          }
-
-          break;
-        } else {
-
-          a = b;
-          b = z;
-          //print('$a , $b');
-
-
-
-        }
-      } }catch(e){
-      mdt.add('الرجاء اختيار عددان طبيعيان');
-      return 0 ;
+    var bb = b * b ; 
+    var f = 4*(a * c) ; 
+    var  dt = bb - f ; 
+    mdt.add('في البداية نحسب ديلتا' );
+    mdt.add('Dt =  b^2 - 4 ac '  );
+    mdt.add('Dt =  ($b - 4 $a * $c ) '  );
+    mdt.add('Dt =  ($bb - 4 * $f ) '  );
+    mdt.add('Dt =  $dt '  );
+    if (dt == 0 ){
+      mdt.add('بما ان ديلتا يساوي 0') ;
+      mdt.add('المعادلة تقبل حل وحيد هو');
+      mdt.add(' X = - b /(2a)');
+      double rslt = - (b)/(2*a);
+      mdt.add(' X = $rslt');
+      return rslt ;
+    }else if(dt > 0){
+      mdt.add('بما ان ديلتا اكبر من صفر') ;
+      mdt.add('المعادلة تقبل حلان هما');
+      //mdt.add(' X = - b /(2a)');
+    //<string name="sqr_root">√¯</string>
+      mdt.add(' X1 = (-b -√¯dt)/(2a)');
+      mdt.add(' X2 = (-b +√¯dt)/(2a)');
+      mdt.add(' اذا');
+      double rslt1 = (-b - sqrt(dt))/(2*a) ;
+      double rslt2 = (-b + sqrt(dt))/(2*a) ;
+      mdt.add(' X1 = $rslt1');
+      mdt.add(' X2 = $rslt2');
+      String rslt_t = 'X1 =  $rslt1 X2 =   $rslt2' ;
+      return rslt_t ;
+    }else if (dt < 0 ){
+      mdt.add('بما ان ديلتا اصغر من صفر') ;
+      mdt.add('يمكن القول انها لا تقبل حلول');
+      //mdt.add('يمكن القول انها لا تقبل حلول');
+      return 'ايوجد حلول' ;
     }
   }
+
+
+
 
 
 }

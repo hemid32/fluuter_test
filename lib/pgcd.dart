@@ -93,6 +93,48 @@ class _PgcdState extends State<Pgcd> {
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
       children: <Widget>[
+
+        Card(
+            child : Container(
+
+              decoration: BoxDecoration(
+                //color: Colors.lightBlueAccent,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10)
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+              ),
+
+              padding: EdgeInsets.only(top: 5 , left: 5 , right: 5 , bottom: 5),
+
+              margin:EdgeInsets.only(top: 10 , left: 5 , right: 5),
+              child : Row(
+
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                  children: <Widget>[
+                    //width: 500,
+
+                    Icon(Icons.border_color),
+                    Text('PGCD(a , b)' , textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
+                    //padding: EdgeInsets.only(left:50),
+
+
+                    Icon(Icons.assignment , )
+                  ]
+              )  ,
+            )
+        ),
         Container(
 
             margin:  EdgeInsets.only(top: 15 ),
