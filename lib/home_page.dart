@@ -67,12 +67,19 @@ class _home_pageState extends State<home_page> {
       appBar: AppBar(
         title: Text('الصفحة الرئيسية' ,textAlign: TextAlign.center,),
           actions: <Widget>[
+            /*
             FloatingActionButton(
               onPressed: ()=> exit(0),
               tooltip: 'Close app',
               backgroundColor: Colors.deepOrange[300],
               child: new Icon(Icons.exit_to_app , size:30,),
-            ),
+            ),*/
+      IconButton(
+      icon: const Icon(Icons.exit_to_app),
+        tooltip: 'خروج',
+        onPressed: () {
+          exit(0);
+        },)
 
 
           ]

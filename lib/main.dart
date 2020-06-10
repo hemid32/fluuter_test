@@ -53,7 +53,7 @@ void main() async{
     supportedLocales: [
       Locale("ar", "AE"), // OR Locale('ar', 'AE') OR Other RTL locales
     ],
-    home: wilcom(), //home_page(info_tout , parcent1 , parcent2,parcent3)//login(title: 'Flutter Login'), //home_page(info_tout), // FirstRoute() // home_page
+    home: home_page(info_tout , parcent1 , parcent2,parcent3)//login(title: 'Flutter Login'), //home_page(info_tout), // FirstRoute() // home_page
   ));
   //getdata();
   //data_partin1();
@@ -80,6 +80,7 @@ class FallbackCupertinoLocalisationsDelegate
 }
 
 // add wilcom page
+/*
 
 class wilcom extends StatefulWidget {
   @override
@@ -163,3 +164,5 @@ class _part4State extends State<wilcom> {
     //return
   }
 }
+
+ */

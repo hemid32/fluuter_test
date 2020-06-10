@@ -7,7 +7,7 @@ class loading extends StatelessWidget {
     return Container(
       color: Colors.lightBlueAccent,
       child: Center(
-        child: SpinKitFadingCircle(
+        child: SpinKitDoubleBounce(
 
           color: Colors.white,
           size: 50.0,
