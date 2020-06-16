@@ -5,6 +5,7 @@ import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_tex/flutter_tex.dart';
 import 'hemidi.dart';
 import 'model/Dog.dart';
 import 'part2_nombrs.dart';
@@ -177,7 +178,7 @@ class _nombrsState extends State<nombrs> {
     //print(info3);
 
     if (file == 'info') {
-      var title1 = info[0]['title'];
+      var title1 = data[4][0]+'-'+' '+info[0]['title'];
       var difinition_title = info[0]['def1'];
       var difinition_title2 = info[0]['def2'];
       var difinition1 = info[0]['deftp'];
@@ -238,11 +239,13 @@ class _nombrsState extends State<nombrs> {
               )
           ),
           Card(
-              color: Colors.orange[200],
+              //color: Colors.orange[200],
               margin: EdgeInsets.only(top: 10, left: 5, right: 5, bottom: 5),
-              child: Container(child: Text(
+              child: Container(child: datas1('info', 1) ,
+
+              /* Text(
                 difinition1, style: TextStyle(fontWeight: FontWeight.bold),),
-                margin: EdgeInsets.only(top: 5, left: 5, right: 5, bottom: 5,),
+                margin: EdgeInsets.only(top: 5, left: 5, right: 5, bottom: 5,),*/
 
 
               )
@@ -269,11 +272,13 @@ class _nombrsState extends State<nombrs> {
               )
           ),
           Card(
-              color: Colors.orange[200],
+              //color: Colors.orange[200],
               margin: EdgeInsets.only(top: 10, left: 5, right: 5, bottom: 5),
-              child: Container(child: Text(
+              child: Container(child: datas1('info', 2) ,
+
+                /*Text(
                 difinition2, style: TextStyle(fontWeight: FontWeight.bold),),
-                margin: EdgeInsets.only(top: 5, left: 5, right: 5, bottom: 5,),
+                margin: EdgeInsets.only(top: 5, left: 5, right: 5, bottom: 5,), */
 
 
               )
@@ -292,12 +297,16 @@ class _nombrsState extends State<nombrs> {
           ),
 
           Card(
-              color: Colors.orange[200],
+              //color: Colors.orange[200],
               margin: EdgeInsets.only(top: 10, left: 5, right: 5, bottom: 5),
-              child: Container(child: Text(
+              child: Container(child: datas1('info', 3) ,
+
+              /* Text(
                 exempl_cont, textDirection: TextDirection.rtl,
                 style: TextStyle(fontWeight: FontWeight.bold),),
                 margin: EdgeInsets.only(top: 5, left: 5, right: 5, bottom: 5,),
+
+               */
 
 
               )
@@ -365,7 +374,7 @@ class _nombrsState extends State<nombrs> {
       );
     } else if (file == 'info2') {
       //print(info3);
-      var title1 = info2[0]['title'];
+      var title1 = data[4][1]+'-'+' '+info2[0]['title'];
       var difinition_title = info2[0]['def1'];
       var difinition_title2 = info2[0]['def2'];
       var difinition1 = info2[0]['deftp'];
@@ -433,9 +442,12 @@ class _nombrsState extends State<nombrs> {
           Card(
               color: Colors.orange[200],
               margin: EdgeInsets.only(top: 10, left: 5, right: 5, bottom: 5),
-              child: Container(child: Text(
+              child: Container(child: datas1('info2', 1) ,
+              /* Text(
                 difinition1, style: TextStyle(fontWeight: FontWeight.bold),),
                 margin: EdgeInsets.only(top: 5, left: 5, right: 5, bottom: 5,),
+
+               */
 
 
               )
@@ -487,10 +499,14 @@ class _nombrsState extends State<nombrs> {
           Card(
               color: Colors.lime[200],
               margin: EdgeInsets.only(top: 10),
-              child: Container(child: Text(
+              child: Container(child: datas1('info2', 3) ,
+              /*Text(
                   exemple, style: TextStyle(fontWeight: FontWeight.bold)),
                 padding: EdgeInsets.only(
                     left: 300, top: 5, right: 5, bottom: 5),
+
+               */
+
               )
           ),
 
@@ -566,7 +582,7 @@ class _nombrsState extends State<nombrs> {
       );
     } else if (file == 'info3') {
       //print(info3);
-      var title1 = info3[0]['title'];
+      var title1 = data[4][2]+'-'+' '+info3[0]['title'];
       var difinition_title = info3[0]['def1'];
       var difinition_title2 = info3[0]['def2'];
       var difinition1 = info3[0]['deftp'];
@@ -632,9 +648,12 @@ class _nombrsState extends State<nombrs> {
           Card(
               color: Colors.orange[200],
               margin: EdgeInsets.only(top: 10, left: 5, right: 5, bottom: 5),
-              child: Container(child: Text(
+              child: Container(child: datas1('info3', 1) ,
+              /* Text(
                 difinition1, style: TextStyle(fontWeight: FontWeight.bold),),
                 margin: EdgeInsets.only(top: 5, left: 5, right: 5, bottom: 5,),
+
+               */
 
 
               )
@@ -682,10 +701,13 @@ class _nombrsState extends State<nombrs> {
           Card(
               color: Colors.lime[200],
               margin: EdgeInsets.only(top: 10),
-              child: Container(child: Text(
+              child: Container(child: datas1('info3', 3) ,
+              /* Text(
                   exemple, style: TextStyle(fontWeight: FontWeight.bold)),
                 padding: EdgeInsets.only(
                     left: 300, top: 5, right: 5, bottom: 5),
+
+               */
               )
           ),
 
@@ -768,5 +790,88 @@ class _nombrsState extends State<nombrs> {
 
 
   }
+  Container datas1(fl , nombre_definition){
+    var target_st = nombre_definition ;
+
+    var k ;
+    if(fl == 'info'){k=0;}else if(fl == 'info2'){k = 1;}else if(fl == 'info3'){k=2;}
+
+
+    var def ;
+    if(target_st == 1){
+      def = '1';
+    }else if(target_st == 2){
+      def = '2' ;
+    }else if(target_st == 3){
+      def = 'ex';
+    }
+
+
+    //var target = widget.data[k][0][target_st];
+    return Container(
+      child: Column(
+        children: <Widget>[
+          Text(
+              widget.data[k][0]['def'+ def +'1'], style: TextStyle(fontWeight: FontWeight.bold)),
+          TeXView(
+
+              child: TeXViewColumn(children: [
+
+                TeXViewDocument(widget.data[k][0]['eq' + def +  '1'],
+                )
+              ])),
+          Text(
+              widget.data[k][0]['def' + def +  '2'], style: TextStyle(fontWeight: FontWeight.bold)),
+          TeXView(
+
+              child: TeXViewColumn(children: [
+
+                TeXViewDocument(widget.data[k][0]['eq'+ def + '2'],
+                )
+              ])),
+          Text(
+              widget.data[k][0]['def'+ def + '3'], style: TextStyle(fontWeight: FontWeight.bold)),
+          TeXView(
+
+              child: TeXViewColumn(children: [
+
+                TeXViewDocument(widget.data[k][0]['eq'+ def + '3'],
+                )
+              ])),
+          Text(
+              widget.data[k][0]['def'+ def + '4'], style: TextStyle(fontWeight: FontWeight.bold)),
+          TeXView(
+
+              child: TeXViewColumn(children: [
+
+                TeXViewDocument(widget.data[k][0]['eq'+ def + '4'],
+                )
+              ])),
+          Text(
+              widget.data[k][0]['def'+ def + '5'], style: TextStyle(fontWeight: FontWeight.bold)),
+          TeXView(
+
+              child: TeXViewColumn(children: [
+
+                TeXViewDocument(widget.data[k][0]['eq'+ def + '5'],
+                )
+              ])),
+
+        ],
+
+
+
+      ),
+
+
+
+
+    );
+
+
+
+
+  }
+
 
 }

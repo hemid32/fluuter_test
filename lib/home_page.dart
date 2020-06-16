@@ -19,6 +19,7 @@ import 'package:sqflite/sqflite.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'abot.dart';
+import 'package:flutter_tex/flutter_tex.dart';
 
 class home_page extends StatefulWidget {
   List<List> data ;
@@ -63,6 +64,7 @@ class _home_pageState extends State<home_page> {
   Widget build(BuildContext context) {
 
     return lod ? loading() :  Scaffold(
+
 
       appBar: AppBar(
         title: Text('الصفحة الرئيسية' ,textAlign: TextAlign.center,),
@@ -118,6 +120,7 @@ class _home_pageState extends State<home_page> {
                   child : Container(
                //EdgeInsets.only(),
 
+
                     child : Text('الرياضيات للسنة الرابعة متوسط',textAlign:TextAlign.center ,style: TextStyle(
                       fontSize: 20,
                       foreground: Paint()
@@ -126,6 +129,8 @@ class _home_pageState extends State<home_page> {
                         ..color = Colors.black,
                     ),
                     )
+
+
 
                   )
               )
@@ -323,6 +328,7 @@ class _home_pageState extends State<home_page> {
   }
 }
 
+/*
 
 Future<int>  get_point() async {
   var dbDir = await getDatabasesPath();
@@ -341,6 +347,8 @@ Future<int>  get_point() async {
   return  t;
 
 }
+
+ */
 
 
 

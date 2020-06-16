@@ -52,6 +52,8 @@ dependencies:
   audioplayers: ^0.15.1
   firebase_admob: ^0.9.3+2
   admob_flutter: ^0.3.4
+  flutter_tex: ^3.6.7+4
+  webview_flutter: ^0.3.22+1
 
 
 

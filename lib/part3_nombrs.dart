@@ -4,6 +4,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutterapp2/hemidi.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutterapp2/loading.dart';
@@ -97,14 +98,15 @@ class _part3State extends State<part3> {
                   var parcent1 = await a.percent('info') ;
                   var parcent2 = await a.percent('info2') ;
                   var parcent3 = await a.percent('info3') ;
-                  //Navigator.of(context).pop();
-                  //Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => home_page(info_tout,parcent1,parcent2,parcent3)));
-
-                  Navigator.pop(context);
-                  Navigator.pop(context);
-                  Navigator.pop(context);
-                  Navigator.pop(context);
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => home_page(info_tout,parcent1,parcent2,parcent3)),
+                        (Route<dynamic> route) => false,
+                  );
+                  //Navigator.pop(context);
+                  //Navigator.pop(context);
+                  //Navigator.pop(context);
+                  //Navigator.pop(context);
 
                   setState(() {
                     lod = false ;
@@ -166,7 +168,7 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
                     //width: 500,
 
                     Icon(Icons.border_color),
-                    Text(data[0][2]['title'] , textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
+                    Text(data[4][0]+'-'+' '+data[0][2]['title'] , textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
                     //padding: EdgeInsets.only(left:50),
 
 
@@ -198,7 +200,8 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
             child: Container(
               width: MediaQuery.of(context).size.width,
           margin: EdgeInsets.only(top: 20),
-          child: Text(qs,style: TextStyle(fontWeight: FontWeight.bold),),
+          child: datas1('info', 1),
+          //Text(qs,style: TextStyle(fontWeight: FontWeight.bold),),
         )
         )
         ,
@@ -266,14 +269,14 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
                                       //print('point ===  $point');
                                       var p = await a.max_qastion_(file) ;
                                       var  max_point = p ;
-                                      if (point == max_point  ){
+                                      if (point > max_point  ){
                                         var point_if_complite = a.update_point_if_complite(file) ;
                                         //Navigator.pop(context, 'Cancel');
                                         //Navigator.pop(context);
                                         //Navigator.pop(context);
                                         //Navigator.pop(context);
                                         await Navigator.of(context).push(MaterialPageRoute(builder: (context) => fine(file: file,)));
-                                      }else if(point % 4 == 0   ){
+                                      }else if((point - 1 ) % 4 == 0   ){
                                         await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => part4(file:file),)
 
 
@@ -394,7 +397,7 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
       methode = data[1][2]['methode'];
       qs = data[1][2]['qst'] ;
       crr = data[1][2]['crr'] ;
-      title = data[1][2]['title'];
+      title = data[4][1]+'-'+' '+data[1][2]['title'];
       url = data[3][0][1];
 
 
@@ -402,7 +405,7 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
       methode = data[2][2]['methode'];
       qs = data[2][2]['qst'] ;
       crr = data[2][2]['crr'] ;
-      title = data[2][2]['title'];
+      title = data[4][2]+'-'+' '+data[2][2]['title'];
       url = data[3][1][1];
 
     }
@@ -472,7 +475,10 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 margin: EdgeInsets.only(top: 20),
-                child: Text(qs,style: TextStyle(fontWeight: FontWeight.bold),),
+                child: datas1(file, 1),
+
+
+                //Text(qs,style: TextStyle(fontWeight: FontWeight.bold),),
               )
           )
           ,
@@ -562,15 +568,15 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
                                         var point = await a.get_point(file);
                                         //print('point ===  $point');
                                         var p = await a.max_qastion_(file) ;
-                                        var  max_point = p ;
-                                        if (point == max_point  ){
+                                        var  max_point = p  ;
+                                        if (point > max_point  ){
                                           var point_if_complite = a.update_point_if_complite(file) ;
                                           //Navigator.pop(context, 'Cancel');
                                           //Navigator.pop(context);
                                           //Navigator.pop(context);
                                           //Navigator.pop(context);
                                           await Navigator.of(context).push(MaterialPageRoute(builder: (context) => fine(file: file,)));
-                                        }else if(point % 4 ==  0   ){
+                                        }else if((point - 1 )  % 4 ==  0   ){
                                           await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => part4(file:file),)
 
 
@@ -685,4 +691,88 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
   }
 
 }
+  Container datas1(fl , nombre_definition   ){
+  var data = widget.data ;
+    var target_st = nombre_definition ;
+
+    var k ;
+    if(fl == 'info'){k=0;}else if(fl == 'info2'){k = 1;}else if(fl == 'info3'){k=2;}
+
+
+    var def ;
+    if(target_st == 1){
+      def = '1';
+    }else if(target_st == 2){
+      def = '2' ;
+    }else if(target_st == 3){
+      def = 'ex';
+    }
+
+
+    //var target = widget.data[k][0][target_st];
+    return Container(
+      child: Column(
+        children: <Widget>[
+          Text(
+              data[k][2]['def'+ def +'1'], style: TextStyle(fontWeight: FontWeight.bold)),
+          TeXView(
+
+              child: TeXViewColumn(children: [
+
+                TeXViewDocument(data[k][2]['eq' + def +  '1'],
+                )
+              ])),
+          Text(
+              data[k][2]['def' + def +  '2'], style: TextStyle(fontWeight: FontWeight.bold)),
+          TeXView(
+
+              child: TeXViewColumn(children: [
+
+                TeXViewDocument(data[k][2]['eq'+ def + '2'],
+                )
+              ])),
+          Text(
+              data[k][2]['def'+def + '3'], style: TextStyle(fontWeight: FontWeight.bold)),
+          TeXView(
+
+              child: TeXViewColumn(children: [
+
+                TeXViewDocument(data[k][2]['eq'+ def + '3'],
+                )
+              ])),
+          Text(
+              data[k][2]['def'+ def + '4'], style: TextStyle(fontWeight: FontWeight.bold)),
+          TeXView(
+
+              child: TeXViewColumn(children: [
+
+                TeXViewDocument(data[k][2]['eq'+ def + '4'],
+                )
+              ])),
+          Text(
+              data[k][2]['def'+ def + '5'], style: TextStyle(fontWeight: FontWeight.bold)),
+          TeXView(
+
+              child: TeXViewColumn(children: [
+
+                TeXViewDocument(data[k][2]['eq'+ def + '5'],
+                )
+              ])),
+
+        ],
+
+
+
+      ),
+
+
+
+
+    );
+
+
+
+
+  }
+
 }

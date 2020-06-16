@@ -6,8 +6,10 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutterapp2/loading.dart';
 import 'package:flutterapp2/part3_nombrs.dart';
+import 'package:flutterapp2/pgcd.dart';
 import "dart:math";
 import 'home_page.dart';
 import 'package:flutterapp2/hemidi.dart';
@@ -62,6 +64,7 @@ class Part2 extends StatefulWidget {
 
 class _Part2State extends State<Part2> {
 
+
   //var cnt = widget.data[3] ;
 
   AudioCache _audioCache;
@@ -112,6 +115,8 @@ class _Part2State extends State<Part2> {
     if (widget.data[3][1][0] == 'issues/images/prv.png'){cnt = false;}else{cnt = true;}
 
     return lod ? loading() :  MaterialApp(
+
+
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -132,7 +137,7 @@ class _Part2State extends State<Part2> {
                 onPressed: () async  {
 
 
-
+                  /*
 
                   setState(()  {
                     lod = true ;
@@ -155,6 +160,36 @@ class _Part2State extends State<Part2> {
                     lod = false ;
                   });
 
+                   */
+
+                  //Navigator.pushNamed(context, '/profil');
+                  setState(() {
+                    lod = true ;
+                  });
+                  var a = await data_tout();
+                  var info_tout = await a.data() ;
+                  var parcent1 = await a.percent('info') ;
+                  var parcent2 = await a.percent('info2') ;
+                  var parcent3 = await a.percent('info3') ;
+                  /*
+                  await Navigator.pushNamed(context, '/home',
+                      arguments:
+                      home_page(info_tout,parcent1,parcent2,parcent3));
+
+                   */
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => home_page(info_tout,parcent1,parcent2,parcent3)),
+                        (Route<dynamic> route) => false,
+                  );
+
+                  setState(() {
+                    lod = false ;
+                  });
+
+
+
+
                 },
               )
             ]
@@ -174,14 +209,14 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
   var title ;
   if (file == 'info'){
     title = data[0][1];
-    print(title);
+    //print(title);
   list_name_gnrl = [data[0][1]['qst'],data[0][1]['choi1'],data[0][1]['choi2'],data[0][1]['choi3'], data[0][1]['choi4']];
   }else if(file == 'info2'){
     title = data[1][1];
   list_name_gnrl = [data[1][1]['qst'],data[1][1]['choi1'],data[1][1]['choi2'],data[1][1]['choi3'], data[1][1]['choi4']];
   }else if(file == 'info3'){
     title = data[2][1];
-    print(title);
+    //print(title);
   list_name_gnrl = [data[2][1]['qst'],data[2][1]['choi1'],data[2][1]['choi2'],data[2][1]['choi3'], data[2][1]['choi4']];
   }
 
@@ -235,7 +270,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
             //width: 500,
 
                 Icon(Icons.border_color),
-                Text(title['title'], textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
+                Text(data[4][0]+'-'+' '+title['title'], textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
             //padding: EdgeInsets.only(left:50),
 
 
@@ -246,7 +281,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
           ),
 
           Container(
-            
+
               margin:  EdgeInsets.only(top: 15 , bottom:  15),
               child : AdmobBanner(
             adUnitId: adse.idbanner(),
@@ -255,11 +290,12 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
           )),
 
 
-          Container(
+          Card(child : Container(
             margin: EdgeInsets.all(10),
             padding: EdgeInsets.all(10),
-            child: Text(list_name_gnrl[0] , style: TextStyle(fontWeight: FontWeight.bold),),
-          ),
+            child: datas1('info', 1, data),
+            //Text(list_name_gnrl[0] , style: TextStyle(fontWeight: FontWeight.bold),),
+          )),
       Container(
 
       child : Card( child : Column(
@@ -491,7 +527,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
                       //width: 500,
 
                       Icon(Icons.border_color),
-                      Text(title['title'], textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
+                      Text(data[4][1]+'-'+' '+title['title'], textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
                       //padding: EdgeInsets.only(left:50),
 
 
@@ -510,11 +546,12 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
 
               )),
 
-          Container(
+          Card ( child : Container(
             margin: EdgeInsets.all(10),
             padding: EdgeInsets.all(10),
-            child: Text(list_name_gnrl[0] , style: TextStyle(fontWeight: FontWeight.bold),),
-          ),
+            child: datas1('info2', 1, data),
+            //Text(list_name_gnrl[0] , style: TextStyle(fontWeight: FontWeight.bold),),
+          )),
 
           Container(
             margin: EdgeInsets.all(10),
@@ -759,7 +796,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
                       //width: 500,
 
                       Icon(Icons.border_color),
-                      Text(title['title'], textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
+                      Text(data[4][2]+'-'+' '+title['title'], textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
                       //padding: EdgeInsets.only(left:50),
 
 
@@ -777,11 +814,12 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
 
               )),
 
-          Container(
+          Card( child : Container(
             margin: EdgeInsets.all(10),
             padding: EdgeInsets.all(10),
-            child: Text(list_name_gnrl[0] , style: TextStyle(fontWeight: FontWeight.bold),),
-          ),
+            child: datas1('info3', 1, data),
+            //Text(list_name_gnrl[0] , style: TextStyle(fontWeight: FontWeight.bold),),
+          )),
           Container(
             margin: EdgeInsets.all(10),
             padding: EdgeInsets.all(10),
@@ -996,6 +1034,89 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
 
 
   }
+}
+
+Container datas1(fl , nombre_definition  , data){
+  var target_st = nombre_definition ;
+
+  var k ;
+  if(fl == 'info'){k=0;}else if(fl == 'info2'){k = 1;}else if(fl == 'info3'){k=2;}
+
+
+  var def ;
+  if(target_st == 1){
+    def = '1';
+  }else if(target_st == 2){
+    def = '2' ;
+  }else if(target_st == 3){
+    def = 'ex';
+  }
+
+
+  //var target = widget.data[k][0][target_st];
+  return Container(
+    child: Column(
+      children: <Widget>[
+        Text(
+            data[k][1]['def'+ def +'1'], style: TextStyle(fontWeight: FontWeight.bold)),
+        TeXView(
+
+            child: TeXViewColumn(children: [
+
+              TeXViewDocument(data[k][1]['eq' + def +  '1'],
+              )
+            ])),
+        Text(
+            data[k][1]['def' + def +  '2'], style: TextStyle(fontWeight: FontWeight.bold)),
+        TeXView(
+
+            child: TeXViewColumn(children: [
+
+              TeXViewDocument(data[k][1]['eq'+ def + '2'],
+              )
+            ])),
+        Text(
+            data[k][1]['def'+def + '3'], style: TextStyle(fontWeight: FontWeight.bold)),
+        TeXView(
+
+            child: TeXViewColumn(children: [
+
+              TeXViewDocument(data[k][1]['eq'+ def + '3'],
+              )
+            ])),
+        Text(
+            data[k][1]['def'+ def + '4'], style: TextStyle(fontWeight: FontWeight.bold)),
+        TeXView(
+
+            child: TeXViewColumn(children: [
+
+              TeXViewDocument(data[k][1]['eq'+ def + '4'],
+              )
+            ])),
+        Text(
+            data[k][1]['def'+ def + '5'], style: TextStyle(fontWeight: FontWeight.bold)),
+        TeXView(
+
+            child: TeXViewColumn(children: [
+
+              TeXViewDocument(data[k][1]['eq'+ def + '5'],
+              )
+            ])),
+
+      ],
+
+
+
+    ),
+
+
+
+
+  );
+
+
+
+
 }
 
 // return list choit random

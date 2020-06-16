@@ -47,7 +47,7 @@ class data_tout {
     var url3 = await get_image('info3');  // url2 = [url_img_p ,url_img_q , url_img_q_choi ] = [pinfo3n.jpg , ginfo3n.jpg,img_choi_info3n.jpg]
     //print(url2);
     //print(url3);
-    List<List> info_tout = [info, info2, info3,[url2 , url3] ]; // [url2 ,url3] = [[pinfo2.jpg , ginfo2.jpg] ,[pinfo3.jpg , ginfo3.jpg] ]
+    List<List> info_tout = [info, info2, info3,[url2 , url3],[ponits_info.toString() , ponits_info2.toString() , ponits_info3.toString()] ]; // [url2 ,url3] = [[pinfo2.jpg , ginfo2.jpg] ,[pinfo3.jpg , ginfo3.jpg] ]
     return info_tout;
     // [info , info1 , info3]
   }
@@ -409,10 +409,13 @@ class data_tout {
     if (nv == 0) {
       var pr = await data_tout();
       var point = await pr.get_point(file);
+      if(point == 1 ){
+        return 0 ;
+      }else{
       var max_qst = await pr.max_qastion_(file);
       var prst = (point / max_qst);
 
-      return prst;
+      return prst;}
     }else {
       return 1 ;
 
@@ -435,7 +438,7 @@ class data_tout {
         //print('image name g= $imgq');
         FirebaseAuth mAuth = FirebaseAuth.instance;
         Future<FirebaseUser> user = mAuth.currentUser();
-        if (user != null) {
+        if (user != null || true) {
           //print('yess');
           final ref = FirebaseStorage.instance.ref().child(imgp);
           final ref2 = FirebaseStorage.instance.ref().child(imgq);
@@ -447,6 +450,9 @@ class data_tout {
           //url = Image.network(url);
           //, url_img_q_choi
           return [url_img_p ,url_img_q,url_img_q_choi ];
+        }else{
+          print('jaraaaaaaaaaaaaaap');
+          //signInAnonymously();
         }
 
 

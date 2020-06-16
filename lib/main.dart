@@ -6,6 +6,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp2/loading.dart';
 import 'package:flutterapp2/model/ponits.dart';
+import 'package:flutterapp2/pgcd.dart';
+import 'package:flutterapp2/test_math.dart';
 import 'package:path_provider/path_provider.dart';
 import 'home_page.dart';
 import 'part1_nombrs.dart';
@@ -44,6 +46,7 @@ void main() async{
   runApp(MaterialApp(
 
     title: 'Navigation Basics',
+
     localizationsDelegates: [
       GlobalMaterialLocalizations.delegate,
       GlobalWidgetsLocalizations.delegate,
@@ -53,7 +56,10 @@ void main() async{
     supportedLocales: [
       Locale("ar", "AE"), // OR Locale('ar', 'AE') OR Other RTL locales
     ],
-    home: home_page(info_tout , parcent1 , parcent2,parcent3)//login(title: 'Flutter Login'), //home_page(info_tout), // FirstRoute() // home_page
+    home: home_page(info_tout , parcent1 , parcent2,parcent3),//login(title: 'Flutter Login'), //home_page(info_tout), // FirstRoute() // home_page
+
+
+
   ));
   //getdata();
   //data_partin1();
@@ -165,4 +171,78 @@ class _part4State extends State<wilcom> {
   }
 }
 
+ */
+
+/*
+Container datas1(fl , target_st){
+    var k ;
+    if(fl == 'info'){k=0;}else if(fl == 'info2'){k = 1;}else if(fl == 'info3'){k=2;}
+
+
+
+    //var target = widget.data[k][0][target_st];
+    return Container(
+      child: Column(
+        children: <Widget>[
+          Text(
+              widget.data[k][0]['def11'], style: TextStyle(fontWeight: FontWeight.bold)),
+      TeXView(
+
+        child: TeXViewColumn(children: [
+
+          TeXViewDocument(widget.data[k][0]['eq11'],
+          )
+        ])),
+          Text(
+              widget.data[k][0]['def12'], style: TextStyle(fontWeight: FontWeight.bold)),
+          TeXView(
+
+              child: TeXViewColumn(children: [
+
+                TeXViewDocument(widget.data[k][0]['eq12'],
+                )
+              ])),
+          Text(
+              widget.data[k][0]['def13'], style: TextStyle(fontWeight: FontWeight.bold)),
+          TeXView(
+
+              child: TeXViewColumn(children: [
+
+                TeXViewDocument(widget.data[k][0]['eq13'],
+                )
+              ])),
+          Text(
+              widget.data[k][0]['def14'], style: TextStyle(fontWeight: FontWeight.bold)),
+          TeXView(
+
+              child: TeXViewColumn(children: [
+
+                TeXViewDocument(widget.data[k][0]['eq14'],
+                )
+              ])),
+          Text(
+              widget.data[k][0]['def15'], style: TextStyle(fontWeight: FontWeight.bold)),
+          TeXView(
+
+              child: TeXViewColumn(children: [
+
+                TeXViewDocument(widget.data[k][0]['eq15'],
+                )
+              ])),
+
+        ],
+
+
+
+      ),
+
+
+
+
+    );
+
+
+
+
+  }
  */
