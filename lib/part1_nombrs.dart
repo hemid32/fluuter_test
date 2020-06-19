@@ -230,7 +230,7 @@ class _nombrsState extends State<nombrs> {
               )
           ),
           Card(
-              color: Colors.lime[200],
+              color: Colors.blue[200],
               margin: EdgeInsets.only(top: 10),
               child: Container(child: Text(difinition_title,
                   style: TextStyle(fontWeight: FontWeight.bold)),
@@ -264,7 +264,7 @@ class _nombrsState extends State<nombrs> {
 
 
           Card(
-              color: Colors.lime[200],
+              color: Colors.blue[200],
               margin: EdgeInsets.only(top: 10),
               child: Container(child: Text(difinition_title2,
                   style: TextStyle(fontWeight: FontWeight.bold)),
@@ -287,7 +287,7 @@ class _nombrsState extends State<nombrs> {
 
 
           Card(
-              color: Colors.lime[200],
+              color: Colors.blue[200],
               margin: EdgeInsets.only(top: 10),
               child: Container(child: Text(
                   exemple, style: TextStyle(fontWeight: FontWeight.bold)),
@@ -431,7 +431,7 @@ class _nombrsState extends State<nombrs> {
 
 
           Card(
-              color: Colors.lime[200],
+              color: Colors.blue[200],
               margin: EdgeInsets.only(top: 10),
               child: Container(child: Text(difinition_title,
                   style: TextStyle(fontWeight: FontWeight.bold)),
@@ -440,7 +440,7 @@ class _nombrsState extends State<nombrs> {
               )
           ),
           Card(
-              color: Colors.orange[200],
+              //color: Colors.orange[200],
               margin: EdgeInsets.only(top: 10, left: 5, right: 5, bottom: 5),
               child: Container(child: datas1('info2', 1) ,
               /* Text(
@@ -460,7 +460,7 @@ class _nombrsState extends State<nombrs> {
 
           ),
           Card(
-              color: Colors.lime[200],
+              color: Colors.blue[200],
               margin: EdgeInsets.only(top: 10),
               child: Container(child: Text(difinition_title2,
                   style: TextStyle(fontWeight: FontWeight.bold)),
@@ -497,9 +497,13 @@ class _nombrsState extends State<nombrs> {
           ),
 
           Card(
-              color: Colors.lime[200],
+              color: Colors.blue[200],
               margin: EdgeInsets.only(top: 10),
-              child: Container(child: datas1('info2', 3) ,
+              child: Container( child: Text(
+                  exemple, style: TextStyle(fontWeight: FontWeight.bold)),
+                  padding: EdgeInsets.only(
+                      left: 300, top: 5, right: 5, bottom: 5),
+
               /*Text(
                   exemple, style: TextStyle(fontWeight: FontWeight.bold)),
                 padding: EdgeInsets.only(
@@ -511,11 +515,14 @@ class _nombrsState extends State<nombrs> {
           ),
 
           Card(
-              color: Colors.orange[200],
+              //color: Colors.orange[200],
               margin: EdgeInsets.only(top: 10, left: 5, right: 5, bottom: 5),
-              child: Container(child: Text(
+              child: Container(child: datas1('info2', 3) ,
+              /* Text(
                 exempl_cont, style: TextStyle(fontWeight: FontWeight.bold),),
                 margin: EdgeInsets.only(top: 5, left: 5, right: 5, bottom: 5,),
+
+               */
 
 
               )
@@ -637,7 +644,7 @@ class _nombrsState extends State<nombrs> {
               )
           ),
           Card(
-              color: Colors.lime[200],
+              color: Colors.blue[200],
               margin: EdgeInsets.only(top: 10),
               child: Container(child: Text(difinition_title,
                   style: TextStyle(fontWeight: FontWeight.bold)),
@@ -646,7 +653,7 @@ class _nombrsState extends State<nombrs> {
               )
           ),
           Card(
-              color: Colors.orange[200],
+              //color:Colors.blue[200],
               margin: EdgeInsets.only(top: 10, left: 5, right: 5, bottom: 5),
               child: Container(child: datas1('info3', 1) ,
               /* Text(
@@ -699,7 +706,7 @@ class _nombrsState extends State<nombrs> {
 
 
           Card(
-              color: Colors.lime[200],
+              //color: Colors.lime[200],
               margin: EdgeInsets.only(top: 10),
               child: Container(child: datas1('info3', 3) ,
               /* Text(
@@ -712,7 +719,7 @@ class _nombrsState extends State<nombrs> {
           ),
 
           Card(
-              color: Colors.orange[200],
+              //color: Colors.orange[200],
               margin: EdgeInsets.only(top: 10, left: 5, right: 5, bottom: 5),
               child: Container(child: Text(
                 exempl_cont, style: TextStyle(fontWeight: FontWeight.bold),),
@@ -755,7 +762,7 @@ class _nombrsState extends State<nombrs> {
                   var a = await data_tout();
                   var point = await a.get_point(file);
                   //var max_point = await a.max_qastion_(file);
-                  if(point % 3 == 0 ){
+                  if(point % 5 == 0 ){
                     interstitialAd.show() ;
                   }
 

@@ -187,7 +187,7 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
             )),
 
         Card(
-            color: Colors.orange[200],
+            color: Colors.blue[200],
             child : Container(
           //margin: EdgeInsets.only(top: 20),
           padding: EdgeInsets.all(10),
@@ -239,7 +239,7 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
                 //print(myController.text);
                 //Navigator.of(context).push(MaterialPageRoute(builder: (context) => Part2()));
                 if(myController.text == crr){
-                  _audioCache.play('yes.mp3');
+                  await _audioCache.play('yes.mp3');
 
                   showDialog(
                       context: context,
@@ -333,7 +333,7 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
                       }
                   )
                   ;} else{
-                  _audioCache.play('non.mp3');
+                await  _audioCache.play('non.mp3');
 
                   showDialog(
                       context: context,
@@ -462,7 +462,7 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
               )),
 
           Card(
-              color: Colors.orange[200],
+              color: Colors.blue[200],
               child : Container(
                 //margin: EdgeInsets.only(top: 20),
                 padding: EdgeInsets.all(10),
@@ -538,7 +538,7 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
                   // print(myController.text);
                   //Navigator.of(context).push(MaterialPageRoute(builder: (context) => Part2()));
                   if(myController.text == crr){
-                    _audioCache.play('yes.mp3');
+                  await  _audioCache.play('yes.mp3');
 
 
                     showDialog(
@@ -634,7 +634,7 @@ Widget _mybody3(myController,context , info3,file , data, cnt , _audioCache){
                         }
                     )
                     ;} else{
-                    _audioCache.play('non.mp3');
+                   await _audioCache.play('non.mp3');
 
                     showDialog(
                         context: context,

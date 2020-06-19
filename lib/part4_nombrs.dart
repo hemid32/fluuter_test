@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutterapp2/loading.dart';
 import 'package:flutterapp2/model/Dog.dart';
 import 'fine.dart';
 import 'hemidi.dart';
@@ -17,9 +18,11 @@ class part4 extends StatefulWidget {
 }
 
 class _part4State extends State<part4> {
+  bool lod = false;
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return lod ? loading() : MaterialApp(
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -28,58 +31,68 @@ class _part4State extends State<part4> {
         Locale("ar", "AE"), // OR Locale('ar', 'AE') OR Other RTL locales
       ],
       home: Scaffold(
-        body: _mybody(context,widget.file),
+        body: _mybody(context, widget.file),
       ),
     );
-
   }
-}
 
 
-Widget _mybody(context,file){
-  return Column(
-    children: <Widget>[
-      Center(child : Container(
-        margin: EdgeInsets.only(top: 90 ),
-      child : Text('احسنت انت تبدي جيدا' , textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold)),
-      )
-      ),
-      Center(child : Container(
-        padding: EdgeInsets.only(top: 60),
-      child : Image.asset('issues/images/prv.png')
-      )
-      ),
-      Center(
-        child: Container(
-            margin: EdgeInsets.only( top: 150 ),
-            child : RaisedButton(
-            padding: EdgeInsets.only(top: 10 , bottom: 10 ,right: 70 , left: 70),
-            color: Colors.tealAccent,
+  Widget _mybody(context, file) {
+    return Column(
+      children: <Widget>[
+        Center(child: Container(
+          margin: EdgeInsets.only(top: 90),
+          child: Text('احسنت انت تبدي جيدا', textAlign: TextAlign.center,
+              style: TextStyle(fontWeight: FontWeight.bold)),
+        )
+        ),
+        Center(child: Container(
+            padding: EdgeInsets.only(top: 60),
+            child: Image.asset('issues/images/prv.png')
+        )
+        ),
+        Center(
+            child: Container(
+              margin: EdgeInsets.only(top: 150),
+              child: RaisedButton(
+                  padding: EdgeInsets.only(
+                      top: 10, bottom: 10, right: 70, left: 70),
+                  color: Colors.tealAccent,
 
 
-            child: Text('متابغة'),
-            onPressed: () async {
-            //print('hemidi love');
+                  child: Text('متابغة'),
+                  onPressed: () async {
+                    //print('hemidi love');
+                    setState(() {
+                      lod = true ;
+                    });
 
-              var a = await data_tout() ;
-              var data = await a.data();
-              //Navigator.pop(context);
+                    var a = await data_tout();
+                    var data = await a.data();
+                    //Navigator.pop(context);
 
-              Navigator.pop(context);
-              Navigator.pop(context);
-              Navigator.pop(context);
-              Navigator.pop(context);
-              Navigator.pop(context);
-              //Navigator.pop(context);
 
-              await Navigator.of(context).push(MaterialPageRoute(builder: (context) => nombrs(file,data)));
-              //Navigator.pop(context);
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                    //Navigator.pop(context);
 
-            }
-                  ),
-      )
-      )
-    ],
-  );
-  //return
+                    await Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => nombrs(file, data)));
+                    //Navigator.pop(context);
+                    setState(() {
+                      lod = false ;
+                    });
+
+
+                  }
+              ),
+            )
+        )
+      ],
+    );
+    //return
+  }
 }

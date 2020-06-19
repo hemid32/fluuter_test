@@ -280,14 +280,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
           )
           ),
 
-          Container(
 
-              margin:  EdgeInsets.only(top: 15 , bottom:  15),
-              child : AdmobBanner(
-            adUnitId: adse.idbanner(),
-            adSize: AdmobBannerSize.FULL_BANNER,
-
-          )),
 
 
           Card(child : Container(
@@ -302,7 +295,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
         children: <Widget>[
 
           Card(
-            color: Colors.orange[200],
+            color:Colors.blue[200],
             child  : ListTile(
             title:  Text(new_list[0]),
             leading: Radio(
@@ -320,7 +313,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
           ),
           ),
           Card(
-            color: Colors.orange[200],
+            color:Colors.blue[200],
             child: ListTile(
             title:  Text(new_list[1]),
             leading: Radio(
@@ -338,7 +331,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
           ),
           ),
           Card(
-            color: Colors.orange[200],
+            color: Colors.blue[200],
             child : ListTile(
             title: Text(new_list[2]),
             leading: Radio(
@@ -356,7 +349,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
           ),
           ),
           Card(
-            color: Colors.orange[200],
+            color: Colors.blue[200],
             child : ListTile(
             title: Text(new_list[3]),
             leading: Radio(
@@ -401,7 +394,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
                 //print(_hemidi);
                 //Navigator.of(context).push(MaterialPageRoute(builder: (context) => Part2()));
                 if(_hemidi == crr){
-                  _audioCache.play('yes.mp3');
+                  await _audioCache.play('yes.mp3');
                   showDialog(
                       context: context,
                       barrierDismissible: false,
@@ -441,7 +434,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
 
 
                 } else{
-                  _audioCache.play('non.mp3');
+                  await _audioCache.play('non.mp3');
 
                   showDialog(
                       context: context,
@@ -537,14 +530,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
               )
           ),
 
-          Container(
 
-              margin:  EdgeInsets.only(top: 15 , bottom:  15),
-              child : AdmobBanner(
-                adUnitId: adse.idbanner(),
-                adSize: AdmobBannerSize.FULL_BANNER,
-
-              )),
 
           Card ( child : Container(
             margin: EdgeInsets.all(10),
@@ -577,7 +563,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
               children: <Widget>[
 
                 Card(
-                  color: Colors.orange[200],
+                  color:Colors.blue[200],
                   child  : ListTile(
                   title:  Text(new_list[0]),
                   leading: Radio(
@@ -594,7 +580,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
                 ),
                 ),
                 Card(
-                  color: Colors.orange[200],
+                  color: Colors.blue[200],
                   child: ListTile(
 
                   title:  Text(new_list[1]),
@@ -613,7 +599,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
                 ),
                 Card(
 
-                  color: Colors.orange[200],
+                  color: Colors.blue[200],
                   child : ListTile(
                   title: Text(new_list[2]),
                   leading: Radio(
@@ -631,7 +617,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
                 ),
                 Card(
 
-                  color: Colors.orange[200],
+                  color: Colors.blue[200],
                   child : ListTile(
                   title: Text(new_list[3]),
                   leading: Radio(
@@ -676,7 +662,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
                   //print(_hemidi);
                   //Navigator.of(context).push(MaterialPageRoute(builder: (context) => Part2()));
                   if(_hemidi == crr){
-                    _audioCache.play('yes.mp3');
+                   await _audioCache.play('yes.mp3');
                     //print('yessss');
                     showDialog(
                         context: context,
@@ -805,14 +791,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
                 )  ,
               )
           ),
-          Container(
 
-              margin:  EdgeInsets.only(top: 15 , bottom:  15),
-              child : AdmobBanner(
-                adUnitId: adse.idbanner(),
-                adSize: AdmobBannerSize.FULL_BANNER,
-
-              )),
 
           Card( child : Container(
             margin: EdgeInsets.all(10),
@@ -849,7 +828,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
 
                 Card(
 
-                  color: Colors.orange[200],
+                  color: Colors.blue[200],
                   child  : ListTile(
                   title:  Text(new_list[0]),
                   leading: Radio(
@@ -866,7 +845,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
                 ),
                 ),
                 Card(
-                  color: Colors.orange[200],
+                  color: Colors.blue[200],
                   child: ListTile(
                   title:  Text(new_list[1]),
                   leading: Radio(
@@ -883,7 +862,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
                 ),
                 ),
                 Card(
-                  color: Colors.orange[200],
+                  color: Colors.blue[200],
                   child : ListTile(
                   title: Text(new_list[2]),
                   leading: Radio(
@@ -900,7 +879,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
                 ),
                 ),
                 Card(
-                  color: Colors.orange[200],
+                  color: Colors.blue[200],
                   child : ListTile(
                   title: Text(new_list[3]),
                   leading: Radio(
@@ -945,7 +924,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
                   //print(_hemidi);
                   //Navigator.of(context).push(MaterialPageRoute(builder: (context) => Part2()));
                   if(_hemidi == crr){
-                    _audioCache.play('yes.mp3');
+                   await _audioCache.play('yes.mp3');
                     //print('yessss');
                     showDialog(
                         context: context,
@@ -981,7 +960,7 @@ Widget mybody(context, info2 , info3,file  ,data , cnt) { //, info2 , info3
 
 
                   } else{
-                    _audioCache.play('non.mp3');
+                   await _audioCache.play('non.mp3');
                     showDialog(
                         context: context,
                         barrierDismissible: false,
